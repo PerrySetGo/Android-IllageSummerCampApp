@@ -3,6 +3,12 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_home">Shot Snap!</string>
-    <string name="title_activity_test">Test</string>
+    <string name="title_activity_home">Illage Summer Camp 2016</string>
+        <string name="aboutCampText"><b>Things to know:</b>
+    Illage Summer camp is a queer-founded, community-oriented, ally-supported, unicorn-inspired experience of pure magic. \n\n
+        You don\'t need to sign up for an activity, just show up!\n\n
+        Respect the Illage community -- treat everyone with love, dignity, and compassion. Honor each other\'s identities and experiences.
+        Don\'t make assumptions. Always do your best and be aware of each other. (This rule was written by our fiends at A-Camp)\n\n
+        Camp runs on donations. Please bring cash to contribute. No one turned away for lack of funds!
+    </string>
 </resources>

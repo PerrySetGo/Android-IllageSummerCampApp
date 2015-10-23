@@ -1,4 +1,4 @@
-package com.example.guest.shotsnap;
+package com.example.guest.illageSummerCamp;
 
 import java.io.Serializable;
 import java.util.ArrayList;

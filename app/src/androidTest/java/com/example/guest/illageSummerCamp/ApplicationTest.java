@@ -1,4 +1,4 @@
-package com.example.guest.shotsnap;
+package com.example.guest.illageSummerCamp;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
