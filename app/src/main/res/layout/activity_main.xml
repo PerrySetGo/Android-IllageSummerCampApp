@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                tools:context="com.example.guest.shotsnap.MainActivity">
+
+    <ImageView
+        android:id="@+id/homeImage"
+        android:src="@drawable/campschedule"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:scaleType="fitStart"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp" />
+
+    <!--<Button-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:text="About Camp"-->
+        <!--android:id="@+id/aboutCampButton"-->
+        <!--android:background="#229678"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:layout_below="@+id/homeImage" />-->
+
+    <!--<Button-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:text="See Camp Map"-->
+        <!--android:id="@+id/campMapButton"-->
+        <!--android:background="#229678"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:layout_above="@+id/aboutCampButton"-->
+        <!--android:layout_alignLeft="@+id/aboutCampButton"-->
+        <!--android:layout_alignStart="@+id/aboutCampButton"-->
+        <!--android:layout_marginBottom="30dp" />-->
+
+    <!--<Button-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:text="Next Activity"-->
+        <!--android:id="@+id/nextActivityButton"-->
+        <!--android:background="#229678"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:layout_marginTop="28dp"-->
+        <!--android:layout_below="@+id/aboutCampButton"-->
+        <!--android:layout_alignLeft="@+id/aboutCampButton"-->
+        <!--android:layout_alignStart="@+id/aboutCampButton" />-->
+
+    <!--<Button-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:text="View All Activities"-->
+        <!--android:id="@+id/allActivitiesButton"-->
+        <!--android:background="#229678"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:layout_marginBottom="31dp"-->
+        <!--android:layout_above="@+id/contactUsButton"-->
+        <!--android:layout_centerHorizontal="true" />-->
+
+
+    <!--<Button-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:text="Contact Us"-->
+        <!--android:id="@+id/contactUsButton"-->
+        <!--android:background="#229678"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true" />-->
+
+</RelativeLayout>
