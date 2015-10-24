@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
         mCampMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainActivity.this, IllageMapActivity.class);
+                startActivity(intent);
             }
         });
         mNextActivityButton.setOnClickListener(new View.OnClickListener() {
