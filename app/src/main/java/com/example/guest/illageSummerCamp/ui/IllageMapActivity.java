@@ -1,7 +1,9 @@
-package com.example.guest.illageSummerCamp;
+package com.example.guest.illageSummerCamp.ui;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+
+import com.example.guest.illageSummerCamp.R;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,7 +22,6 @@ public class IllageMapActivity extends FragmentActivity implements OnMapReadyCal
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_illage_map);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);

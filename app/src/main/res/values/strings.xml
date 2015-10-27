@@ -12,4 +12,6 @@
         Camp runs on donations. Please bring cash to contribute. No one turned away for lack of funds!
     </string>
     <string name="title_activity_illage_map">IllageMap</string>
+    <string name="title_activity_all_events">View All Events</string>
+    <string name="title_activity_add_event">AddEventActivity</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.guest.illageSummerCamp;
+package com.example.guest.illageSummerCamp.ui;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.guest.illageSummerCamp.R;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button mAboutCampButton;
@@ -20,24 +22,21 @@ public class MainActivity extends AppCompatActivity {
     private Button mContactUsButton;
     private TextView mAboutCampText;
 
-//    private CategoryLib mCategoryLib;
+    private Button mAddActivityButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Typeface vit = Typeface.createFromAsset(getAssets(),"fonts/vitreous_medium.ttf");
-//        TextView titleLabel = (TextView)findViewById(R.id.titleLabel);
-//        titleLabel.setTypeface(vit);
-
         mAboutCampButton = (Button) findViewById(R.id.aboutCampButton);
         mCampMapButton = (Button) findViewById(R.id.campMapButton);
         mNextActivityButton =(Button) findViewById(R.id.nextActivityButton);
         mViewAllButton = (Button) findViewById(R.id.allActivitiesButton);
         mContactUsButton = (Button) findViewById(R.id.contactUsButton);
-
         mAboutCampText = (TextView) findViewById(R.id.aboutCampText);
+
+        mAddActivityButton = (Button) findViewById(R.id.addEventButton);
 
 
         mAboutCampButton.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 mNextActivityButton.setVisibility(View.INVISIBLE);
                 mViewAllButton.setVisibility(View.INVISIBLE);
                 mContactUsButton.setVisibility(View.INVISIBLE);
-
                 mAboutCampText.setVisibility(View.VISIBLE);
 
             }
@@ -65,26 +63,34 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        mViewAllButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AllEventsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         mNextActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
             }
         });
-        //       mCategoryLib = new CategoryLib();
 
-//        mViewAllButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, ShowPhotosActivity.class);
-//                intent.putExtra("category", mCategoryLib.getCategories().get(0));
-//                startActivity(intent);
-//            }
-//        });
         mContactUsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+            }
+        });
+
+        mAddActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddEventActivity.class);
+                startActivity(intent);
             }
         });
 
