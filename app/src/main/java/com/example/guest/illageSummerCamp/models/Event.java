@@ -12,7 +12,7 @@ import java.util.TimeZone;
 @Table(name = "events", id = "_id")
 public class Event extends Model {
 
-    @Column (name = "EventName")
+    @Column (name = "EventName")//do not change to title as this breaks things
     private String mEventTitle;
 
     @Column (name = "EventLocation")
@@ -34,13 +34,13 @@ public class Event extends Model {
         super();
     }
 
-    public Event(String eventTitle) {
+    public Event(String eventTitle, String eventLocation, String eventStartTime, String eventEndTime, String eventDescription, String eventDate) {
         mEventTitle = eventTitle;
-//        mEventLocation = eventLocation;
-//        mEventStartTime = eventStartTime;
-//        mEventEndTime = eventEndTime;
-//        mEventDescription = eventDescription;
-//        mEventDate = eventDate;
+        mEventLocation = eventLocation;
+        mEventStartTime = eventStartTime;
+        mEventEndTime = eventEndTime;
+        mEventDescription = eventDescription;
+        mEventDate = eventDate;
     }
 
 
