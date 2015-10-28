@@ -41,12 +41,14 @@ public class MainActivity extends AppCompatActivity {
         mContactUsButton = (Button) findViewById(R.id.contactUsButton);
         mAboutCampText = (TextView) findViewById(R.id.aboutCampText);
         Button adminButton = (Button) findViewById(R.id.adminButton);
+        Button logoutButton = (Button) findViewById(R.id.logoutButton);
 
         final Button addActivityButton = (Button) findViewById(R.id.addEventButton);
 
 
         if (isRegistered()) {
             addActivityButton.setVisibility(View.VISIBLE);
+            logoutButton.setVisibility(View.VISIBLE);
             adminButton.setVisibility(View.INVISIBLE);
         }
 
@@ -73,6 +75,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = mPreferences.edit();
+                editor.clear();
+                editor.commit();
+                finish();
+                startActivity(getIntent());
             }
         });
 
