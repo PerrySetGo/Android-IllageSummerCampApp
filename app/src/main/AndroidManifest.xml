@@ -55,6 +55,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.guest.illageSummerCamp.ui.MainActivity" />
         </activity>
+        <activity
+            android:name=".ui.RegisterActivity"
+            android:label="@string/title_activity_register"
+            android:parentActivityName=".ui.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.guest.illageSummerCamp.ui.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
