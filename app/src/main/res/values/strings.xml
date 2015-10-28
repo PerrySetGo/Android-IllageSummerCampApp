@@ -17,4 +17,11 @@
     <string name="NewEventText">Your event has been Added! \n\nWould You Like To Add Another Event?</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_single_event">SingleEventActivity</string>
+    <string name="eventDescription">Description</string>
+    <string name="title_activity_day_events">View Events By Day</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
 </resources>
