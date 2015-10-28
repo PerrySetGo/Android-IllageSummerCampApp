@@ -1,17 +1,20 @@
 package com.example.guest.illageSummerCamp.ui;
 
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.guest.illageSummerCamp.R;
+import com.example.guest.illageSummerCamp.models.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,13 +24,15 @@ public class MainActivity extends AppCompatActivity {
     private Button mViewAllButton;
     private Button mContactUsButton;
     private TextView mAboutCampText;
-
-    private Button mAddActivityButton;
+    private SharedPreferences mPreferences;
+    private User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mPreferences = getApplicationContext().getSharedPreferences("illageCamp", Context.MODE_PRIVATE);
 
         mAboutCampButton = (Button) findViewById(R.id.aboutCampButton);
         mCampMapButton = (Button) findViewById(R.id.campMapButton);
@@ -35,8 +40,15 @@ public class MainActivity extends AppCompatActivity {
         mViewAllButton = (Button) findViewById(R.id.allActivitiesButton);
         mContactUsButton = (Button) findViewById(R.id.contactUsButton);
         mAboutCampText = (TextView) findViewById(R.id.aboutCampText);
+        Button adminButton = (Button) findViewById(R.id.adminButton);
 
-        mAddActivityButton = (Button) findViewById(R.id.addEventButton);
+        final Button addActivityButton = (Button) findViewById(R.id.addEventButton);
+
+
+        if (isRegistered()) {
+            addActivityButton.setVisibility(View.VISIBLE);
+            adminButton.setVisibility(View.INVISIBLE);
+        }
 
 
         mAboutCampButton.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +65,14 @@ public class MainActivity extends AppCompatActivity {
                 mContactUsButton.setVisibility(View.INVISIBLE);
                 mAboutCampText.setVisibility(View.VISIBLE);
 
+            }
+        });
+
+        adminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -86,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mAddActivityButton.setOnClickListener(new View.OnClickListener() {
+
+        addActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddEventActivity.class);
@@ -96,4 +117,31 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private boolean isRegistered() {
+        String username = mPreferences.getString("username", null);
+        if (username == null) {
+            return false;
+        } else {
+            setUser(username);
+            return true;
+        }
+    }
+
+    private void setUser(String username) {
+        User user = User.find(username);
+        if (user != null) {
+            mUser = user;
+        } else {
+            mUser = new User(username);
+            mUser.save();
+        }
+        Toast.makeText(this, "Welcome " + mUser.getName(), Toast.LENGTH_LONG).show();
+    }
+
+//    public static User find(String username) {
+//        return new Select()
+//                .from(User.class)
+//                .where("Name = ?", username)
+//                .executeSingle();
+//    }
 }
