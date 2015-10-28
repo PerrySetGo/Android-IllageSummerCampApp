@@ -44,9 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
                     editor.commit();
                     Intent intent = new Intent (RegisterActivity.this, MainActivity.class);
                     startActivity(intent);
-                }
-
-                else{
+                } else{
                     Toast.makeText(getApplicationContext(),"Passwords don't match, please try again", Toast.LENGTH_LONG).show();
                 }
 
