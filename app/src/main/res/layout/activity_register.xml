@@ -12,11 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Please Register"
+        android:text="Please create an cccount in order to add events."
         android:id="@+id/registerLabel"
-        android:layout_above="@+id/nameText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="87dp"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="118dp"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -24,9 +25,11 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/nameText"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:hint="Name"/>
+        android:hint="Name"
+        android:layout_below="@+id/registerLabel"
+        android:layout_alignRight="@+id/registerButton"
+        android:layout_alignEnd="@+id/registerButton"
+        android:layout_marginTop="35dp"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -34,7 +37,31 @@
         android:layout_height="wrap_content"
         android:text="Register"
         android:id="@+id/registerButton"
+        android:layout_marginBottom="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editPassword"
+        android:hint="Password"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/nameText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editPasswordVerify"
+        android:hint="Verify Password"
+        android:layout_below="@+id/editPassword"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
 </RelativeLayout>
