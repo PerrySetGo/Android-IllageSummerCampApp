@@ -27,4 +27,6 @@
     <string name="title_activity_contact">ContactActivity</string>
     <string name="contact_us_text">Illage Summer Camp is a volunteer driven effort! If you have questions or suggestions, or want to participate through volunteering, please get in touch!  You can reach us through the contact form below, and visit us on the web.</string>
     <string name="contact_form_intro">Fill out this form to get in touch! We will get back to you as soon as we can.</string>
+    <string name="next_event_title">New Text</string>
+    <string name="no_next_event_text">There are no events starting in the next three hours. But check the full schedule to see what is happening later tonight and tomorrow!</string>
 </resources>
