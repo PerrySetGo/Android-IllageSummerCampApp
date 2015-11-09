@@ -14,6 +14,8 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 public class IllageMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -31,6 +33,8 @@ public class IllageMapActivity extends FragmentActivity implements OnMapReadyCal
     public void onMapReady(GoogleMap googleMap) {
         //dryify!!
         mMap = googleMap;
+        
+
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         LatLng peninsulaPark = new LatLng(45.5697276,-122.6753081);
         LatLng floridaRoom = new LatLng(45.5629381,-122.6730989);

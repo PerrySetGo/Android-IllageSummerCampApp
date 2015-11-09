@@ -15,27 +15,95 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/nextEventTitle"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/nextLabel"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="113dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="8dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/nextEventDescription"
-        android:layout_below="@+id/nextEventTitle"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/nextLocationLabel"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="45dp"/>
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/nextEventDate"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/nextDateTimeLabel"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="More Illage Coming Right Up...!"
+        android:id="@+id/nextEventLabel"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="The Next Event Is"
+        android:id="@+id/nextLabel"
+        android:layout_below="@+id/nextEventLabel"
+        android:layout_marginTop="31dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:background="#ff1438"
+        android:textColor="#ffffff"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Location:"
+        android:id="@+id/nextLocationLabel"
+        android:gravity="center_vertical|center_horizontal"
+        android:background="#ff1438"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/nextEventTitle"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Time:"
+        android:id="@+id/nextDateTimeLabel"
+        android:gravity="center_vertical|center_horizontal"
+        android:background="#ff1438"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/nextEventDescription"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description:"
+        android:id="@+id/nextDescriptionLabel"
+        android:gravity="center_vertical|center_horizontal"
+        android:background="#ff1438"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/nextEventDate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You&apos;re Invited!"
+        android:id="@+id/invitedText"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="40dp"/>
+
 </RelativeLayout>

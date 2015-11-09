@@ -21,8 +21,9 @@ import java.util.TimeZone;
 public class Event extends Model implements Comparable<Event>{
 
     public static final String TAG = Event.class.getSimpleName();
+    private static final long WINDOW_END = 10800000;
 
-    @Column (name = "EventTitle")//do not change to title as this breaks things
+    @Column (name = "EventTitle")
     private String mEventTitle;
 
     @Column (name = "EventLocation")
@@ -87,12 +88,12 @@ public class Event extends Model implements Comparable<Event>{
     public static Event findRecent() {
         Calendar rightNow = Calendar.getInstance();
         //get the next event if one starts between now and 3 hours from now
-        long timeInterval = rightNow.getTimeInMillis() + 10800000;
+        long eventWindowEnd = rightNow.getTimeInMillis() + WINDOW_END;
         return new Select()
                 .from(Event.class)
                 .orderBy("EventDateTimeStart DESC")
                 .where("EventDateTimeStart > ?", rightNow.getTimeInMillis()) //get current time
-                .where("EventDateTimeStart < ?", timeInterval) //add three hours in ms
+                .where("EventDateTimeStart < ?", eventWindowEnd) //add expiration time in MS
                 .executeSingle();
     }
 
@@ -101,43 +102,9 @@ public class Event extends Model implements Comparable<Event>{
         return getDateTime().compareTo(o.getDateTime());
     }
 
-//    public void setEventTitle(String eventTitle) {
-//        mEventTitle = eventTitle;
-//    }
-
-//    public String getEventLocation() {
-//        return mEventLocation;
-//    }
-
-//    public void setEventLocation(String eventLocation) {
-//        mEventLocation = eventLocation;
-//    }
-
-
-
-//    public void setEventStartTime(String eventStartTime) {
-//        mEventStartTime = eventStartTime;
-//    }
-
     public String getEventEndTime() {
         return mEventStartDateTime.toString();
     }
-
-//    public void setEventEndTime(String eventEndTime) {
-//        mEventEndTime = eventEndTime;
-//    }
-
-
-//    public void setEventDate(String eventDate) {
-//        mEventDate = eventDate;
-//    }
-
-//    public String getFormattedTime(){
-//        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMMM d");
-//        formatter.setTimeZone(TimeZone.getTimeZone("PST"));
-//        return formatter.format(mEventDate);
-//    }
-
 
 
 }
