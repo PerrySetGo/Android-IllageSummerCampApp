@@ -54,8 +54,8 @@ public class EventAdapter extends BaseAdapter{
         }
         Event event = mEvents.get(position);
         holder.titleLabel.setText(event.getEventTitle());
-        holder.timeLabel.setText("From: " + event.getEventStartTime() + " To: " + event.getEventEndTime());
-        holder.dateLabel.setText(event.getEventDate().toString());
+        //holder.timeLabel.setText("From: " + event.getEventStartTime() + " To: " + event.getEventEndTime());
+        holder.dateLabel.setText(event.getDateTime().toString());
         holder.descriptionLabel.setText(event.getEventDescription());
 
         return convertView;

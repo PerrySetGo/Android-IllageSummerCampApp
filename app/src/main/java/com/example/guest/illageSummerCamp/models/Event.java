@@ -7,82 +7,64 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.*;
+import java.util.Calendar;
 import java.util.TimeZone;
 
 @Table(name = "events", id = "_id")
-public class Event extends Model {
+public class Event extends Model implements Comparable<Event>{
 
     public static final String TAG = Event.class.getSimpleName();
 
-    @Column (name = "EventName")//do not change to title as this breaks things
+    @Column (name = "EventTitle")//do not change to title as this breaks things
     private String mEventTitle;
 
     @Column (name = "EventLocation")
     private String mEventLocation;
 
-    @Column (name = "EventStartTime")
-    private String mEventStartTime;
+    @Column(name = "EventDateTimeStart")
+    private Date mEventStartDateTime;
 
-    @Column (name = "EventEndTime")
-    private String mEventEndTime;
+//timestamp    @Column(name = "eventDateTimeEnd", index = true)
+//    private Date mEventDateTimeEnd;
 
     @Column (name = "Description")
     private String mEventDescription;
-
-    @Column (name = "EventDate")
-    private String mEventDate;
 
     public Event() {
         super();
     }
 
-    public Event(String eventTitle, String eventLocation, String eventStartTime, String eventEndTime, String eventDescription, String eventDate) {
+    public Event(String eventTitle, String eventLocation,String eventDescription, Date dateTime) {
         mEventTitle = eventTitle;
         mEventLocation = eventLocation;
-        mEventStartTime = eventStartTime;
-        mEventEndTime = eventEndTime;
         mEventDescription = eventDescription;
-        mEventDate = eventDate;
+        mEventStartDateTime = dateTime;
     }
 
+    public void setDateFromString(String date) {
+        SimpleDateFormat sf = new SimpleDateFormat("MM/dd/yyyy hh:mm");
+        sf.setLenient(true);
+        try {
+            this.mEventStartDateTime = sf.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
     public String getEventTitle() {
         return mEventTitle;
     }
 
-    public void setEventTitle(String eventTitle) {
-        mEventTitle = eventTitle;
+    public Date getEventStartTime() {
+        return mEventStartDateTime;
     }
-
-    public String getEventLocation() {
-        return mEventLocation;
-    }
-
-    public void setEventLocation(String eventLocation) {
-        mEventLocation = eventLocation;
-    }
-
-    public String getEventStartTime() {
-        return mEventStartTime;
-    }
-
-    public void setEventStartTime(String eventStartTime) {
-        mEventStartTime = eventStartTime;
-    }
-
-    public String getEventEndTime() {
-        return mEventEndTime;
-    }
-
-    public void setEventEndTime(String eventEndTime) {
-        mEventEndTime = eventEndTime;
-    }
-
     public String getEventDescription() {
         return mEventDescription;
     }
@@ -91,24 +73,71 @@ public class Event extends Model {
         mEventDescription = eventDescription;
     }
 
-    public String getEventDate() {
-        return mEventDate;
-    }
-
-    public void setEventDate(String eventDate) {
-        mEventDate = eventDate;
-    }
-
-    public String getFormattedTime(){
-        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMMM d");
-        formatter.setTimeZone(TimeZone.getTimeZone("PST"));
-        return formatter.format(mEventDate);
+    public Date getDateTime() {
+        return mEventStartDateTime;
     }
 
     public static List<Event> all(){
         return new Select()
                 .from(Event.class)
+                .orderBy("EventDateTimeStart DESC")
                 .execute();
     }
+
+    public static Event findRecent() {
+        Calendar rightNow = Calendar.getInstance();
+        //long timeInterval = rightNow.getTimeInMillis() + 3600000;
+        return new Select()
+                .from(Event.class)
+                .orderBy("EventDateTimeStart DESC")
+               // .where("EventDateTimeStart < ?", timeInterval ) //add an hour
+                .where("EventDateTimeStart > ?", rightNow.getTimeInMillis())
+                //this needs to only get events between now and the end of the day or similar
+                .executeSingle();
+    }
+
+    @Override
+    public int compareTo(Event o) {
+        return getDateTime().compareTo(o.getDateTime());
+    }
+
+//    public void setEventTitle(String eventTitle) {
+//        mEventTitle = eventTitle;
+//    }
+
+//    public String getEventLocation() {
+//        return mEventLocation;
+//    }
+
+//    public void setEventLocation(String eventLocation) {
+//        mEventLocation = eventLocation;
+//    }
+
+
+
+//    public void setEventStartTime(String eventStartTime) {
+//        mEventStartTime = eventStartTime;
+//    }
+
+    public String getEventEndTime() {
+        return mEventStartDateTime.toString();
+    }
+
+//    public void setEventEndTime(String eventEndTime) {
+//        mEventEndTime = eventEndTime;
+//    }
+
+
+//    public void setEventDate(String eventDate) {
+//        mEventDate = eventDate;
+//    }
+
+//    public String getFormattedTime(){
+//        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMMM d");
+//        formatter.setTimeZone(TimeZone.getTimeZone("PST"));
+//        return formatter.format(mEventDate);
+//    }
+
+
 
 }
