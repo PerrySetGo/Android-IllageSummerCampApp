@@ -16,35 +16,30 @@ import android.widget.Toast;
 import com.example.guest.illageSummerCamp.R;
 import com.example.guest.illageSummerCamp.models.User;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
-    private Button mAboutCampButton;
-    private Button mCampMapButton;
-    private Button mNextActivityButton;
-    private Button mViewAllButton;
-    private Button mContactUsButton;
-    private TextView mAboutCampText;
-    private SharedPreferences mPreferences;
+    @Bind(R.id.aboutCampButton)  Button mAboutCampButton;
+    @Bind(R.id.campMapButton)  Button mCampMapButton;
+    @Bind(R.id.nextActivityButton)  Button mNextActivityButton;
+    @Bind(R.id.allActivitiesButton)  Button mViewAllButton;
+    @Bind(R.id.contactUsButton)  Button mContactUsButton;
+    @Bind(R.id.adminButton) Button adminButton;
+    @Bind(R.id.logoutButton) Button logoutButton;
+    @Bind(R.id.addEventButton) Button addActivityButton;
+
+
     private User mUser;
+    private SharedPreferences mPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ButterKnife.bind(this);
         mPreferences = getApplicationContext().getSharedPreferences("illageCamp", Context.MODE_PRIVATE);
-
-        mAboutCampButton = (Button) findViewById(R.id.aboutCampButton);
-        mCampMapButton = (Button) findViewById(R.id.campMapButton);
-        mNextActivityButton =(Button) findViewById(R.id.nextActivityButton);
-        mViewAllButton = (Button) findViewById(R.id.allActivitiesButton);
-        mContactUsButton = (Button) findViewById(R.id.contactUsButton);
-        mAboutCampText = (TextView) findViewById(R.id.aboutCampText);
-        Button adminButton = (Button) findViewById(R.id.adminButton);
-        Button logoutButton = (Button) findViewById(R.id.logoutButton);
-
-        final Button addActivityButton = (Button) findViewById(R.id.addEventButton);
-
 
         if (isRegistered()) {
             addActivityButton.setVisibility(View.VISIBLE);
@@ -52,21 +47,11 @@ public class MainActivity extends AppCompatActivity {
             adminButton.setVisibility(View.INVISIBLE);
         }
 
-
         mAboutCampButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Animation a = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale_down_main);
-                ((ImageView) findViewById(R.id.homeImage)).startAnimation(a);
-
-                //these should be changed to fadeouts.
-                mAboutCampButton.setVisibility(View.INVISIBLE);
-                mCampMapButton.setVisibility(View.INVISIBLE);
-                mNextActivityButton.setVisibility(View.INVISIBLE);
-                mViewAllButton.setVisibility(View.INVISIBLE);
-                mContactUsButton.setVisibility(View.INVISIBLE);
-                mAboutCampText.setVisibility(View.VISIBLE);
-
+                Intent intent = new Intent(MainActivity.this, AboutCampActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -108,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         mNextActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DayEventsActivity.class);
+                Intent intent = new Intent(MainActivity.this, NextEventActivity.class);
                 startActivity(intent);
             }
         });
@@ -119,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
 
         addActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,11 +135,4 @@ public class MainActivity extends AppCompatActivity {
         }
         Toast.makeText(this, "Welcome " + mUser.getName(), Toast.LENGTH_LONG).show();
     }
-
-//    public static User find(String username) {
-//        return new Select()
-//                .from(User.class)
-//                .where("Name = ?", username)
-//                .executeSingle();
-//    }
 }
