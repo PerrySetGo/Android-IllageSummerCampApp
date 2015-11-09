@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 
 public class AddEventActivity extends AppCompatActivity {
 
-    public static final String TAG = Event.class.getSimpleName();
+    public static final String TAG = AddEventActivity.class.getSimpleName();
 
     @Bind(R.id.editTitle) EditText mEventTitle;
     @Bind(R.id.editDescription) EditText mEventDescription;
