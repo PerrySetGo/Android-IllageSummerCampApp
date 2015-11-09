@@ -51,7 +51,6 @@ public class AddEventActivity extends AppCompatActivity {
         final TextView newEventLabel = (TextView) findViewById(R.id.newEventLabel);
         final TextView addNewEventLabel = (TextView) findViewById(R.id.addNewEventLabel);
 
-
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
