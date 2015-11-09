@@ -49,8 +49,8 @@ public class Event extends Model implements Comparable<Event>{
     }
 
     public void setDateFromString(String date) {
-        SimpleDateFormat sf = new SimpleDateFormat("MM/dd/yyyy hh:mm");
-        sf.setLenient(true);
+        SimpleDateFormat sf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+        sf.setLenient(false);
         try {
             this.mEventStartDateTime = sf.parse(date);
         } catch (ParseException e) {
@@ -86,13 +86,13 @@ public class Event extends Model implements Comparable<Event>{
 
     public static Event findRecent() {
         Calendar rightNow = Calendar.getInstance();
-        //long timeInterval = rightNow.getTimeInMillis() + 3600000;
+        //get the next event if one starts between now and 3 hours from now
+        long timeInterval = rightNow.getTimeInMillis() + 10800000;
         return new Select()
                 .from(Event.class)
                 .orderBy("EventDateTimeStart DESC")
-               // .where("EventDateTimeStart < ?", timeInterval ) //add an hour
-                .where("EventDateTimeStart > ?", rightNow.getTimeInMillis())
-                //this needs to only get events between now and the end of the day or similar
+                .where("EventDateTimeStart > ?", rightNow.getTimeInMillis()) //get current time
+                .where("EventDateTimeStart < ?", timeInterval) //add three hours in ms
                 .executeSingle();
     }
 
