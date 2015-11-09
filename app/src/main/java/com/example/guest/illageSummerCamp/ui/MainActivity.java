@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.aboutCampButton)  Button mAboutCampButton;
     @Bind(R.id.campMapButton)  Button mCampMapButton;
-    @Bind(R.id.nextActivityButton)  Button mNextActivityButton;
-    @Bind(R.id.allActivitiesButton)  Button mViewAllButton;
-    @Bind(R.id.contactUsButton)  Button mContactUsButton;
+    @Bind(R.id.nextActivityButton) Button mNextActivityButton;
+    @Bind(R.id.allActivitiesButton) Button mViewAllButton;
+    @Bind(R.id.contactUsButton) Button mContactUsButton;
     @Bind(R.id.adminButton) Button adminButton;
     @Bind(R.id.logoutButton) Button logoutButton;
     @Bind(R.id.addEventButton) Button addActivityButton;

@@ -37,7 +37,7 @@
 
         <meta-data
             android:name="AA_DB_NAME"
-            android:value="TwitterClone.db" />
+            android:value="IllageCamp.db" />
         <meta-data
             android:name="AA_DB_VERSION"
             android:value="1" />
@@ -66,22 +66,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.guest.illageSummerCamp.ui.MainActivity" />
         </activity>
-        <activity
-            android:name=".ui.SingleEventActivity"
-            android:label="@string/title_activity_single_event"
-            android:parentActivityName=".ui.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.guest.illageSummerCamp.ui.MainActivity" />
-        </activity>
-        <activity
-            android:name=".ui.DayEventsActivity"
-            android:label="@string/title_activity_day_events"
-            android:parentActivityName=".ui.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.guest.illageSummerCamp.ui.MainActivity" />
-        </activity>
+
         <activity android:name=".ui.NextEventActivity" >
         </activity>
         <activity android:name=".ui.AboutCampActivity" >

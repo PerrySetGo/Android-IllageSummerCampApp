@@ -2,6 +2,7 @@ package com.example.guest.illageSummerCamp.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,18 +18,24 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class AddEventActivity extends AppCompatActivity {
 
-    private EditText mEventTitle;
-    private EditText mEventDescription;
-    private EditText mEventLocation;
-    private EditText mEventDate;
-    private EditText mEventStartTime;
-    private EditText mEventEndTime;
-    private Button mNewEventButton;
-    private Button mNoNewEventButton;
-    private Button mSubmitButton;
+    public static final String TAG = Event.class.getSimpleName();
+
+    @Bind(R.id.editTitle) EditText mEventTitle;
+    @Bind(R.id.editDescription) EditText mEventDescription;
+    @Bind(R.id.editLocation) EditText mEventLocation;
+    @Bind(R.id.editDate) EditText mEventDate;
+    @Bind(R.id.editStartTime) EditText mEventStartTime;
+    @Bind(R.id.editEndTime) EditText mEventEndTime;
+    @Bind(R.id.newEventButton) Button mNewEventButton;
+    @Bind(R.id.noNewButton) Button mNoNewEventButton;
+    @Bind(R.id.eventSubmitButton)  Button mSubmitButton;
     private ArrayList<Event> mEvents;
     private EventAdapter mAdapter;
 
@@ -36,24 +43,14 @@ public class AddEventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
-
+        ButterKnife.bind(this);
         mEvents = (ArrayList) Event.all();
         mAdapter = new EventAdapter(this, mEvents);
-        mEventTitle = (EditText) findViewById(R.id.editTitle);
-        mEventDescription = (EditText) findViewById(R.id.editDescription);
-        mEventLocation = (EditText) findViewById(R.id.editLocation);
         final TextView startTimeLabel = (TextView) findViewById(R.id.startTimeLabel);
         final TextView endTimeLabel = (TextView) findViewById(R.id.endTimeLabel);
-        mEventDate = (EditText) findViewById(R.id.editDate);
-        mEventStartTime = (EditText) findViewById(R.id.editStartTime);
-        mEventEndTime = (EditText) findViewById(R.id.editEndTime);
-
-        mSubmitButton = (Button) findViewById(R.id.eventSubmitButton);
-
         final TextView newEventLabel = (TextView) findViewById(R.id.newEventLabel);
-        mNewEventButton = (Button) findViewById(R.id.newEventButton);
-        mNoNewEventButton = (Button) findViewById(R.id.noNewButton);
         final TextView addNewEventLabel = (TextView) findViewById(R.id.addNewEventLabel);
+
 
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,11 +58,19 @@ public class AddEventActivity extends AppCompatActivity {
                 String eventTitle = mEventTitle.getText().toString();
                 String eventLocation = mEventLocation.getText().toString();
                 String eventStart = mEventStartTime.getText().toString();
+                Log.d(TAG,eventStart);
+
                 String eventEnd = mEventEndTime.getText().toString();
                 String eventDescription = mEventDescription.getText().toString();
-                String eventDateInput = mEventDate.getText().toString();
+                String eventDate = mEventDate.getText().toString();
+                Log.d(TAG,eventDate);
 
-                Event event = new Event(eventTitle, eventLocation, eventStart, eventEnd, eventDescription, eventDateInput);
+                String dateTime = eventDate + " " + eventStart;
+                Log.d(TAG, dateTime);
+                Date eventDateAsDate = getDateFromString(dateTime);
+
+
+                Event event = new Event(eventTitle, eventLocation, eventDescription, eventDateAsDate);
                 event.save();
                 mEvents.add(event);
                 mAdapter.notifyDataSetChanged();
@@ -103,4 +108,16 @@ public class AddEventActivity extends AppCompatActivity {
             }
         });
     }
+
+    public Date getDateFromString(String date){
+        DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.ENGLISH);
+        Date newDate = null;
+        try {
+            newDate = format.parse(date);
+        } catch (ParseException e) {
+            Toast.makeText(getApplicationContext(),"There was an error, please try again",Toast.LENGTH_LONG).show();
+        }
+        return newDate;
+    }
+
 }
