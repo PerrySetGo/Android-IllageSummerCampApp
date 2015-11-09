@@ -22,50 +22,85 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
+        android:id="@+id/contactUsText"
         android:layout_below="@+id/titleLabel"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="29dp"
         android:text="@string/contact_us_text"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Our Website"
+        android:id="@+id/viewWebsiteButton"
+        android:layout_below="@+id/contactUsText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center_vertical"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Us a Message"
+        android:id="@+id/sendNoteForm"
+        android:layout_alignTop="@+id/viewWebsiteButton"
+        android:layout_toRightOf="@+id/viewWebsiteButton"
+        android:layout_toEndOf="@+id/viewWebsiteButton"
+        android:gravity="center_vertical"
+        android:layout_centerHorizontal="true"/>
+
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="37dp"
-        android:weightSum="100"
+        android:layout_below="@+id/viewWebsiteButton"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="false"
-        android:layout_centerInParent="true"
-        android:gravity="center_horizontal">
+        android:weightSum="1">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:weightSum="50">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View Our Website"
-                android:id="@+id/viewWebsiteButton"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:weightSum="50">
+            android:id="@+id/contactFormIntro"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/contact_form_intro"
+            android:visibility="invisible"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Send Us a Message"
-                android:id="@+id/sendNoteForm"/>
-        </LinearLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/nameContact"
+            android:hint="Name"
+            android:visibility="invisible"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/emailContact"
+            android:hint="Email"
+            android:visibility="invisible"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/messageContact"
+            android:hint="Your message for us"
+            android:visibility="invisible"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send It!"
+            android:id="@+id/formSubmitButton"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"/>
     </LinearLayout>
 
 </RelativeLayout>
