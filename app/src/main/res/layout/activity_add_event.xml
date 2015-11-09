@@ -144,4 +144,14 @@
         android:layout_toEndOf="@+id/newEventButton"
         android:visibility="invisible"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MM/DD/YYYY only"
+        android:id="@+id/textView"
+        android:layout_below="@+id/editTitle"
+        android:layout_toRightOf="@+id/newEventLabel"
+        android:layout_toEndOf="@+id/newEventLabel"
+        android:layout_alignParentStart="false"/>
+
 </RelativeLayout>

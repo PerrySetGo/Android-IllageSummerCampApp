@@ -11,7 +11,7 @@
         android:toYScale="0.5"
         android:pivotX="50%p"
         android:pivotY="50%p"
-        android:duration="175"
+        android:duration="1000"
     />
     <translate
         android:fromYDelta="0"

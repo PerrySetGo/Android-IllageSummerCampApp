@@ -6,12 +6,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.guest.illageSummerCamp.R;
 import com.example.guest.illageSummerCamp.adapters.EventAdapter;
 import com.example.guest.illageSummerCamp.models.Event;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AddEventActivity extends AppCompatActivity {
 
@@ -32,23 +37,23 @@ public class AddEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
 
-        mEvents =(ArrayList) Event.all();
+        mEvents = (ArrayList) Event.all();
         mAdapter = new EventAdapter(this, mEvents);
-        mEventTitle = (EditText)findViewById(R.id.editTitle);
-        mEventDescription = (EditText)findViewById(R.id.editDescription);
-        mEventLocation = (EditText)findViewById(R.id.editLocation);
-        final TextView startTimeLabel = (TextView)findViewById(R.id.startTimeLabel);
-        final TextView endTimeLabel = (TextView)findViewById(R.id.endTimeLabel);
-        mEventDate = (EditText)findViewById(R.id.editDate);
-        mEventStartTime = (EditText)findViewById(R.id.editStartTime);
-        mEventEndTime = (EditText)findViewById(R.id.editEndTime);
+        mEventTitle = (EditText) findViewById(R.id.editTitle);
+        mEventDescription = (EditText) findViewById(R.id.editDescription);
+        mEventLocation = (EditText) findViewById(R.id.editLocation);
+        final TextView startTimeLabel = (TextView) findViewById(R.id.startTimeLabel);
+        final TextView endTimeLabel = (TextView) findViewById(R.id.endTimeLabel);
+        mEventDate = (EditText) findViewById(R.id.editDate);
+        mEventStartTime = (EditText) findViewById(R.id.editStartTime);
+        mEventEndTime = (EditText) findViewById(R.id.editEndTime);
 
         mSubmitButton = (Button) findViewById(R.id.eventSubmitButton);
 
-        final TextView newEventLabel = (TextView)findViewById(R.id.newEventLabel);
-        mNewEventButton = (Button)findViewById(R.id.newEventButton);
-        mNoNewEventButton = (Button)findViewById(R.id.noNewButton);
-        final TextView addNewEventLabel = (TextView)findViewById(R.id.addNewEventLabel);
+        final TextView newEventLabel = (TextView) findViewById(R.id.newEventLabel);
+        mNewEventButton = (Button) findViewById(R.id.newEventButton);
+        mNoNewEventButton = (Button) findViewById(R.id.noNewButton);
+        final TextView addNewEventLabel = (TextView) findViewById(R.id.addNewEventLabel);
 
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,8 +63,9 @@ public class AddEventActivity extends AppCompatActivity {
                 String eventStart = mEventStartTime.getText().toString();
                 String eventEnd = mEventEndTime.getText().toString();
                 String eventDescription = mEventDescription.getText().toString();
-                String eventDate = mEventDate.getText().toString();
-                Event event = new Event(eventTitle, eventLocation, eventStart, eventEnd, eventDescription, eventDate);
+                String eventDateInput = mEventDate.getText().toString();
+
+                Event event = new Event(eventTitle, eventLocation, eventStart, eventEnd, eventDescription, eventDateInput);
                 event.save();
                 mEvents.add(event);
                 mAdapter.notifyDataSetChanged();
@@ -96,7 +102,5 @@ public class AddEventActivity extends AppCompatActivity {
                 });
             }
         });
-
     }
-
 }

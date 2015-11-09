@@ -1,16 +1,23 @@
 package com.example.guest.illageSummerCamp.models;
 
+import android.util.Log;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
 @Table(name = "events", id = "_id")
 public class Event extends Model {
+
+    public static final String TAG = Event.class.getSimpleName();
 
     @Column (name = "EventName")//do not change to title as this breaks things
     private String mEventTitle;
