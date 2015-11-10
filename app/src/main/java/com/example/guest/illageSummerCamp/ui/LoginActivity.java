@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                         } else {
-                            Toast.makeText(LoginActivity.this, "Login Credentials incorrect", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Login credentials incorrect.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

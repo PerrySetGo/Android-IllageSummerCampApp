@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.guest.illageSummerCamp.R;
 import com.example.guest.illageSummerCamp.models.User;
+import com.parse.ParseUser;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -66,9 +67,8 @@ public class MainActivity extends AppCompatActivity {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = mPreferences.edit();
-                editor.clear();
-                editor.commit();
+                ParseUser.logOut();
+                ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
                 finish();
                 startActivity(getIntent());
             }
@@ -117,23 +117,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isRegistered() {
-        String username = mPreferences.getString("username", null);
-        if (username == null) {
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser == null) {
             return false;
         } else {
-            setUser(username);
             return true;
         }
     }
 
-    private void setUser(String username) {
-        User user = User.find(username);
-        if (user != null) {
-            mUser = user;
-        } else {
-            mUser = new User(username);
-            mUser.save();
-        }
-        Toast.makeText(this, "Welcome " + mUser.getName(), Toast.LENGTH_LONG).show();
-    }
 }
