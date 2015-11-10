@@ -34,7 +34,6 @@ public class AddEventActivity extends AppCompatActivity {
 
     @Bind(R.id.editTitle) EditText mEventTitle;
     @Bind(R.id.editDescription) EditText mEventDescription;
-    //@Bind(R.id.editLocation) EditText mEventLocation;
     @Bind(R.id.editDate) EditText mEventDate;
     @Bind(R.id.editStartTime) EditText mEventStartTime;
     @Bind(R.id.editEndTime) EditText mEventEndTime;
@@ -62,27 +61,20 @@ public class AddEventActivity extends AppCompatActivity {
 
         //get the list of locations for the spinner
         mLocationLib = new LocationLib();
-        Log.d(TAG, mLocationLib.getLocations().toString());
          for (int i = 0; i < mLocationLib.getLocations().size(); i++ ) {
-
              String locName = mLocationLib.getLocations().get(i).getName();
              mLocationNames.add(locName);
          }
 
-
-        //Log.d(TAG,mLocationNames.toString());
-
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,mLocationNames);
         mLocationSpinner.setAdapter(adapter);
-        mLocationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+        mLocationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int arg2, long arg3)
-            {
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 locationChoice = mLocationSpinner.getSelectedItem().toString();
             }
-            public void onNothingSelected(AdapterView<?> arg0)
-            {
+
+            public void onNothingSelected(AdapterView<?> arg0) {
 
             }
 
@@ -97,56 +89,55 @@ public class AddEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String eventTitle = mEventTitle.getText().toString();
-                //String eventLocation = mEventLocation.getText().toString();
                 String eventStart = mEventStartTime.getText().toString();
-                Log.d(TAG,eventStart);
-
                 String eventEnd = mEventEndTime.getText().toString();
                 String eventDescription = mEventDescription.getText().toString();
                 String eventDate = mEventDate.getText().toString();
-                Log.d(TAG,eventDate);
-
                 String dateTime = eventDate + " " + eventStart;
-                Log.d(TAG, dateTime);
-                Date eventDateAsDate = getDateFromString(dateTime);
 
+                //empty fields
+                if (eventTitle.length() == 0 || eventTitle.length() == 0 || eventTitle.length() == 0 || eventTitle.length() == 0 || eventTitle.length() == 0){
+                    Toast.makeText(getApplicationContext()," You need to fill out all fields to be able to save this event", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Date eventDateAsDate = getDateFromString(dateTime);
+                    Event event = new Event(eventTitle, locationChoice, eventDescription, eventDateAsDate);
+                    event.save();
+                    mEvents.add(event);
+                    mAdapter.notifyDataSetChanged();
 
-                Event event = new Event(eventTitle, locationChoice, eventDescription, eventDateAsDate);
-                event.save();
-                mEvents.add(event);
-                mAdapter.notifyDataSetChanged();
+                    mEventTitle.setVisibility(View.INVISIBLE);
+                    mEventDescription.setVisibility(View.INVISIBLE);
+                    mEventStartTime.setVisibility(View.INVISIBLE);
+                    startTimeLabel.setVisibility(View.INVISIBLE);
+                    mEventEndTime.setVisibility(View.INVISIBLE);
+                    endTimeLabel.setVisibility(View.INVISIBLE);
+                    mEventDate.setVisibility(View.INVISIBLE);
+                    mLocationSpinner.setVisibility(View.INVISIBLE);
+                    mSubmitButton.setVisibility(View.INVISIBLE);
+                    newEventLabel.setVisibility(View.INVISIBLE);
 
-                mEventTitle.setVisibility(View.INVISIBLE);
-                mEventDescription.setVisibility(View.INVISIBLE);
-                mEventStartTime.setVisibility(View.INVISIBLE);
-                startTimeLabel.setVisibility(View.INVISIBLE);
-                mEventEndTime.setVisibility(View.INVISIBLE);
-                endTimeLabel.setVisibility(View.INVISIBLE);
-                mEventDate.setVisibility(View.INVISIBLE);
-                mLocationSpinner.setVisibility(View.INVISIBLE);
-                //mEventLocation.setVisibility(View.INVISIBLE);
-                mSubmitButton.setVisibility(View.INVISIBLE);
+                    addNewEventLabel.setVisibility(View.VISIBLE);
+                    mNewEventButton.setVisibility(View.VISIBLE);
+                    mNoNewEventButton.setVisibility(View.VISIBLE);
 
-                newEventLabel.setVisibility(View.INVISIBLE);
-                addNewEventLabel.setVisibility(View.VISIBLE);
-                mNewEventButton.setVisibility(View.VISIBLE);
-                mNoNewEventButton.setVisibility(View.VISIBLE);
+                    mNewEventButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                            startActivity(getIntent());
+                        }
+                    });
 
-                mNewEventButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                        startActivity(getIntent());
-                    }
-                });
+                    mNoNewEventButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(AddEventActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
 
-                mNoNewEventButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(AddEventActivity.this, MainActivity.class);
-                        startActivity(intent);
-                    }
-                });
             }
         });
     }
