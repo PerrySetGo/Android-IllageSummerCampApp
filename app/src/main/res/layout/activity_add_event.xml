@@ -104,12 +104,11 @@
         android:hint="Event Description"
         android:elegantTextHeight="false"/>
 
-    <EditText
+    <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editLocation"
+        android:id="@+id/locationSpinner"
         android:layout_below="@+id/editDate"
-        android:layout_toEndOf="@+id/endTimeLabel"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:hint="Location?"/>
@@ -139,7 +138,6 @@
         android:layout_height="wrap_content"
         android:text="No Thanks"
         android:id="@+id/noNewButton"
-        android:layout_alignBottom="@+id/editLocation"
         android:layout_toRightOf="@+id/newEventButton"
         android:layout_toEndOf="@+id/newEventButton"
         android:visibility="invisible"/>
@@ -151,7 +149,6 @@
         android:id="@+id/textView"
         android:layout_below="@+id/editTitle"
         android:layout_toRightOf="@+id/newEventLabel"
-        android:layout_toEndOf="@+id/newEventLabel"
-        android:layout_alignParentStart="false"/>
+        android:layout_toEndOf="@+id/newEventLabel"/>
 
 </RelativeLayout>
