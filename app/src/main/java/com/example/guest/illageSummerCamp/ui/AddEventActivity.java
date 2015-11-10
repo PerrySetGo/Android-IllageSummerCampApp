@@ -4,14 +4,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.guest.illageSummerCamp.R;
 import com.example.guest.illageSummerCamp.adapters.EventAdapter;
 import com.example.guest.illageSummerCamp.models.Event;
+import com.example.guest.illageSummerCamp.models.Location;
+import com.example.guest.illageSummerCamp.models.LocationLib;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -38,6 +42,11 @@ public class AddEventActivity extends AppCompatActivity {
     @Bind(R.id.eventSubmitButton)  Button mSubmitButton;
     private ArrayList<Event> mEvents;
     private EventAdapter mAdapter;
+    Spinner locationSpinner;
+    private ArrayAdapter<String> adapter;
+    private LocationLib mLocationLib;
+    private ArrayList<String> mLocationNames; //this is the names of the locations so we can use them for the spinner
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +55,19 @@ public class AddEventActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mEvents = (ArrayList) Event.all();
         mAdapter = new EventAdapter(this, mEvents);
+        mLocationNames = new ArrayList<String>();
+
+        //get the list of locations for the spinner
+        mLocationLib = new LocationLib();
+        Log.d(TAG, mLocationLib.getLocations().toString());
+         for (int i = 0; i < mLocationLib.getLocations().size(); i++ ) {
+
+             String locName = mLocationLib.getLocations().get(i).getName();
+             mLocationNames.add(locName);
+         }
+        Log.d(TAG,mLocationNames.toString());
+
+
         final TextView startTimeLabel = (TextView) findViewById(R.id.startTimeLabel);
         final TextView endTimeLabel = (TextView) findViewById(R.id.endTimeLabel);
         final TextView newEventLabel = (TextView) findViewById(R.id.newEventLabel);

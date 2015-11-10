@@ -60,5 +60,4 @@ public class Location {
     public void setDescription(String description) {
         mDescription = description;
     }
-
 }

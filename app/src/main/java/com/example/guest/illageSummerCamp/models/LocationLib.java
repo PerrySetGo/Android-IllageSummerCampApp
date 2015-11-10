@@ -53,7 +53,7 @@ public class LocationLib {
         "Oregon City",
         45.334031,
         -122.474941,
-        "Please register with a camp counsellor to get the address."));
+        "Please talk to a camp counsellor to get the address."));
     }
 
     public ArrayList<Location> getLocations(){
