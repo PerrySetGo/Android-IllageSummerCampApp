@@ -2,19 +2,12 @@ package com.example.guest.illageSummerCamp.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.guest.illageSummerCamp.R;
-import com.example.guest.illageSummerCamp.models.User;
 import com.parse.ParseUser;
 
 import butterknife.Bind;
@@ -31,16 +24,11 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.logoutButton) Button logoutButton;
     @Bind(R.id.addEventButton) Button addActivityButton;
 
-
-    private User mUser;
-    private SharedPreferences mPreferences;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        mPreferences = getApplicationContext().getSharedPreferences("illageCamp", Context.MODE_PRIVATE);
 
         if (isRegistered()) {
             addActivityButton.setVisibility(View.VISIBLE);
@@ -117,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isRegistered() {
-
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser == null) {
             return false;
