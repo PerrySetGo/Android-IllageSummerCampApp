@@ -11,26 +11,27 @@ import android.widget.Toast;
 
 import com.example.guest.illageSummerCamp.R;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText mNameEdit;
-    private Button mLoginButton;
-    private EditText mPasswordEdit;
-    private EditText mPasswordVerify;
+
+    @Bind(R.id.nameText) EditText mNameEdit;
+    @Bind(R.id.editPassword) EditText mPasswordEdit;
+    @Bind(R.id.editPasswordVerify) EditText mPasswordVerify;
+    @Bind(R.id.registerButton) EditText mRegisterButton;
+
     private SharedPreferences mPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        mNameEdit = (EditText) findViewById(R.id.nameText);
-        mPasswordEdit = (EditText)findViewById(R.id.editPassword);
-        mPasswordVerify = (EditText)findViewById(R.id.editPasswordVerify);
-        mLoginButton = (Button) findViewById(R.id.registerButton);
+        ButterKnife.bind(this);
         mPreferences = getApplicationContext().getSharedPreferences("illageCamp", Context.MODE_PRIVATE);
 
-        mLoginButton.setOnClickListener(new View.OnClickListener() {
+        mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = mNameEdit.getText().toString();
