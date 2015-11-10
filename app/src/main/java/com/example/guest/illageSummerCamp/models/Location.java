@@ -2,10 +2,6 @@ package com.example.guest.illageSummerCamp.models;
 
 import java.util.ArrayList;
 
-/**
- * Created by Guest on 11/9/15.
- */
-
 public class Location {
     private String mName;
     private String mAddress;
