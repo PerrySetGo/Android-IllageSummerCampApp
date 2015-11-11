@@ -50,68 +50,14 @@
         android:layout_alignParentStart="true"
         android:hint="Date"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start Time"
-        android:id="@+id/startTimeLabel"
-        android:layout_below="@+id/editDate"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="33dp"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:ems="10"
-        android:id="@+id/editStartTime"
-        android:layout_below="@+id/startTimeLabel"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="End Time"
-        android:id="@+id/endTimeLabel"
-        android:layout_below="@+id/editStartTime"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:ems="10"
-        android:id="@+id/editEndTime"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/endTimeLabel"
-        android:layout_alignParentLeft="true"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/editDescription"
-        android:layout_below="@+id/editEndTime"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp"
-        android:layout_alignRight="@+id/eventSubmitButton"
-        android:layout_alignEnd="@+id/eventSubmitButton"
-        android:hint="Event Description"
-        android:elegantTextHeight="false"/>
-
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/locationSpinner"
+        android:hint="Location?"
         android:layout_below="@+id/editDate"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="Location?"/>
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -129,8 +75,6 @@
         android:text="Yes"
         android:id="@+id/newEventButton"
         android:layout_alignBottom="@+id/noNewButton"
-        android:layout_toRightOf="@+id/startTimeLabel"
-        android:layout_toEndOf="@+id/startTimeLabel"
         android:visibility="invisible"/>
 
     <Button
@@ -147,8 +91,43 @@
         android:layout_height="wrap_content"
         android:text="MM/DD/YYYY only"
         android:id="@+id/textView"
-        android:layout_below="@+id/editTitle"
-        android:layout_toRightOf="@+id/newEventLabel"
-        android:layout_toEndOf="@+id/newEventLabel"/>
+        android:layout_alignBottom="@+id/addNewEventLabel"
+        android:layout_alignRight="@+id/editTitle"
+        android:layout_alignEnd="@+id/editTitle"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Start Time"
+        android:id="@+id/showStartTimeButton"
+        android:layout_below="@+id/locationSpinner"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set End Time"
+        android:id="@+id/button"
+        android:layout_below="@+id/showStartTimeButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="46dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/startTimeView"
+        android:layout_above="@+id/button"
+        android:layout_alignRight="@+id/addNewEventLabel"
+        android:layout_alignEnd="@+id/addNewEventLabel"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/endTimeView"
+        android:layout_alignBottom="@+id/button"
+        android:layout_alignRight="@+id/locationSpinner"
+        android:layout_alignEnd="@+id/locationSpinner"/>
 
 </RelativeLayout>

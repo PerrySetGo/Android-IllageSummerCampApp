@@ -56,8 +56,9 @@
         android:layout_height="wrap_content"
         android:text="Testing: test/123"
         android:id="@+id/textView2"
-        android:layout_below="@+id/passwordInput"
-        android:layout_toRightOf="@+id/passwordInput"
-        android:layout_toEndOf="@+id/passwordInput"/>
+        android:layout_above="@+id/loginButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="51dp"/>
 
 </RelativeLayout>
