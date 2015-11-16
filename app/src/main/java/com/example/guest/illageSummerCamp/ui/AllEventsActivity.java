@@ -21,5 +21,4 @@ public class AllEventsActivity extends ListActivity {
         mAdapter = new EventAdapter(this, mEvents);
         setListAdapter(mAdapter);
     }
-
 }

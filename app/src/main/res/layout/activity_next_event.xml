@@ -8,7 +8,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.guest.illageSummerCamp.ui.NextEventActivity">
+    tools:context="com.example.guest.illageSummerCamp.ui.NextEventActivity"
+    android:background="#ffffff">
 
     <TextView
         android:layout_width="wrap_content"
