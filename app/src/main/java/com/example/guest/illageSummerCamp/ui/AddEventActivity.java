@@ -1,5 +1,6 @@
 package com.example.guest.illageSummerCamp.ui;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.guest.illageSummerCamp.R;
 import com.example.guest.illageSummerCamp.adapters.EventAdapter;
+import com.example.guest.illageSummerCamp.fragments.TimePickerFragment;
 import com.example.guest.illageSummerCamp.models.Event;
 import com.example.guest.illageSummerCamp.models.Location;
 import com.example.guest.illageSummerCamp.models.LocationLib;
@@ -63,7 +65,7 @@ public class AddEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
         ButterKnife.bind(this);
-        showTimePickerDialog();
+        //showTimePickerDialog();
 
         mEvents = (ArrayList) Event.all();
         mAdapter = new EventAdapter(this, mEvents);
@@ -147,47 +149,60 @@ public class AddEventActivity extends AppCompatActivity {
                         }
                     });
                 }
-
             }
         });
     }
 
-    @Override
-    protected Dialog onCreateDialog(int id){
-        if (id == DIALOG_ID)
-            return new TimePickerDialog(AddEventActivity.this,timePickerListener, hour, minute, false);
-        return null;
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getFragmentManager(), "timePicker");
     }
+//    @Override
+//    protected Dialog onCreateDialog(int id){
+//        if (id == DIALOG_ID)
+//            return new TimePickerDialog(AddEventActivity.this,timePickerListener, hour, minute, false);
+//        return null;
+//    }
 
-    protected TimePickerDialog.OnTimeSetListener timePickerListener =
-            new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minuteOfHour){
-                hour = hourOfDay;
-                minute = minuteOfHour;
-                startTimeView.setText(hourOfDay-12 + " : " + minuteOfHour);//translate to 12-hr clock
-            }
-    };
+//    protected TimePickerDialog.OnTimeSetListener timePickerListener =
+//            new TimePickerDialog.OnTimeSetListener() {
+//            @Override
+//            public void onTimeSet(TimePicker view, int hourOfDay, int minuteOfHour){
+//                String amOrPm = "am";
+//                hour = hourOfDay;
+//                minute = minuteOfHour;
+//                String minutesString = "";
+//                if (hour > 12){ //translate to 12 hr clock. Little workaround to get both timepicker and am/pm label to show up correctly.
+//                    amOrPm = "pm";
+//                    hourOfDay-=12;
+//                }
+//                if (minuteOfHour < 10){
+//                    minutesString = "0"; //fix weird bug where only one zero is shown on times ending in :00
+//                }
+//
+//                startTimeView.setText(hourOfDay + " : " + minutesString + minuteOfHour + " " +amOrPm );
+//            }
+//    };
 
 
-    public void showTimePickerDialog(){
-        mShowTimeStartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog(DIALOG_ID);
-            }
-        });
-    }
+//    public void showTimePickerDialog(){
+//        mShowTimeStartButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showDialog(DIALOG_ID);
+//            }
+//        });
+//    }
 
-    public Date getDateFromString(String date){
-        DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.ENGLISH);
-        Date newDate = null;
-        try {
-            newDate = format.parse(date);
-        } catch (ParseException e) {
-            Toast.makeText(getApplicationContext(),"There was an error, please try again",Toast.LENGTH_LONG).show();
-        }
-        return newDate;
-    }
+//    public Date getDateFromString(String date){
+//        DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.ENGLISH);
+//        Date newDate = null;
+//        try {
+//            newDate = format.parse(date);
+//        } catch (ParseException e) {
+//            Toast.makeText(getApplicationContext(),"There was an error, please try again",Toast.LENGTH_LONG).show();
+//        }
+//        return newDate;
+//    }
 
 }

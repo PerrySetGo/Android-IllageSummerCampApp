@@ -54,6 +54,12 @@ public class LocationLib {
         45.334031,
         -122.474941,
         "Please talk to a camp counsellor to get the address."));
+        mLocations.add(new Location(
+                "Test",
+                "Test Loc",
+                45.334031,
+                -122.474941,
+                "Please talk to a camp counsellor to get the address."));
     }
 
     public ArrayList<Location> getLocations(){
