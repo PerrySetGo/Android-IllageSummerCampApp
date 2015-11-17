@@ -19,6 +19,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -57,6 +58,7 @@ public class ContactActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mViewWebSiteButton.setVisibility(View.INVISIBLE);
+                mSendNoteForm.setVisibility(View.INVISIBLE);
 
                 mContactFormIntro.setVisibility(View.VISIBLE);
                 mEmailContact.setVisibility(View.VISIBLE);
@@ -76,7 +78,7 @@ public class ContactActivity extends AppCompatActivity {
                 formattedMessage = buildMessage(name, email, message);
                 Intent emailIntent = new Intent(Intent.ACTION_SEND);
 
-                emailIntent.setType(HTTP.PLAIN_TEXT_TYPE);
+                emailIntent.setType("message/rfc822");
                 emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{recipientEmail});
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, messageSubject);
                 emailIntent.putExtra(Intent.EXTRA_TEXT, formattedMessage);
@@ -96,7 +98,7 @@ public class ContactActivity extends AppCompatActivity {
    }
 
     private String buildMessage(String name, String email, String message) {
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.US);
         Calendar cal = Calendar.getInstance();
         String currentDateTime = dateFormat.format(cal.getTime());
         String formattedMessage = "Message from: " + name + "\n\n"
