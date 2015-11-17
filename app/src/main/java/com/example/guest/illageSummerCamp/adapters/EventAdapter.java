@@ -44,7 +44,7 @@ public class EventAdapter extends BaseAdapter{
             convertView = LayoutInflater.from(mContext).inflate(R.layout.event_list_item,null);
             holder = new ViewHolder();
             holder.titleLabel = (TextView) convertView.findViewById(R.id.eventTitleLabel);
-            holder.timeLabel = (TextView) convertView.findViewById(R.id.eventTimeLabel);
+            //holder.timeLabel = (TextView) convertView.findViewById(R.id.eventTimeLabel);
             holder.dateLabel = (TextView) convertView.findViewById(R.id.eventDateLabel);
             holder.descriptionLabel = (TextView) convertView.findViewById(R.id.eventDescriptionLabel);
 
@@ -68,6 +68,8 @@ public class EventAdapter extends BaseAdapter{
         TextView dateLabel;
         TextView descriptionLabel;
     }
+
+
 
 
 }
