@@ -47,7 +47,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     @Bind(R.id.endTimeView) TextView endTimeView;
     private int pickerHour = 0;
     private int pickerMin = 0;
-    private int startPickerHour, startPickerMin;
+    private int startPickerHour, startPickerMin, endPickerHour, endPickerMin;
     boolean isSettingStartTime = true;
     private ArrayList<Event> mEvents;
     private EventAdapter mAdapter;
@@ -75,7 +75,6 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
         mDates.add("Fri, 08/26/2016");
         mDates.add("Sat, 08/27/2016");
         mDates.add("Sun, 08/28/2016");
-        Log.d(TAG, mDates.toString());
 
         //get the list of locations for the spinner
         mLocationLib = new LocationLib();
@@ -119,18 +118,18 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                 String eventTitle = mEventTitle.getText().toString();
                 String eventDescription = mEventDescription.getText().toString();
                 String dateTime = trimmedDateChoice + " " + startPickerHour + ":" + startPickerMin;
+                long endTime = createEndTimeInLong(endPickerMin,endPickerHour,trimmedDateChoice);
 
-                //empty fields
-                if (eventTitle.length() == 0 || eventTitle.length() == 0 || eventTitle.length() == 0 || eventTitle.length() == 0 || eventTitle.length() == 0){
+                //empty fields or vals not set
+                if (eventTitle.length() == 0 || eventDescription.length() == 0 || startPickerHour == 0 || endPickerHour == 0){
                     Toast.makeText(getApplicationContext()," You need to fill out all fields to be able to save this event", Toast.LENGTH_LONG).show();
                 }
                 else{
                     Date eventDateAsDate = getDateFromString(dateTime);
-                    Event event = new Event(eventTitle, locationChoice, eventDescription, eventDateAsDate);
+                    Event event = new Event(eventTitle, locationChoice, eventDescription, eventDateAsDate, endTime);
                     event.save();
                     mEvents.add(event);
                     mAdapter.notifyDataSetChanged();
-
                     mEventTitle.setVisibility(View.INVISIBLE);
                     mLocationSpinner.setVisibility(View.INVISIBLE);
                     mSubmitButton.setVisibility(View.INVISIBLE);
@@ -174,13 +173,13 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        String amOrPm = "am";
+        String amOrPm = "pm";
         pickerHour = hourOfDay;
         pickerMin = minute;
         String minutesString = "";
-        if (hourOfDay > 12){ //translate to 12 hr clock. Little workaround to get both timepicker and am/pm label to show up correctly.
-                    amOrPm = "pm";
-                    pickerHour-=12;
+        if (hourOfDay == 0){ //translate to 12 hr clock. Little workaround to get both timepicker and am/pm label to show up correctly.
+                    amOrPm = "am";
+                    pickerHour+=12;
                 }
                 if (pickerMin < 10) {
                     minutesString = "0"; //fix weird bug where only one zero is shown on times ending in :00
@@ -193,6 +192,8 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
             isSettingStartTime = false;
         } else {
             endTimeView.setText("End time set to: " + pickerHour + " : " + minutesString + pickerMin + " " + amOrPm);
+            endPickerHour = pickerHour;
+            endPickerMin = pickerMin;
         }
 
     }
@@ -206,6 +207,17 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
             Toast.makeText(getApplicationContext(),"There was an error, please try again",Toast.LENGTH_LONG).show();
         }
         return newDate;
+    }
+
+    public long createEndTimeInLong (int endPickerMin, int endPickerHour, String trimmedDateChoice){
+        DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.ENGLISH);
+        Date endDate = null;
+        try {
+            endDate = format.parse(trimmedDateChoice + " " + endPickerHour + ":" + endPickerMin);
+        } catch (ParseException e) {
+            Toast.makeText(getApplicationContext(),"There was an error, please try again",Toast.LENGTH_LONG).show();
+        }
+        return endDate.getTime();
     }
 
 }

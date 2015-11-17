@@ -21,7 +21,7 @@ import java.util.TimeZone;
 public class Event extends Model implements Comparable<Event>{
 
     public static final String TAG = Event.class.getSimpleName();
-    private static final long WINDOW_END = 10800000;
+    private static final long WINDOW_END = 10800000; //3hrs in ms
 
     @Column (name = "EventTitle")
     private String mEventTitle;
@@ -32,25 +32,35 @@ public class Event extends Model implements Comparable<Event>{
     @Column(name = "EventDateTimeStart")
     private Date mEventStartDateTime;
 
-//timestamp    @Column(name = "eventDateTimeEnd", index = true)
-//    private Date mEventDateTimeEnd;
+    @Column (name  = "EventEndTime")
+    private long mEventEndTime;
 
     @Column (name = "Description")
     private String mEventDescription;
+
+    public String getEventDescription() {
+        return mEventDescription;
+    }
 
     public Event() {
         super();
     }
 
-    public Event(String eventTitle, String eventLocation,String eventDescription, Date dateTime) {
+    public String getEventLocation() {
+        return mEventLocation;
+    }
+
+    public Event(String eventTitle, String eventLocation, String eventDescription, Date dateTime, long endTime) {
         mEventTitle = eventTitle;
         mEventLocation = eventLocation;
         mEventDescription = eventDescription;
         mEventStartDateTime = dateTime;
+        mEventEndTime = endTime;
+
     }
 
     public void setDateFromString(String date) {
-        SimpleDateFormat sf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+        SimpleDateFormat sf = new SimpleDateFormat("MM/dd/yyyy hh:mm");
         sf.setLenient(false);
         try {
             this.mEventStartDateTime = sf.parse(date);
@@ -63,17 +73,6 @@ public class Event extends Model implements Comparable<Event>{
         return mEventTitle;
     }
 
-    public Date getEventStartTime() {
-        return mEventStartDateTime;
-    }
-    public String getEventDescription() {
-        return mEventDescription;
-    }
-
-    public void setEventDescription(String eventDescription) {
-        mEventDescription = eventDescription;
-    }
-
     public Date getDateTime() {
         return mEventStartDateTime;
     }
@@ -81,7 +80,7 @@ public class Event extends Model implements Comparable<Event>{
     public static List<Event> all(){
         return new Select()
                 .from(Event.class)
-                .orderBy("EventDateTimeStart DESC")
+                .orderBy("EventDateTimeStart ASC")
                 .execute();
     }
 
@@ -102,8 +101,8 @@ public class Event extends Model implements Comparable<Event>{
         return getDateTime().compareTo(o.getDateTime());
     }
 
-    public String getEventEndTime() {
-        return mEventStartDateTime.toString();
+    public long getEventEndTime() {
+        return mEventEndTime;
     }
 
 
