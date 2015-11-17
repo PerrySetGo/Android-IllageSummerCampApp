@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.example.guest.illageSummerCamp.R;
 import com.example.guest.illageSummerCamp.models.Event;
@@ -44,8 +46,8 @@ public class EventAdapter extends BaseAdapter{
             convertView = LayoutInflater.from(mContext).inflate(R.layout.event_list_item,null);
             holder = new ViewHolder();
             holder.titleLabel = (TextView) convertView.findViewById(R.id.eventTitleLabel);
-            //holder.timeLabel = (TextView) convertView.findViewById(R.id.eventTimeLabel);
             holder.dateLabel = (TextView) convertView.findViewById(R.id.eventDateLabel);
+            holder.locationLabel = (TextView) convertView.findViewById(R.id.eventLocationLabel);
             holder.descriptionLabel = (TextView) convertView.findViewById(R.id.eventDescriptionLabel);
 
             convertView.setTag(holder);
@@ -54,8 +56,21 @@ public class EventAdapter extends BaseAdapter{
         }
         Event event = mEvents.get(position);
         holder.titleLabel.setText(event.getEventTitle());
-        //holder.timeLabel.setText("From: " + event.getEventStartTime() + " To: " + event.getEventEndTime());
-        holder.dateLabel.setText(event.getDateTime().toString());
+
+        SimpleDateFormat startTimeFormat = new SimpleDateFormat("hh:mm");
+        String startTime = startTimeFormat.format(event.getDateTime());
+
+        SimpleDateFormat eventDateFormat = new SimpleDateFormat("MM/dd");
+        String eventDateString = eventDateFormat.format(event.getDateTime());
+
+        long endTimeInMillis = event.getEventEndTime();
+        Date endTimeDate = new Date (endTimeInMillis);
+
+        SimpleDateFormat endTimeFormat = new SimpleDateFormat("hh:mm");
+        String endTimeString = endTimeFormat.format(endTimeDate);
+
+        holder.dateLabel.setText(startTime + " to " + endTimeString + " on: " + eventDateString);
+        holder.locationLabel.setText(event.getEventLocation());
         holder.descriptionLabel.setText(event.getEventDescription());
 
         return convertView;
@@ -64,9 +79,9 @@ public class EventAdapter extends BaseAdapter{
 
     private static class ViewHolder{
         TextView titleLabel;
-        TextView timeLabel;
         TextView dateLabel;
         TextView descriptionLabel;
+        TextView locationLabel;
     }
 
 
