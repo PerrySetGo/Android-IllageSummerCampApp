@@ -9,11 +9,11 @@ public class Location {
     private double mLatitude;
     private String mDescription;
 
-    public Location(String name, String address, double longitude, double latitude, String description) {
+    public Location(String name, String address, double latitude, double longitude, String description) {
         mName = name;
         mAddress = address;
-        mLongitude = longitude;
         mLatitude = latitude;
+        mLongitude = longitude;
         mDescription = description;
     }
 

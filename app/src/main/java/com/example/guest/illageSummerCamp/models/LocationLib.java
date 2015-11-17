@@ -18,7 +18,7 @@ public class LocationLib {
         "5527 N Vancouver Ave",
         45.5631991,
         -122.6716721,
-        "This is someone's home! Please be respectful."));
+        "This is someone\'s home! Please be respectful."));
 
         mLocations.add( new Location(
         "Peninsula Park",
@@ -48,18 +48,6 @@ public class LocationLib {
         -122.677954,
         "This is a 21+ venue."));
 
-        mLocations.add(new Location(
-        "Lesbian Lake",
-        "Oregon City",
-        45.334031,
-        -122.474941,
-        "Please talk to a camp counsellor to get the address."));
-        mLocations.add(new Location(
-                "Test",
-                "Test Loc",
-                45.334031,
-                -122.474941,
-                "Please talk to a camp counsellor to get the address."));
     }
 
     public ArrayList<Location> getLocations(){
