@@ -46,31 +46,6 @@ public class IllageMapActivity extends FragmentActivity implements OnMapReadyCal
 
         }
 
-
-//
-//
-//
-//        LatLng peninsulaPark = new LatLng(45.5697276,-122.6753081);
-//        LatLng floridaRoom = new LatLng(45.5629381,-122.6730989);
-//        LatLng skidmoreBluffs = new LatLng (45.5550166,-122.6925705);
-//        LatLng dynasty = new LatLng(45.562471,-122.677954);
-//        LatLng lesbianLake = new LatLng(45.334031,-122.474941);
-//        LatLng illageAlley = new LatLng (45.5631991,-122.6716721);
-//
-//
-//        Marker peninsulaMarker = mMap.addMarker(new MarkerOptions().position(peninsulaPark).title("Peninsula Park").snippet("700 N Rosa Parks Way"));
-//        Marker floridaMarker = mMap.addMarker(new MarkerOptions().position(floridaRoom).title("Florida Room").snippet("435 N Killingsworth St"));
-//        Marker skidmoreMarker = mMap.addMarker(new MarkerOptions().position(skidmoreBluffs).title("Skidmore Bluffs").snippet("2230 N Skidmore Ct"));
-//        Marker dynastyMarker = mMap.addMarker(new MarkerOptions().position(dynasty).title("Dynasty").snippet("832 N Killingsworth St"));
-//        Marker lesbianMarker = mMap.addMarker(new MarkerOptions().position(lesbianLake).title("lesbianLake").snippet("Please register with a camp counsellor to get the address."));
-//        Marker illageMarker = mMap.addMarker(new MarkerOptions().position(illageAlley).title("illageAlley").snippet("5527 N Vancouver Ave"));
-//
-//        builder.include(peninsulaMarker.getPosition());
-//        builder.include(floridaMarker.getPosition());
-//        builder.include(skidmoreMarker.getPosition());
-//        builder.include(dynastyMarker.getPosition());
-//        builder.include(illageMarker.getPosition());
-
         LatLngBounds bounds = builder.build();
 
         int padding = 50; // offset from edges of the map in pixels
