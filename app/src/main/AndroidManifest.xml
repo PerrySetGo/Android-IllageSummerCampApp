@@ -27,7 +27,8 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB5SFtQ9GWh4R2mpr0TJEXzpNT3M7Go-cI"/>
+            android:value="AIzaSyC2SYyUL73X9T9iJMVwUXJgny_1Adn8s-s"/>
+            <!--android:value="AIzaSyC2SYyUL73X9T9iJMVwUXJgny_1Adn8s-s"/>-->
 
         <activity
             android:name=".ui.IllageMapActivity"
