@@ -3,9 +3,8 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+//import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,7 +15,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.guest.illageSummerCamp.R;
-//import com.example.guest.illageSummerCamp.adapters.EventAdapter;
 import com.example.guest.illageSummerCamp.adapters.EventAdapter;
 import com.example.guest.illageSummerCamp.fragments.TimePickerFragment;
 import com.example.guest.illageSummerCamp.models.Event;
@@ -36,7 +34,7 @@ import butterknife.ButterKnife;
 
 public class AddEventActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
 
-    public static final String TAG = AddEventActivity.class.getSimpleName();
+    //public static final String TAG = AddEventActivity.class.getSimpleName();
 
     @Bind(R.id.editTitle) EditText mEventTitle;
     @Bind(R.id.editDescription) EditText mEventDescription;
@@ -49,32 +47,31 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     @Bind(R.id.showStartTimeButton) Button mShowTimeStartButton;
     @Bind(R.id.startTimeView) TextView startTimeView;
     @Bind(R.id.endTimeView) TextView endTimeView;
-    private int pickerHour = 0;
-    private int pickerMin = 0;
-    private int startPickerHour, startPickerMin, endPickerHour, endPickerMin;
+    int pickerHour = 0;
+    int pickerMin = 0;
+    int startPickerHour, startPickerMin, endPickerHour, endPickerMin;
     boolean isSettingStartTime = true;
-    private ArrayList<Event> mEvents;
-    private EventAdapter mAdapter;
-    private ArrayAdapter<String> locationAdapter;
-    private ArrayAdapter<String> datesAdapter;
-    private LocationLib mLocationLib;
+    ArrayList<Event> mEvents;
+    EventAdapter mAdapter;
+    ArrayAdapter<String> locationAdapter;
+    ArrayAdapter<String> datesAdapter;
+    LocationLib mLocationLib;
     public String locationChoice;
     public String dateChoice;
     public String trimmedDateChoice;
-    private ArrayList<String> mLocationNames; //this is the names of the locations so we can use them for the spinner
-    private ArrayList<String> mDates;
+    ArrayList<String> mLocationNames; //this is the names of the locations so we can use them for the spinner
+    ArrayList<String> mDates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
         ButterKnife.bind(this);
-        //mEvents = (ArrayList) Event.all();
         mAdapter = new EventAdapter(this, mEvents);
-        mLocationNames = new ArrayList<String>();
+        mLocationNames = new ArrayList<>();
 
         //get list of dates for date spinner
-        mDates = new ArrayList<String>();
+        mDates = new ArrayList<>();
         mDates.add("Thu, 08/25/2016");
         mDates.add("Fri, 08/26/2016");
         mDates.add("Sat, 08/27/2016");
@@ -87,7 +84,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
             mLocationNames.add(locName);
         }
 
-        locationAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mLocationNames);
+        locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mLocationNames);
         mLocationSpinner.setAdapter(locationAdapter);
         mLocationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -101,7 +98,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
 
         });
 
-        datesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mDates);
+        datesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mDates);
         mDateSpinner.setAdapter(datesAdapter);
         mDateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
@@ -120,13 +117,13 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String dateTime = trimmedDateChoice + " " + startPickerHour + ":" + startPickerMin;
-                long endTime = createEndTimeInLong(endPickerMin, endPickerHour, trimmedDateChoice);
                 if (mEventTitle.length() == 0 || mEventDescription.length() == 0 || startPickerHour == 0 || endPickerHour == 0) {
                     Toast.makeText(getApplicationContext(), " You need to fill out all fields to be able to save this event", Toast.LENGTH_LONG).show();
                 } else {
+                    String dateTime = trimmedDateChoice + " " + startPickerHour + ":" + startPickerMin;
+                    long endTime = createEndTimeInLong(endPickerMin, endPickerHour, trimmedDateChoice);
                     Date eventDateAsDate = getDateFromString(dateTime);
-                    saveEvent(eventDateAsDate);
+                    saveEvent(eventDateAsDate, endTime);
                     mAdapter.notifyDataSetChanged();
                     mEventTitle.setVisibility(View.INVISIBLE);
                     mLocationSpinner.setVisibility(View.INVISIBLE);
@@ -161,63 +158,10 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                     });
                 }
             }
-
-
-//        mSubmitButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String eventTitle = mEventTitle.getText().toString();
-//                String eventDescription = mEventDescription.getText().toString();
-//                String dateTime = trimmedDateChoice + " " + startPickerHour + ":" + startPickerMin;
-//                long endTime = createEndTimeInLong(endPickerMin,endPickerHour,trimmedDateChoice);
-//
-//                //empty fields or vals not set
-//                if (eventTitle.length() == 0 || eventDescription.length() == 0 || startPickerHour == 0 || endPickerHour == 0){
-//                    Toast.makeText(getApplicationContext()," You need to fill out all fields to be able to save this event", Toast.LENGTH_LONG).show();
-//                }
-//                else{
-//                    Date eventDateAsDate = getDateFromString(dateTime);
-//                    Event event = new Event(eventTitle, locationChoice, eventDescription, eventDateAsDate, endTime);
-//                    event.save();
-//                    mEvents.add(event);
-//                    mAdapter.notifyDataSetChanged();
-//                    mEventTitle.setVisibility(View.INVISIBLE);
-//                    mLocationSpinner.setVisibility(View.INVISIBLE);
-//                    mSubmitButton.setVisibility(View.INVISIBLE);
-//                    newEventLabel.setVisibility(View.INVISIBLE);
-//                    mShowTimeStartButton.setVisibility(View.INVISIBLE);
-//                    endTimeButton.setVisibility(View.INVISIBLE);
-//                    startTimeView.setVisibility(View.INVISIBLE);
-//                    endTimeView.setVisibility(View.INVISIBLE);
-//                    mEventDescription.setVisibility(View.INVISIBLE);
-//                    mDateSpinner.setVisibility(View.INVISIBLE);
-//
-//
-//                    addNewEventLabel.setVisibility(View.VISIBLE);
-//                    mNewEventButton.setVisibility(View.VISIBLE);
-//                    mNoNewEventButton.setVisibility(View.VISIBLE);
-//
-//                    mNewEventButton.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            finish();
-//                            startActivity(getIntent());
-//                        }
-//                    });
-//
-//                    mNoNewEventButton.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            Intent intent = new Intent(AddEventActivity.this, MainActivity.class);
-//                            startActivity(intent);
-//                        }
-//                    });
-//                }
-//            }
-//        });
-//    }
         });
     }
+
+
 
     public void showTimePickerDialog(View v) {
         TimePickerFragment newFragment = new TimePickerFragment();
@@ -234,25 +178,30 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                     amOrPm = "am";
                     pickerHour+=12;
                 }
+        else if(hourOfDay > 12){
+            amOrPm = "pm";
+            pickerHour-=12;
+        }
                 if (pickerMin < 10) {
                     minutesString = "0"; //fix weird bug where only one zero is shown on times ending in :00
                 }
 
         if (isSettingStartTime){
-            startTimeView.setText("Start time set to: " + pickerHour + " : " + minutesString + pickerMin + " " + amOrPm);
+            startTimeView.setText("Start time set to: " + pickerHour + ":" + minutesString + pickerMin + " " + amOrPm);
             startPickerHour = pickerHour;
             startPickerMin  = pickerMin;
             isSettingStartTime = false;
         } else {
-            endTimeView.setText("End time set to: " + pickerHour + " : " + minutesString + pickerMin + " " + amOrPm);
+            endTimeView.setText("End time set to: " + pickerHour + ":" + minutesString + pickerMin + " " + amOrPm);
             endPickerHour = pickerHour;
             endPickerMin = pickerMin;
+            isSettingStartTime = true;
         }
 
     }
 
     public Date getDateFromString(String date){
-        DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.ENGLISH);
+        DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
         Date newDate = null;
         try {
             newDate = format.parse(date);
@@ -263,7 +212,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     }
 
     public long createEndTimeInLong (int endPickerMin, int endPickerHour, String trimmedDateChoice){
-        DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.ENGLISH);
+        DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
         Date endDate = null;
         try {
             endDate = format.parse(trimmedDateChoice + " " + endPickerHour + ":" + endPickerMin);
@@ -273,13 +222,14 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
         return endDate.getTime();
     }
 
-    private void saveEvent(Date eventDateAsDate){
+    private void saveEvent(Date eventDateAsDate, long endTime){
         //requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         ParseObject event = new ParseObject("Event");
         event.put("title", mEventTitle.getText().toString());
         event.put("location", locationChoice);
         event.put("description", mEventDescription.getText().toString());
         event.put("startDateTime", eventDateAsDate);
+        event.put("endTime", endTime);
 
         event.saveInBackground(new SaveCallback() {
             @Override
