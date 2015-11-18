@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-                <!--android:orientation="vertical"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-        <!--android:text="&#45;&#45;"-->
-        <!--android:id="@+id/eventDateLabel"-->
-        <!--android:background="#8ec1da"-->
-        <!--android:textColor="@android:color/black"-->
-        <!--android:padding="4dp"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_below="@+id/eventDescriptionLabel"-->
-        <!--android:layout_marginRight="4dp"/>-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="--"
+        android:id="@+id/eventDateLabel"
+        android:background="#8ec1da"
+        android:textColor="@android:color/black"
+        android:padding="4dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/eventDescriptionLabel"
+        android:layout_marginRight="4dp"/>
 
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="This is a 140 character tweet used to test the dimensions of my Text View box. Here are 50 extra characters used as a placeholder for tests!"-->
-        <!--android:id="@+id/eventDescriptionLabel"-->
-        <!--android:textSize="17sp"-->
-        <!--android:textColor="@android:color/black"-->
-        <!--android:padding="8dp"-->
-        <!--android:layout_below="@+id/eventTitleLabel"-->
-        <!--android:layout_alignRight="@+id/eventDateLabel"-->
-        <!--android:layout_alignEnd="@+id/eventDateLabel"/>-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This is a 140 character tweet used to test the dimensions of my Text View box. Here are 50 extra characters used as a placeholder for tests!"
+        android:id="@+id/eventDescriptionLabel"
+        android:textSize="17sp"
+        android:textColor="@android:color/black"
+        android:padding="8dp"
+        android:layout_below="@+id/eventTitleLabel"
+        android:layout_alignRight="@+id/eventDateLabel"
+        android:layout_alignEnd="@+id/eventDateLabel"/>
 
     <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -41,19 +41,19 @@
         android:paddingTop="10dp"
         android:layout_marginTop="10dp"/>
 
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-        <!--android:text="&#45;&#45;"-->
-        <!--android:id="@+id/eventLocationLabel"-->
-        <!--android:background="#8ec1da"-->
-        <!--android:textColor="@android:color/black"-->
-        <!--android:padding="4dp"-->
-        <!--android:layout_alignTop="@+id/eventDateLabel"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:paddingLeft="8dp"-->
-        <!--android:layout_marginLeft="4dp"/>-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="--"
+        android:id="@+id/eventLocationLabel"
+        android:background="#8ec1da"
+        android:textColor="@android:color/black"
+        android:padding="4dp"
+        android:layout_alignTop="@+id/eventDateLabel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="8dp"
+        android:layout_marginLeft="4dp"/>
 
-<!--</RelativeLayout>-->
+</RelativeLayout>
