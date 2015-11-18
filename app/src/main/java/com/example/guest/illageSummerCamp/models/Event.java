@@ -17,26 +17,30 @@ import java.util.*;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-@Table(name = "events", id = "_id")
 public class Event extends Model implements Comparable<Event>{
 
     public static final String TAG = Event.class.getSimpleName();
     private static final long WINDOW_END = 10800000; //3hrs in ms
-
-    @Column (name = "EventTitle")
     private String mEventTitle;
-
-    @Column (name = "EventLocation")
     private String mEventLocation;
-
-    @Column(name = "EventDateTimeStart")
     private Date mEventStartDateTime;
-
-    @Column (name  = "EventEndTime")
     private long mEventEndTime;
-
-    @Column (name = "Description")
     private String mEventDescription;
+
+
+
+    public Event(String eventTitle) {
+        mEventTitle = eventTitle;
+    }
+
+//    public Event(String eventTitle, String eventLocation, String eventDescription, Date dateTime, long endTime) {
+//        mEventTitle = eventTitle;
+//        mEventLocation = eventLocation;
+//        mEventDescription = eventDescription;
+//        mEventStartDateTime = dateTime;
+//        mEventEndTime = endTime;
+//
+//    }
 
     public String getEventDescription() {
         return mEventDescription;
@@ -48,15 +52,6 @@ public class Event extends Model implements Comparable<Event>{
 
     public String getEventLocation() {
         return mEventLocation;
-    }
-
-    public Event(String eventTitle, String eventLocation, String eventDescription, Date dateTime, long endTime) {
-        mEventTitle = eventTitle;
-        mEventLocation = eventLocation;
-        mEventDescription = eventDescription;
-        mEventStartDateTime = dateTime;
-        mEventEndTime = endTime;
-
     }
 
     public void setDateFromString(String date) {
@@ -77,24 +72,24 @@ public class Event extends Model implements Comparable<Event>{
         return mEventStartDateTime;
     }
 
-    public static List<Event> all(){
-        return new Select()
-                .from(Event.class)
-                .orderBy("EventDateTimeStart ASC")
-                .execute();
-    }
-
-    public static Event findRecent() {
-        Calendar rightNow = Calendar.getInstance();
-        //get the next event if one starts between now and 3 hours from now
-        long eventWindowEnd = rightNow.getTimeInMillis() + WINDOW_END;
-        return new Select()
-                .from(Event.class)
-                .orderBy("EventDateTimeStart DESC")
-                .where("EventDateTimeStart > ?", rightNow.getTimeInMillis()) //get current time
-                .where("EventDateTimeStart < ?", eventWindowEnd) //add expiration time in MS
-                .executeSingle();
-    }
+//    public static List<Event> all(){
+//        return new Select()
+//                .from(Event.class)
+//                .orderBy("EventDateTimeStart ASC")
+//                .execute();
+//    }
+//
+//    public static Event findRecent() {
+//        Calendar rightNow = Calendar.getInstance();
+//        //get the next event if one starts between now and 3 hours from now
+//        long eventWindowEnd = rightNow.getTimeInMillis() + WINDOW_END;
+//        return new Select()
+//                .from(Event.class)
+//                .orderBy("EventDateTimeStart DESC")
+//                .where("EventDateTimeStart > ?", rightNow.getTimeInMillis()) //get current time
+//                .where("EventDateTimeStart < ?", eventWindowEnd) //add expiration time in MS
+//                .executeSingle();
+//    }
 
     @Override
     public int compareTo(Event o) {
@@ -105,5 +100,11 @@ public class Event extends Model implements Comparable<Event>{
         return mEventEndTime;
     }
 
+    @Override
+    public String toString() {
+        return this.getEventTitle();
+    }
+
 
 }
+
