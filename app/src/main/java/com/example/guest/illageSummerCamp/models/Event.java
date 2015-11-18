@@ -1,25 +1,14 @@
 package com.example.guest.illageSummerCamp.models;
 
-import android.util.Log;
-
 import com.activeandroid.Model;
-import com.activeandroid.annotation.Column;
-import com.activeandroid.annotation.Table;
-import com.activeandroid.query.Select;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
 import java.util.*;
-import java.util.Calendar;
-import java.util.TimeZone;
 
 public class Event extends Model implements Comparable<Event>{
 
-    public static final String TAG = Event.class.getSimpleName();
+    //public static final String TAG = Event.class.getSimpleName();
     private static final long WINDOW_END = 10800000; //3hrs in ms
     private String mEventTitle;
     private String mEventLocation;
@@ -28,12 +17,12 @@ public class Event extends Model implements Comparable<Event>{
     private String mEventDescription;
 
 
-    public Event(String eventTitle, String eventLocation, String eventDescription, Date dateTime) {
+    public Event(String eventTitle, String eventLocation, String eventDescription, Date dateTime, long eventEndTime) {
         mEventTitle = eventTitle;
         mEventLocation = eventLocation;
         mEventDescription = eventDescription;
         mEventStartDateTime = dateTime;
-//        mEventEndTime = endTime;
+        mEventEndTime = eventEndTime;
 
     }
 
@@ -41,16 +30,12 @@ public class Event extends Model implements Comparable<Event>{
         return mEventDescription;
     }
 
-    public Event() {
-        super();
-    }
-
     public String getEventLocation() {
         return mEventLocation;
     }
 
     public void setDateFromString(String date) {
-        SimpleDateFormat sf = new SimpleDateFormat("MM/dd/yyyy hh:mm");
+        SimpleDateFormat sf = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
         sf.setLenient(false);
         try {
             this.mEventStartDateTime = sf.parse(date);

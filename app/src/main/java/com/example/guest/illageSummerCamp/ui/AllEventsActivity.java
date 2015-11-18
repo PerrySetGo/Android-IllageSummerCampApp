@@ -2,15 +2,11 @@ package com.example.guest.illageSummerCamp.ui;
 
 import android.app.ListActivity;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Window;
-import android.widget.ArrayAdapter;
-
 import com.example.guest.illageSummerCamp.adapters.EventAdapter;
 import com.example.guest.illageSummerCamp.models.Event;
 import com.example.guest.illageSummerCamp.R;
-//import com.example.guest.illageSummerCamp.adapters.EventAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -30,7 +26,7 @@ public class AllEventsActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_events);
 
-        mEvents = new ArrayList<Event>();
+        mEvents = new ArrayList<>();
 
         mAdapter = new EventAdapter(this, mEvents);
         setListAdapter(mAdapter);
@@ -51,7 +47,7 @@ public class AllEventsActivity extends ListActivity {
                     setProgressBarIndeterminateVisibility(false);
                     mEvents.clear();
                     for (ParseObject event : eventList) {//rebuild event objects from parse data
-                        Event newEvent = new Event(event.getString("title"), event.getString("location"),event.getString("description"),event.getDate("startDateTime"));
+                        Event newEvent = new Event(event.getString("title"), event.getString("location"),event.getString("description"),event.getDate("startDateTime"), event.getLong(""));
                         mEvents.add(newEvent);
                     }
                     mAdapter.notifyDataSetChanged();
