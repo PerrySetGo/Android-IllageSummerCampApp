@@ -46,7 +46,7 @@ public class EventAdapter extends BaseAdapter{
             convertView = LayoutInflater.from(mContext).inflate(R.layout.event_list_item,null);
             holder = new ViewHolder();
             holder.titleLabel = (TextView) convertView.findViewById(R.id.eventTitleLabel);
-//            holder.dateLabel = (TextView) convertView.findViewById(R.id.eventDateLabel);
+            holder.dateLabel = (TextView) convertView.findViewById(R.id.eventDateLabel);
             holder.locationLabel = (TextView) convertView.findViewById(R.id.eventLocationLabel);
             holder.descriptionLabel = (TextView) convertView.findViewById(R.id.eventDescriptionLabel);
 
@@ -57,19 +57,19 @@ public class EventAdapter extends BaseAdapter{
         Event event = mEvents.get(position);
         holder.titleLabel.setText(event.getEventTitle());
 
-//        SimpleDateFormat startTimeFormat = new SimpleDateFormat("hh:mm");
-//        String startTime = startTimeFormat.format(event.getDateTime());
-//
-//        SimpleDateFormat eventDateFormat = new SimpleDateFormat("MM/dd");
-//        String eventDateString = eventDateFormat.format(event.getDateTime());
-//
+        SimpleDateFormat startTimeFormat = new SimpleDateFormat("hh:mm");
+        String startTime = startTimeFormat.format(event.getDateTime());
+
+        SimpleDateFormat eventDateFormat = new SimpleDateFormat("MM/dd");
+        String eventDateString = eventDateFormat.format(event.getDateTime());
+
 //        long endTimeInMillis = event.getEventEndTime();
 //        Date endTimeDate = new Date (endTimeInMillis);
 //
 //        SimpleDateFormat endTimeFormat = new SimpleDateFormat("hh:mm");
 //        String endTimeString = endTimeFormat.format(endTimeDate);
-//
-//        holder.dateLabel.setText(startTime + " to " + endTimeString + " on: " + eventDateString);
+
+        holder.dateLabel.setText(startTime + " on: " + eventDateString);
         holder.locationLabel.setText(event.getEventLocation());
         holder.descriptionLabel.setText(event.getEventDescription());
 
@@ -83,8 +83,5 @@ public class EventAdapter extends BaseAdapter{
         TextView descriptionLabel;
         TextView locationLabel;
     }
-
-
-
 
 }

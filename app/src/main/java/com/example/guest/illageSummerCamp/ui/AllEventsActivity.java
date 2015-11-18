@@ -51,7 +51,7 @@ public class AllEventsActivity extends ListActivity {
                     setProgressBarIndeterminateVisibility(false);
                     mEvents.clear();
                     for (ParseObject event : eventList) {//rebuild event objects from parse data
-                        Event newEvent = new Event(event.getString("title"), event.getString("location"),event.getString("description"));
+                        Event newEvent = new Event(event.getString("title"), event.getString("location"),event.getString("description"),event.getDate("startDateTime"));
                         mEvents.add(newEvent);
                     }
                     mAdapter.notifyDataSetChanged();
