@@ -38,31 +38,30 @@ import butterknife.ButterKnife;
     public static final String TAG = AddEventActivity.class.getSimpleName();
 
     @Bind(R.id.editTitle) EditText mEventTitle;
-//    @Bind(R.id.editDescription) EditText mEventDescription;
+    @Bind(R.id.editDescription) EditText mEventDescription;
     @Bind(R.id.newEventButton) Button mNewEventButton;
     @Bind(R.id.noNewButton) Button mNoNewEventButton;
 //    @Bind (R.id.endTimeButton) Button endTimeButton;
     @Bind(R.id.eventSubmitButton)  Button mSubmitButton;
-//    @Bind(R.id.locationSpinner) Spinner mLocationSpinner;
-//    @Bind(R.id.dateSpinner) Spinner mDateSpinner;
+    @Bind(R.id.locationSpinner) Spinner mLocationSpinner;
+    //@Bind(R.id.dateSpinner) Spinner mDateSpinner;
 //    @Bind(R.id.showStartTimeButton) Button mShowTimeStartButton;
 //    @Bind(R.id.startTimeView) TextView startTimeView;
 //    @Bind(R.id.endTimeView) TextView endTimeView;
-    private String eventTitle;
-    private int pickerHour = 0;
-    private int pickerMin = 0;
-    private int startPickerHour, startPickerMin, endPickerHour, endPickerMin;
+    //private int pickerHour = 0;
+    //private int pickerMin = 0;
+    //private int startPickerHour, startPickerMin, endPickerHour, endPickerMin;
     boolean isSettingStartTime = true;
     private ArrayList<Event> mEvents;
     //private EventAdapter mAdapter;
     private ArrayAdapter<String> locationAdapter;
-    private ArrayAdapter<String> datesAdapter;
+    //private ArrayAdapter<String> datesAdapter;
     private LocationLib mLocationLib;
     public String locationChoice;
-    public String dateChoice;
-    public String trimmedDateChoice;
+    //public String dateChoice;
+    //public String trimmedDateChoice;
     private ArrayList<String> mLocationNames; //this is the names of the locations so we can use them for the spinner
-    private ArrayList<String> mDates;
+    //private ArrayList<String> mDates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,35 +70,35 @@ import butterknife.ButterKnife;
         ButterKnife.bind(this);
         //mEvents = (ArrayList) Event.all();
         //mAdapter = new EventAdapter(this, mEvents);
-//        mLocationNames = new ArrayList<String>();
-//
+        mLocationNames = new ArrayList<String>();
+
 //        //get list of dates for date spinner
 //        mDates = new ArrayList<String>();
 //        mDates.add("Thu, 08/25/2016");
 //        mDates.add("Fri, 08/26/2016");
 //        mDates.add("Sat, 08/27/2016");
 //        mDates.add("Sun, 08/28/2016");
-//
-//        //get the list of locations for the spinner
-//        mLocationLib = new LocationLib();
-//        for (int i = 0; i < mLocationLib.getLocations().size(); i++) {
-//            String locName = mLocationLib.getLocations().get(i).getName();
-//            mLocationNames.add(locName);
-//        }
-//
-//        locationAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mLocationNames);
-//        mLocationSpinner.setAdapter(locationAdapter);
-//        mLocationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//
-//            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-//                locationChoice = mLocationSpinner.getSelectedItem().toString();
-//            }
-//
-//            public void onNothingSelected(AdapterView<?> arg0) {
-//
-//            }
-//
-//        });
+
+        //get the list of locations for the spinner
+        mLocationLib = new LocationLib();
+        for (int i = 0; i < mLocationLib.getLocations().size(); i++) {
+            String locName = mLocationLib.getLocations().get(i).getName();
+            mLocationNames.add(locName);
+        }
+
+        locationAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mLocationNames);
+        mLocationSpinner.setAdapter(locationAdapter);
+        mLocationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                locationChoice = mLocationSpinner.getSelectedItem().toString();
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+
+        });
 
 //        datesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mDates);
 //        mDateSpinner.setAdapter(datesAdapter);
@@ -234,10 +233,11 @@ import butterknife.ButterKnife;
 //    }
 
     private void saveEvent(){
-        eventTitle = mEventTitle.getText().toString();
         //requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         ParseObject event = new ParseObject("Event");
-        event.put("title", eventTitle);
+        event.put("title", mEventTitle.getText().toString());
+        event.put("location", locationChoice);
+        event.put("description", mEventDescription.getText().toString());
 
         event.saveInBackground(new SaveCallback() {
             @Override

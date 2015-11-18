@@ -60,15 +60,15 @@
         android:layout_alignEnd="@+id/eventSubmitButton"
         android:visibility="visible"/>
 
-    <!--<Spinner-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/locationSpinner"-->
-        <!--android:hint="Location?"-->
-        <!--android:layout_above="@+id/showStartTimeButton"-->
-        <!--android:layout_toLeftOf="@+id/dateView"-->
-        <!--android:layout_toStartOf="@+id/dateView"-->
-        <!--android:visibility="visible"/>-->
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationSpinner"
+        android:hint="Location?"
+        android:layout_above="@+id/showStartTimeButton"
+        android:layout_toLeftOf="@+id/dateView"
+        android:layout_toStartOf="@+id/dateView"
+        android:visibility="visible"/>
 
     <!--<TextView-->
         <!--android:layout_width="wrap_content"-->
@@ -132,17 +132,17 @@
         <!--android:layout_alignParentStart="true"-->
         <!--android:visibility="visible"/>-->
 
-    <!--<EditText-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:inputType="textMultiLine"-->
-        <!--android:ems="10"-->
-        <!--android:id="@+id/editDescription"-->
-        <!--android:layout_below="@+id/endTimeButton"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:visibility="visible"-->
-        <!--android:hint="Please enter a description"/>-->
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editDescription"
+        android:layout_below="@+id/endTimeButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:visibility="visible"
+        android:hint="Please enter a description"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"

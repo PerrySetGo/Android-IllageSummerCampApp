@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 
+import com.example.guest.illageSummerCamp.adapters.EventAdapter;
 import com.example.guest.illageSummerCamp.models.Event;
 import com.example.guest.illageSummerCamp.R;
 //import com.example.guest.illageSummerCamp.adapters.EventAdapter;
@@ -20,8 +21,8 @@ import java.util.List;
 
 public class AllEventsActivity extends ListActivity {
 
-    private List<Event> mEvents;
-    //private EventAdapter mAdapter;
+    private ArrayList<Event> mEvents;
+    private EventAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,9 @@ public class AllEventsActivity extends ListActivity {
         setContentView(R.layout.activity_all_events);
 
         mEvents = new ArrayList<Event>();
-        ArrayAdapter<Event> adapter = new ArrayAdapter<Event>(this, R.layout.event_list_item, mEvents);
-        setListAdapter(adapter);
+
+        mAdapter = new EventAdapter(this, mEvents);
+        setListAdapter(mAdapter);
         refreshEventList();
     }
 
@@ -49,10 +51,10 @@ public class AllEventsActivity extends ListActivity {
                     setProgressBarIndeterminateVisibility(false);
                     mEvents.clear();
                     for (ParseObject event : eventList) {//rebuild event objects from parse data
-                        Event newEvent = new Event(event.getString("title"));
+                        Event newEvent = new Event(event.getString("title"), event.getString("location"),event.getString("description"));
                         mEvents.add(newEvent);
                     }
-                    ((ArrayAdapter<Event>) getListAdapter()).notifyDataSetChanged();
+                    mAdapter.notifyDataSetChanged();
                 } else {
                     Log.d(getClass().getSimpleName(), "Error: " + e.getMessage());
                 }
