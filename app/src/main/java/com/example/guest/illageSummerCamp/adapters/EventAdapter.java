@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import com.example.guest.illageSummerCamp.R;
 import com.example.guest.illageSummerCamp.models.Event;
@@ -43,7 +43,7 @@ public class EventAdapter extends BaseAdapter{
         ViewHolder holder;
         if (convertView == null)
         {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.event_list_item,null);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.event_list_item,parent,false);
             holder = new ViewHolder();
             holder.titleLabel = (TextView) convertView.findViewById(R.id.eventTitleLabel);
             holder.dateLabel = (TextView) convertView.findViewById(R.id.eventDateLabel);
@@ -57,19 +57,19 @@ public class EventAdapter extends BaseAdapter{
         Event event = mEvents.get(position);
         holder.titleLabel.setText(event.getEventTitle());
 
-        SimpleDateFormat startTimeFormat = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat startTimeFormat = new SimpleDateFormat("hh:mm", Locale.US);
         String startTime = startTimeFormat.format(event.getDateTime());
 
-        SimpleDateFormat eventDateFormat = new SimpleDateFormat("MM/dd");
+        SimpleDateFormat eventDateFormat = new SimpleDateFormat("MM/dd", Locale.US);
         String eventDateString = eventDateFormat.format(event.getDateTime());
 
-//        long endTimeInMillis = event.getEventEndTime();
-//        Date endTimeDate = new Date (endTimeInMillis);
-//
-//        SimpleDateFormat endTimeFormat = new SimpleDateFormat("hh:mm");
-//        String endTimeString = endTimeFormat.format(endTimeDate);
+        long endTimeInMillis = event.getEventEndTime();
+        Date endTimeDate = new Date (endTimeInMillis);
 
-        holder.dateLabel.setText(startTime + " on: " + eventDateString);
+        SimpleDateFormat endTimeFormat = new SimpleDateFormat("hh:mm", Locale.US);
+        String endTimeString = endTimeFormat.format(endTimeDate);
+
+        holder.dateLabel.setText(startTime + " to " + endTimeString + " on: " + eventDateString);
         holder.locationLabel.setText(event.getEventLocation());
         holder.descriptionLabel.setText(event.getEventDescription());
 
