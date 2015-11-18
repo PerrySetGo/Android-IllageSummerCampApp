@@ -27,20 +27,15 @@ public class Event extends Model implements Comparable<Event>{
     private long mEventEndTime;
     private String mEventDescription;
 
-    public Event(String eventTitle, String eventLocation, String eventDescription) {
+
+    public Event(String eventTitle, String eventLocation, String eventDescription, Date dateTime) {
         mEventTitle = eventTitle;
         mEventLocation = eventLocation;
         mEventDescription = eventDescription;
-    }
-
-//    public Event(String eventTitle, String eventLocation, String eventDescription, Date dateTime, long endTime) {
-//        mEventTitle = eventTitle;
-//        mEventLocation = eventLocation;
-//        mEventDescription = eventDescription;
-//        mEventStartDateTime = dateTime;
+        mEventStartDateTime = dateTime;
 //        mEventEndTime = endTime;
-//
-//    }
+
+    }
 
     public String getEventDescription() {
         return mEventDescription;
