@@ -60,89 +60,89 @@
         android:layout_alignEnd="@+id/eventSubmitButton"
         android:visibility="visible"/>
 
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/locationSpinner"
-        android:hint="Location?"
-        android:layout_above="@+id/showStartTimeButton"
-        android:layout_toLeftOf="@+id/dateView"
-        android:layout_toStartOf="@+id/dateView"
-        android:visibility="visible"/>
+    <!--<Spinner-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/locationSpinner"-->
+        <!--android:hint="Location?"-->
+        <!--android:layout_above="@+id/showStartTimeButton"-->
+        <!--android:layout_toLeftOf="@+id/dateView"-->
+        <!--android:layout_toStartOf="@+id/dateView"-->
+        <!--android:visibility="visible"/>-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/dateView"
-        android:layout_alignBottom="@+id/addNewEventLabel"
-        android:layout_alignRight="@+id/editTitle"
-        android:layout_alignEnd="@+id/editTitle"/>
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/dateView"-->
+        <!--android:layout_alignBottom="@+id/addNewEventLabel"-->
+        <!--android:layout_alignRight="@+id/editTitle"-->
+        <!--android:layout_alignEnd="@+id/editTitle"/>-->
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Set Start Time"
-        android:id="@+id/showStartTimeButton"
-        android:onClick="showTimePickerDialog"
-        android:layout_above="@+id/endTimeButton"
-        android:layout_toLeftOf="@+id/newEventLabel"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:visibility="visible"/>
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Set Start Time"-->
+        <!--android:id="@+id/showStartTimeButton"-->
+        <!--android:onClick="showTimePickerDialog"-->
+        <!--android:layout_above="@+id/endTimeButton"-->
+        <!--android:layout_toLeftOf="@+id/newEventLabel"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:visibility="visible"/>-->
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Set End Time"
-        android:id="@+id/endTimeButton"
-        android:onClick="showTimePickerDialog"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/showStartTimeButton"
-        android:layout_alignEnd="@+id/showStartTimeButton"
-        android:visibility="visible"/>
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Set End Time"-->
+        <!--android:id="@+id/endTimeButton"-->
+        <!--android:onClick="showTimePickerDialog"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignRight="@+id/showStartTimeButton"-->
+        <!--android:layout_alignEnd="@+id/showStartTimeButton"-->
+        <!--android:visibility="visible"/>-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/startTimeView"
-        android:background="#76ff62"
-        android:layout_above="@+id/endTimeButton"
-        android:visibility="visible"
-        android:layout_alignRight="@+id/addNewEventLabel"
-        android:layout_alignEnd="@+id/addNewEventLabel"/>
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/startTimeView"-->
+        <!--android:background="#76ff62"-->
+        <!--android:layout_above="@+id/endTimeButton"-->
+        <!--android:visibility="visible"-->
+        <!--android:layout_alignRight="@+id/addNewEventLabel"-->
+        <!--android:layout_alignEnd="@+id/addNewEventLabel"/>-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/endTimeView"
-        android:background="#40bcff"
-        android:layout_alignBottom="@+id/endTimeButton"
-        android:layout_alignRight="@+id/locationSpinner"
-        android:layout_alignEnd="@+id/locationSpinner"
-        android:visibility="visible"/>
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/endTimeView"-->
+        <!--android:background="#40bcff"-->
+        <!--android:layout_alignBottom="@+id/endTimeButton"-->
+        <!--android:layout_alignRight="@+id/locationSpinner"-->
+        <!--android:layout_alignEnd="@+id/locationSpinner"-->
+        <!--android:visibility="visible"/>-->
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/dateSpinner"
-        android:layout_alignTop="@+id/dateView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:visibility="visible"/>
+    <!--<Spinner-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/dateSpinner"-->
+        <!--android:layout_alignTop="@+id/dateView"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:visibility="visible"/>-->
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/editDescription"
-        android:layout_below="@+id/endTimeButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:visibility="visible"
-        android:hint="Please enter a description"/>
+    <!--<EditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textMultiLine"-->
+        <!--android:ems="10"-->
+        <!--android:id="@+id/editDescription"-->
+        <!--android:layout_below="@+id/endTimeButton"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:visibility="visible"-->
+        <!--android:hint="Please enter a description"/>-->
 
     <Button
         style="?android:attr/buttonStyleSmall"
