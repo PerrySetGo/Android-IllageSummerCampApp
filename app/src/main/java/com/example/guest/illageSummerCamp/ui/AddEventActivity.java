@@ -1,4 +1,5 @@
 package com.example.guest.illageSummerCamp.ui;
+import android.app.FragmentManager;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,12 +42,14 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     @Bind(R.id.newEventButton) Button mNewEventButton;
     @Bind(R.id.noNewButton) Button mNoNewEventButton;
     @Bind (R.id.endTimeButton) Button endTimeButton;
+    @Bind(R.id.showStartTimeButton) Button startTimeButton;
     @Bind(R.id.eventSubmitButton)  Button mSubmitButton;
     @Bind(R.id.locationSpinner) Spinner mLocationSpinner;
     @Bind(R.id.dateSpinner) Spinner mDateSpinner;
-    @Bind(R.id.showStartTimeButton) Button mShowTimeStartButton;
     @Bind(R.id.startTimeView) TextView startTimeView;
     @Bind(R.id.endTimeView) TextView endTimeView;
+    TimePickerFragment startTimePickerFragment;
+    TimePickerFragment endTimePickerFragment;
     int pickerHour = 0;
     int pickerMin = 0;
     int startPickerHour, startPickerMin, endPickerHour, endPickerMin;
@@ -129,7 +132,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                     mLocationSpinner.setVisibility(View.INVISIBLE);
                     mSubmitButton.setVisibility(View.INVISIBLE);
                     newEventLabel.setVisibility(View.INVISIBLE);
-                    mShowTimeStartButton.setVisibility(View.INVISIBLE);
+                    startTimeButton.setVisibility(View.INVISIBLE);
                     endTimeButton.setVisibility(View.INVISIBLE);
                     startTimeView.setVisibility(View.INVISIBLE);
                     endTimeView.setVisibility(View.INVISIBLE);
@@ -159,7 +162,29 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                 }
             }
         });
+
+        startTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isSettingStartTime = true;
+                startTimePickerFragment = new TimePickerFragment();
+                startTimePickerFragment.show(getFragmentManager(), "startTimePicker");
+            }
+        });
+
+        endTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isSettingStartTime = false;
+                endTimePickerFragment = new TimePickerFragment();
+                endTimePickerFragment.show(getFragmentManager(), "endTimePicker");
+            }
+        });
+
+
     }
+
+
 
 
 
@@ -182,6 +207,9 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
             amOrPm = "pm";
             pickerHour-=12;
         }
+        else if (hourOfDay <12){
+            amOrPm = "am";
+        }
                 if (pickerMin < 10) {
                     minutesString = "0"; //fix weird bug where only one zero is shown on times ending in :00
                 }
@@ -190,12 +218,10 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
             startTimeView.setText("Start time set to: " + pickerHour + ":" + minutesString + pickerMin + " " + amOrPm);
             startPickerHour = pickerHour;
             startPickerMin  = pickerMin;
-            isSettingStartTime = false;
         } else {
             endTimeView.setText("End time set to: " + pickerHour + ":" + minutesString + pickerMin + " " + amOrPm);
             endPickerHour = pickerHour;
             endPickerMin = pickerMin;
-            isSettingStartTime = true;
         }
 
     }
