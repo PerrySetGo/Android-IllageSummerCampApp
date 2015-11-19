@@ -1,12 +1,14 @@
 package com.example.guest.illageSummerCamp.models;
 
 import com.activeandroid.Model;
+import com.parse.ParseObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.*;
 
-public class Event extends Model implements Comparable<Event>{
+public class Event {
 
     //public static final String TAG = Event.class.getSimpleName();
     private static final long WINDOW_END = 10800000; //3hrs in ms
@@ -71,10 +73,10 @@ public class Event extends Model implements Comparable<Event>{
 //                .executeSingle();
 //    }
 
-    @Override
-    public int compareTo(Event o) {
-        return getDateTime().compareTo(o.getDateTime());
-    }
+//    @Override
+//    public int compareTo(Event o) {
+//        return getDateTime().compareTo(o.getDateTime());
+//    }
 
     public long getEventEndTime() {
         return mEventEndTime;

@@ -1,7 +1,10 @@
 package com.example.guest.illageSummerCamp.ui;
 import android.app.FragmentManager;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 //import android.util.Log;
@@ -200,9 +203,9 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
         pickerMin = minute;
         String minutesString = "";
         if (hourOfDay == 0){ //translate to 12 hr clock. Little workaround to get both timepicker and am/pm label to show up correctly.
-                    amOrPm = "am";
-                    pickerHour+=12;
-                }
+            amOrPm = "am";
+            pickerHour+=12;
+        }
         else if(hourOfDay > 12){
             amOrPm = "pm";
             pickerHour-=12;
@@ -210,9 +213,9 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
         else if (hourOfDay <12){
             amOrPm = "am";
         }
-                if (pickerMin < 10) {
-                    minutesString = "0"; //fix weird bug where only one zero is shown on times ending in :00
-                }
+        if (pickerMin < 10) {
+            minutesString = "0"; //fix weird bug where only one zero is shown on times ending in :00
+        }
 
         if (isSettingStartTime){
             startTimeView.setText("Start time set to: " + pickerHour + ":" + minutesString + pickerMin + " " + amOrPm);
@@ -249,26 +252,46 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     }
 
     private void saveEvent(Date eventDateAsDate, long endTime){
-        //requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         ParseObject event = new ParseObject("Event");
         event.put("title", mEventTitle.getText().toString());
         event.put("location", locationChoice);
         event.put("description", mEventDescription.getText().toString());
         event.put("startDateTime", eventDateAsDate);
         event.put("endTime", endTime);
+        event.pinInBackground();
 
-        event.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(com.parse.ParseException e) {
-                //setProgressBarIndeterminateVisibility(false);
-                if (e == null) {
-                    Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+        if (isNetworkAvailable()) {
+            event.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(com.parse.ParseException e) {
+                    if (e == null) {
+                        Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Not saved", Toast.LENGTH_LONG).show();
+                    }
                 }
-                else {
-                    Toast.makeText(getApplicationContext(), "Not saved", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+            });
+        }
+        else {
+            event.saveEventually();
+            Toast.makeText(getApplicationContext(), "You are currently offline. Your Event will be saved automatically when you reconnect.", Toast.LENGTH_LONG).show();
+        }
+
+
+
+    }
+
+    private boolean isNetworkAvailable() {
+
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        boolean isAvailable = false;
+
+        if (networkInfo != null && networkInfo.isConnected() ){
+            isAvailable = true;
+        }
+        return isAvailable;
     }
 
 }
