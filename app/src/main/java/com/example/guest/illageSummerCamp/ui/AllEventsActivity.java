@@ -40,6 +40,7 @@ public class AllEventsActivity extends ListActivity {
 
         showLoadingDialog();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
+        query.fromLocalDatastore();
 
         query.findInBackground(new FindCallback<ParseObject>() {
 

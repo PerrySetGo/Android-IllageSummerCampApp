@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
                 ParseUser.logInInBackground(mNameEdit.getText().toString(), mPasswordEdit.getText().toString(), new LogInCallback() {
                     public void done(ParseUser user, ParseException e) {
                         if (user != null) {
-                            Toast.makeText(LoginActivity.this, "welcome " + ParseUser.getCurrentUser().getUsername(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Welcome " + ParseUser.getCurrentUser().getUsername(), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         } else {
