@@ -4,7 +4,9 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.guest.illageSummerCamp.adapters.EventAdapter;
@@ -14,9 +16,13 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class AllEventsActivity extends ListActivity {
 
@@ -26,9 +32,8 @@ public class AllEventsActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_all_events);
-
+        ButterKnife.bind(this);
         mEvents = new ArrayList<>();
 
         mAdapter = new EventAdapter(this, mEvents);
@@ -80,6 +85,15 @@ public class AllEventsActivity extends ListActivity {
 
         if (progress != null && progress.isShowing()) {
             progress.dismiss();
+        }
+    }
+
+    private boolean isRegistered() {
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser == null) {
+            return false;
+        } else {
+            return true;
         }
     }
 }
