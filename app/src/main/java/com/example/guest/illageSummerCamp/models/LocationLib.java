@@ -42,11 +42,18 @@ public class LocationLib {
         "Please pack out your trash."));
 
         mLocations.add( new Location(
-        "Killingsworth Dynasty",
-        "832 N Killingsworth St",
-        45.562471,
-        -122.677954,
-        "This is a 21+ venue."));
+                "Killingsworth Dynasty",
+                "832 N Killingsworth St",
+                45.562471,
+                -122.677954,
+                "This is a 21+ venue."));
+
+        mLocations.add( new Location(
+                "test",
+                "832 N Killingsworth St",
+                45.562471,
+                -122.677954,
+                "This is a 21+ venue."));
 
     }
 
