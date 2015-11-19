@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import java.util.Locale;
 
 import com.example.guest.illageSummerCamp.R;
 import com.example.guest.illageSummerCamp.models.Event;
+import com.parse.ParseUser;
 
 public class EventAdapter extends BaseAdapter{
     private Context mContext;
@@ -40,20 +43,33 @@ public class EventAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         ViewHolder holder;
         if (convertView == null)
         {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.event_list_item,parent,false);
             holder = new ViewHolder();
+
+
+            holder.editButton = (ImageButton) convertView.findViewById(R.id.editButton);
+            holder.deleteButton = (ImageButton) convertView.findViewById(R.id.deleteButton);
+            if (isRegistered()){
+                holder.editButton.setVisibility(View.VISIBLE);
+                holder.deleteButton.setVisibility(View.VISIBLE);
+            }
+
             holder.titleLabel = (TextView) convertView.findViewById(R.id.eventTitleLabel);
             holder.dateLabel = (TextView) convertView.findViewById(R.id.eventDateLabel);
             holder.locationLabel = (TextView) convertView.findViewById(R.id.eventLocationLabel);
             holder.descriptionLabel = (TextView) convertView.findViewById(R.id.eventDescriptionLabel);
 
+
             convertView.setTag(holder);
         } else{
             holder =(ViewHolder) convertView.getTag();
         }
+
+
         Event event = mEvents.get(position);
         holder.titleLabel.setText(event.getEventTitle());
 
@@ -82,6 +98,17 @@ public class EventAdapter extends BaseAdapter{
         TextView dateLabel;
         TextView descriptionLabel;
         TextView locationLabel;
+        ImageButton editButton;
+        ImageButton deleteButton;
+    }
+
+    private boolean isRegistered() {
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }
