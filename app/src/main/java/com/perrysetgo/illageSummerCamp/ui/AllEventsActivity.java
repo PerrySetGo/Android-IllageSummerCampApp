@@ -2,17 +2,22 @@ package com.perrysetgo.illageSummerCamp.ui;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.adapters.EventAdapter;
 import com.perrysetgo.illageSummerCamp.models.Event;
 import com.perrysetgo.illageSummerCamp.R;
-//import com.parse.FindCallback;
-//import com.parse.ParseException;
-//import com.parse.ParseObject;
-//import com.parse.ParseQuery;
-//import com.parse.ParseUser;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +26,10 @@ import butterknife.ButterKnife;
 
 public class AllEventsActivity extends ListActivity {
 
-    private ArrayList<Event> mEvents;
+    private ArrayList<Event> mEvents = new ArrayList<>();
+    public static final String TAG = AllEventsActivity.class.getSimpleName();
+
+
     private EventAdapter mAdapter;
 
     @Override
@@ -29,39 +37,42 @@ public class AllEventsActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_events);
         ButterKnife.bind(this);
-        mEvents = new ArrayList<>();
+
 
         mAdapter = new EventAdapter(this, mEvents);
         setListAdapter(mAdapter);
 //        refreshEventList();
     }
 
-//    private void refreshEventList() {
-//
-//        showLoadingDialog();
-//        ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
-//        query.fromLocalDatastore();
-//
-//        query.findInBackground(new FindCallback<ParseObject>() {
-//
-//            @Override
-//            public void done(List<ParseObject> eventList, ParseException e) {
-//                dismissLoadingDialog();
-//                if (e == null) {
-//                    //there is something to show
-//                    mEvents.clear();
-//                    for (ParseObject event : eventList) {//rebuild event objects from parse data
-//                        Event newEvent = new Event(event.getString("title"), event.getString("location"),event.getString("description"),event.getDate("startDateTime"), event.getLong(""));
-//                        mEvents.add(newEvent);
-//                    }
-//                    mAdapter.notifyDataSetChanged();
-//                } else {
-//
-//                    Toast.makeText(getApplicationContext(),"There are no events currently stored in the database. Please check back", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
-//    }
+    private void refreshEventList() {
+
+        showLoadingDialog();
+        
+        //// TODO: 6/28/16 implement listener to listen for database changes. 
+        //// TODO: 6/28/16 understand offline retrieval options.
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EVENTS);
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    mEvents.add(snapshot.getValue(Event.class));
+                    Log.d(TAG, mEvents.toString());
+                }
+
+            }
+            public void onCancelled(DatabaseError error){
+                Log.d(TAG, error.toString());
+            }
+
+
+
+            //   Toast.makeText(getApplicationContext(),"There are no events currently stored in the database. Please check back", Toast.LENGTH_LONG).show();
+
+        });
+    }
+
 
     private ProgressDialog progress;
 
@@ -82,13 +93,4 @@ public class AllEventsActivity extends ListActivity {
             progress.dismiss();
         }
     }
-
-//    private boolean isRegistered() {
-//        ParseUser currentUser = ParseUser.getCurrentUser();
-//        if (currentUser == null) {
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
 }
