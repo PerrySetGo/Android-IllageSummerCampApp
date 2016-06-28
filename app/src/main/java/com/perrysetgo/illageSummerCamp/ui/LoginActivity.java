@@ -1,4 +1,4 @@
-package com.example.guest.illageSummerCamp.ui;
+package com.perrysetgo.illageSummerCamp.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.guest.illageSummerCamp.R;
+import com.perrysetgo.illageSummerCamp.R;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;

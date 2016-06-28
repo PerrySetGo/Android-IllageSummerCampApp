@@ -1,7 +1,7 @@
-package com.example.guest.illageSummerCamp.models;
+package com.perrysetgo.illageSummerCamp.models;
 
 import com.activeandroid.Model;
-import com.parse.ParseObject;
+//import com.parse.ParseObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

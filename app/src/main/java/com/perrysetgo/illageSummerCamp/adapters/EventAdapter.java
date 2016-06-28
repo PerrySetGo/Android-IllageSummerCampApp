@@ -1,11 +1,10 @@
-package com.example.guest.illageSummerCamp.adapters;
+package com.perrysetgo.illageSummerCamp.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import java.text.SimpleDateFormat;
@@ -13,8 +12,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import com.example.guest.illageSummerCamp.R;
-import com.example.guest.illageSummerCamp.models.Event;
+import com.perrysetgo.illageSummerCamp.R;
+import com.perrysetgo.illageSummerCamp.models.Event;
 import com.parse.ParseUser;
 
 public class EventAdapter extends BaseAdapter{
