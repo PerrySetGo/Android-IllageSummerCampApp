@@ -1,26 +1,14 @@
-package com.example.guest.illageSummerCamp.fragments;
+package com.perrysetgo.illageSummerCamp.fragments;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
-import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.text.format.DateFormat;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.TimePicker;
 
-import com.example.guest.illageSummerCamp.R;
+import com.perrysetgo.illageSummerCamp.R;
 
 import java.util.Calendar;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class TimePickerFragment extends DialogFragment {
     int hour,minute;

@@ -1,17 +1,13 @@
-package com.example.guest.illageSummerCamp.ui;
+package com.perrysetgo.illageSummerCamp.ui;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.guest.illageSummerCamp.adapters.EventAdapter;
-import com.example.guest.illageSummerCamp.models.Event;
-import com.example.guest.illageSummerCamp.R;
+import com.perrysetgo.illageSummerCamp.adapters.EventAdapter;
+import com.perrysetgo.illageSummerCamp.models.Event;
+import com.perrysetgo.illageSummerCamp.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -21,7 +17,6 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class AllEventsActivity extends ListActivity {

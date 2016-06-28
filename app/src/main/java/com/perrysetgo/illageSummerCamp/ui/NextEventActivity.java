@@ -1,20 +1,11 @@
-package com.example.guest.illageSummerCamp.ui;
+package com.perrysetgo.illageSummerCamp.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
-import com.example.guest.illageSummerCamp.R;
-import com.example.guest.illageSummerCamp.models.Event;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
+import com.perrysetgo.illageSummerCamp.R;
+import com.perrysetgo.illageSummerCamp.models.Event;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

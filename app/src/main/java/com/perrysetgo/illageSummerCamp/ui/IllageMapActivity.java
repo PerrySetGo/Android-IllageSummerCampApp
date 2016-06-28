@@ -1,4 +1,4 @@
-package com.example.guest.illageSummerCamp.ui;
+package com.perrysetgo.illageSummerCamp.ui;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -9,9 +9,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.guest.illageSummerCamp.R;
-import com.example.guest.illageSummerCamp.models.Location;
-import com.example.guest.illageSummerCamp.models.LocationLib;
+import com.perrysetgo.illageSummerCamp.R;
+import com.perrysetgo.illageSummerCamp.models.Location;
+import com.perrysetgo.illageSummerCamp.models.LocationLib;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;

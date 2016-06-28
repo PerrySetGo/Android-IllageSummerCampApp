@@ -1,6 +1,4 @@
-package com.example.guest.illageSummerCamp;
-
-import android.app.Application;
+package com.perrysetgo.illageSummerCamp;
 
 import com.parse.Parse;
 
