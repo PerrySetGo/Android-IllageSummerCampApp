@@ -5,5 +5,5 @@ package com.perrysetgo.illageSummerCamp;
  */
 public class Constants {
 
-    public static final String FIREBASE_TEST_SAVE = "I am a test";
+    public static final String FIREBASE_CHILD_EVENTS = "events";
 }
