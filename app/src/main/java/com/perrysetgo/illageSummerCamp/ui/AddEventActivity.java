@@ -278,7 +278,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     }
 
     public void saveToFirebase(String str) {
-        mTestSaveReference.setValue(str);
+        mTestSaveReference.push().setValue(str);
         Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
     }
 
