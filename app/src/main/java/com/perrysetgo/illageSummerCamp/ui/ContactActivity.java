@@ -1,4 +1,4 @@
-package com.example.guest.illageSummerCamp.ui;
+package com.perrysetgo.illageSummerCamp.ui;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -6,15 +6,14 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.guest.illageSummerCamp.R;
-import org.apache.http.protocol.HTTP;
+import com.perrysetgo.illageSummerCamp.R;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

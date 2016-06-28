@@ -1,12 +1,9 @@
-package com.example.guest.illageSummerCamp.ui;
+package com.perrysetgo.illageSummerCamp.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 
-import com.example.guest.illageSummerCamp.R;
+import com.perrysetgo.illageSummerCamp.R;
 
 public class AboutCampActivity extends AppCompatActivity {
 

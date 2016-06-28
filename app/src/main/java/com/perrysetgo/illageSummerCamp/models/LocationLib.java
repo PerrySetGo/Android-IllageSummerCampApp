@@ -1,4 +1,4 @@
-package com.example.guest.illageSummerCamp.models;
+package com.perrysetgo.illageSummerCamp.models;
 
 import java.util.ArrayList;
 
