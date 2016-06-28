@@ -1,6 +1,6 @@
 package com.perrysetgo.illageSummerCamp.models;
 
-import com.activeandroid.Model;
+//import com.activeandroid.Model;
 //import com.parse.ParseObject;
 
 import java.text.ParseException;

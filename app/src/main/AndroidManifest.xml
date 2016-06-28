@@ -59,7 +59,7 @@
             android:parentActivityName=".ui.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.perrysetgo.illageSummerCamp.ui.MainActivity" />
+                android:value="com.illageSummerCamp.ui.MainActivity" />
         </activity>
         <activity android:name=".ui.NextEventActivity" >
         </activity>
@@ -71,7 +71,7 @@
             android:parentActivityName=".ui.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.perrysetgo.illageSummerCamp.ui.MainActivity" />
+                android:value="com.illageSummerCamp.ui.MainActivity" />
         </activity>
         <activity
             android:name=".ui.LoginActivity"
@@ -79,7 +79,7 @@
             android:parentActivityName=".ui.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.perrysetgo.illageSummerCamp.ui.MainActivity" />
+                android:value="com.illageSummerCamp.ui.MainActivity" />
         </activity>
     </application>
 
