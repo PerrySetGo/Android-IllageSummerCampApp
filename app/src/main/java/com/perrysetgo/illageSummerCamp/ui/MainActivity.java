@@ -72,13 +72,13 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-//        mViewAllButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, AllEventsActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        mViewAllButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AllEventsActivity.class);
+                startActivity(intent);
+            }
+        });
 //
 //        mNextActivityButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
