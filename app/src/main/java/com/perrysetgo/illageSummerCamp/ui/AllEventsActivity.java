@@ -41,17 +41,18 @@ public class AllEventsActivity extends ListActivity {
 
         mAdapter = new EventAdapter(this, mEvents);
         setListAdapter(mAdapter);
-//        refreshEventList();
+      refreshEventList();
     }
 
     private void refreshEventList() {
 
-        showLoadingDialog();
+        //showLoadingDialog();
         
         //// TODO: 6/28/16 implement listener to listen for database changes. 
         //// TODO: 6/28/16 understand offline retrieval options.
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EVENTS);
+        //this currently does not pull events
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -74,23 +75,23 @@ public class AllEventsActivity extends ListActivity {
     }
 
 
-    private ProgressDialog progress;
-
-
-
-    public void showLoadingDialog() {
-
-        if (progress == null) {
-            progress = new ProgressDialog(this);
-            progress.setMessage("Getting Events");
-        }
-        progress.show();
+//    private ProgressDialog progress;
+//
+//
+//
+//    public void showLoadingDialog() {
+//
+//        if (progress == null) {
+//            progress = new ProgressDialog(this);
+//            progress.setMessage("Getting Events");
+//        }
+//        progress.show();
+//    }
+//
+//    public void dismissLoadingDialog() {
+//
+//        if (progress != null && progress.isShowing()) {
+//            progress.dismiss();
+//        }
     }
-
-    public void dismissLoadingDialog() {
-
-        if (progress != null && progress.isShowing()) {
-            progress.dismiss();
-        }
-    }
-}
+//}
