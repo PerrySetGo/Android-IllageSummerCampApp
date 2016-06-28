@@ -54,5 +54,6 @@ dependencies {
     compile 'se.akerfeldt:okhttp-signpost:1.1.0'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
+    compile 'com.firebaseui:firebase-ui-database:0.4.0'
 }
 apply plugin: 'com.google.gms.google-services'

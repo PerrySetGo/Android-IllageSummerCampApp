@@ -1,4 +1,5 @@
 package com.perrysetgo.illageSummerCamp.ui;
+
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-//import android.util.Log;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.adapters.EventAdapter;
 import com.perrysetgo.illageSummerCamp.fragments.TimePickerFragment;
@@ -27,12 +28,10 @@ import com.perrysetgo.illageSummerCamp.models.Event;
 import com.perrysetgo.illageSummerCamp.models.LocationLib;
 import com.perrysetgo.illageSummerCamp.Constants;
 
-//import com.parse.ParseObject;
-//import com.parse.SaveCallback;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -42,8 +41,7 @@ import butterknife.ButterKnife;
 
 public class AddEventActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
 
-    //public static final String TAG = AddEventActivity.class.getSimpleName();
-    String TAG = "AddEventActivity";
+    public static final String TAG = AddEventActivity.class.getSimpleName();
 
     @Bind(R.id.editTitle) EditText mEventTitle;
     @Bind(R.id.editDescription) EditText mEventDescription;
@@ -73,7 +71,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     ArrayList<String> mLocationNames; //this is the names of the locations so we can use them for the spinner
     ArrayList<String> mDates;
 
-    private DatabaseReference mTestSaveReference;
+    private DatabaseReference mSavedEventReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,17 +81,13 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
 
 
         //setup for firebase saving
-        mTestSaveReference = FirebaseDatabase
+        mSavedEventReference = FirebaseDatabase
                 .getInstance()
                 .getReference()
                 .child(Constants.FIREBASE_CHILD_EVENTS);
 
-
-
-
-
         mAdapter = new EventAdapter(this, mEvents);
-        mLocationNames = new ArrayList<>();
+
 
         //get list of dates for date spinner
         mDates = new ArrayList<>();
@@ -102,7 +96,10 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
         mDates.add("Sat, 08/27/2016");
         mDates.add("Sun, 08/28/2016");
 
+
+        //start location
         //get the list of locations for the spinner
+        mLocationNames = new ArrayList<>();
         mLocationLib = new LocationLib();
         for (int i = 0; i < mLocationLib.getLocations().size(); i++) {
             String locName = mLocationLib.getLocations().get(i).getName();
@@ -122,6 +119,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
             }
 
         });
+        //end location code
 
         datesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mDates);
         mDateSpinner.setAdapter(datesAdapter);
@@ -150,7 +148,17 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                     long endTime = createEndTimeInLong(endPickerMin, endPickerHour, trimmedDateChoice);
                     Date eventDateAsDate = getDateFromString(dateTime);
                     Event newEvent = new Event(mEventTitle.getText().toString(), locationChoice, mEventDescription.getText().toString(), eventDateAsDate, endTime );
-                    saveEvent(newEvent);
+
+                        if (isNetworkAvailable()) {
+                        saveEvent(newEvent);
+                        }
+                        else {
+                            
+                            //// TODO: 6/28/16 verify that data saves to db after re-establishing connectivity 
+                            Toast.makeText(getApplicationContext(), "You are currently offline. Your Event will not be saved.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
 
                     mAdapter.notifyDataSetChanged();
                     mEventTitle.setVisibility(View.INVISIBLE);
@@ -185,9 +193,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                         }
                     });
                 }
-            }
-        });
-
+    });
 
 
         startTimeButton.setOnClickListener(new View.OnClickListener() {
@@ -211,15 +217,12 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
 
     }
 
-
-
-
-
     public void showTimePickerDialog(View v) {
         TimePickerFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
     }
 
+    //time translator code
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         String amOrPm = "pm";
@@ -253,6 +256,8 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
 
     }
 
+
+    //// TODO: 6/28/16 review saving the entry time in long vs date.
     public Date getDateFromString(String date){
         DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
         Date newDate = null;
@@ -276,39 +281,11 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     }
 
     public void saveEvent(Event newEvent) {
-        mTestSaveReference.push().setValue(newEvent);
+        mSavedEventReference.push().setValue(newEvent);
         Toast.makeText(getApplicationContext(), "Event " + newEvent.getEventDescription() + " was saved.", Toast.LENGTH_LONG).show();
     }
 
-//    private void saveEvent(Date eventDateAsDate, long endTime){
-//        ParseObject event = new ParseObject("Event");
-//        event.put("title", mEventTitle.getText().toString());
-//        event.put("location", locationChoice);
-//        event.put("description", mEventDescription.getText().toString());
-//        event.put("startDateTime", eventDateAsDate);
-//        event.put("endTime", endTime);
-//        event.pinInBackground();
-//
-//        if (isNetworkAvailable()) {
-//            event.saveInBackground(new SaveCallback() {
-//                @Override
-//                public void done(com.parse.ParseException e) {
-//                    if (e == null) {
-//                        Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), "Not saved", Toast.LENGTH_LONG).show();
-//                    }
-//                }
-//            });
-//        }
-//        else {
-//            event.saveEventually();
-//            Toast.makeText(getApplicationContext(), "You are currently offline. Your Event will be saved automatically when you reconnect.", Toast.LENGTH_LONG).show();
-//        }
-//
-//
-//
-//    }
+
 
     private boolean isNetworkAvailable() {
 
