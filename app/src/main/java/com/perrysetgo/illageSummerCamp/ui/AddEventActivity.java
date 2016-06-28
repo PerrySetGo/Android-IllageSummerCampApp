@@ -86,7 +86,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
         mTestSaveReference = FirebaseDatabase
                 .getInstance()
                 .getReference()
-                .child(Constants.FIREBASE_TEST_SAVE);
+                .child(Constants.FIREBASE_CHILD_EVENTS);
 
 
 
@@ -149,10 +149,8 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                     String dateTime = trimmedDateChoice + " " + startPickerHour + ":" + startPickerMin;
                     long endTime = createEndTimeInLong(endPickerMin, endPickerHour, trimmedDateChoice);
                     Date eventDateAsDate = getDateFromString(dateTime);
-                    //saveEvent(eventDateAsDate, endTime);
-
-
-                    saveToFirebase(mEventDescription.getText().toString());
+                    Event newEvent = new Event(mEventTitle.getText().toString(), locationChoice, mEventDescription.getText().toString(), eventDateAsDate, endTime );
+                    saveEvent(newEvent);
 
                     mAdapter.notifyDataSetChanged();
                     mEventTitle.setVisibility(View.INVISIBLE);
@@ -277,9 +275,9 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
         return endDate.getTime();
     }
 
-    public void saveToFirebase(String str) {
-        mTestSaveReference.push().setValue(str);
-        Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+    public void saveEvent(Event newEvent) {
+        mTestSaveReference.push().setValue(newEvent);
+        Toast.makeText(getApplicationContext(), "Event " + newEvent.getEventDescription() + " was saved.", Toast.LENGTH_LONG).show();
     }
 
 //    private void saveEvent(Date eventDateAsDate, long endTime){

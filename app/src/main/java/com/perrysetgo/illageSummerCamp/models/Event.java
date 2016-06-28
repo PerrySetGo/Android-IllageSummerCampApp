@@ -7,7 +7,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.*;
+import org.parceler.Parcel;
 
+@Parcel
 public class Event {
 
     //public static final String TAG = Event.class.getSimpleName();
@@ -18,13 +20,14 @@ public class Event {
     private long mEventEndTime;
     private String mEventDescription;
 
+    public Event(){}; //required no arg constructor
 
     public Event(String eventTitle, String eventLocation, String eventDescription, Date dateTime, long eventEndTime) {
-        mEventTitle = eventTitle;
-        mEventLocation = eventLocation;
-        mEventDescription = eventDescription;
-        mEventStartDateTime = dateTime;
-        mEventEndTime = eventEndTime;
+        this.mEventTitle = eventTitle;
+        this.mEventLocation = eventLocation;
+        this.mEventDescription = eventDescription;
+        this.mEventStartDateTime = dateTime;
+        this.mEventEndTime = eventEndTime;
 
     }
 
