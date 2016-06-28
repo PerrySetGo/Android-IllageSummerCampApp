@@ -1,5 +1,4 @@
-package com.example.guest.illageSummerCamp.ui;
-import android.app.FragmentManager;
+package com.perrysetgo.illageSummerCamp.ui;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,11 +17,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.guest.illageSummerCamp.R;
-import com.example.guest.illageSummerCamp.adapters.EventAdapter;
-import com.example.guest.illageSummerCamp.fragments.TimePickerFragment;
-import com.example.guest.illageSummerCamp.models.Event;
-import com.example.guest.illageSummerCamp.models.LocationLib;
+import com.perrysetgo.illageSummerCamp.R;
+import com.perrysetgo.illageSummerCamp.adapters.EventAdapter;
+import com.perrysetgo.illageSummerCamp.fragments.TimePickerFragment;
+import com.perrysetgo.illageSummerCamp.models.Event;
+import com.perrysetgo.illageSummerCamp.models.LocationLib;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
 
