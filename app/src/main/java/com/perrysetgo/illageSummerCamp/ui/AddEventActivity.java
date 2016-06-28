@@ -142,9 +142,9 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, mEventDescription.getText().toString());
-                if (mEventTitle.length() == 0 || mEventDescription.getText().toString().length() == 0 || startPickerHour == 0 || endPickerHour == 0) {
-                    Toast.makeText(getApplicationContext(), " You need to fill out all fields to be able to save this event", Toast.LENGTH_LONG).show();
+
+                if (mEventTitle.getText().toString().length() == 0 || mEventDescription.getText().toString().length() == 0 || startPickerHour == 0 || endPickerHour == 0) {
+                    Toast.makeText(getApplicationContext(), "Please fill out all fields to save this event", Toast.LENGTH_LONG).show();
                 } else {
                     String dateTime = trimmedDateChoice + " " + startPickerHour + ":" + startPickerMin;
                     long endTime = createEndTimeInLong(endPickerMin, endPickerHour, trimmedDateChoice);
