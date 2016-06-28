@@ -14,7 +14,6 @@ import java.util.Locale;
 
 import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.models.Event;
-import com.parse.ParseUser;
 
 public class EventAdapter extends BaseAdapter{
     private Context mContext;
@@ -52,10 +51,10 @@ public class EventAdapter extends BaseAdapter{
 
             holder.editButton = (ImageButton) convertView.findViewById(R.id.editButton);
             holder.deleteButton = (ImageButton) convertView.findViewById(R.id.deleteButton);
-            if (isRegistered()){
-                holder.editButton.setVisibility(View.VISIBLE);
-                holder.deleteButton.setVisibility(View.VISIBLE);
-            }
+//            if (isRegistered()){
+//                holder.editButton.setVisibility(View.VISIBLE);
+//                holder.deleteButton.setVisibility(View.VISIBLE);
+//            }
 
             holder.titleLabel = (TextView) convertView.findViewById(R.id.eventTitleLabel);
             holder.dateLabel = (TextView) convertView.findViewById(R.id.eventDateLabel);
@@ -99,15 +98,6 @@ public class EventAdapter extends BaseAdapter{
         TextView locationLabel;
         ImageButton editButton;
         ImageButton deleteButton;
-    }
-
-    private boolean isRegistered() {
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser == null) {
-            return false;
-        } else {
-            return true;
-        }
     }
 
 }

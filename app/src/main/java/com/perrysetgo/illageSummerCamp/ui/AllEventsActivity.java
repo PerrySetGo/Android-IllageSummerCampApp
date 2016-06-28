@@ -8,11 +8,11 @@ import android.widget.Toast;
 import com.perrysetgo.illageSummerCamp.adapters.EventAdapter;
 import com.perrysetgo.illageSummerCamp.models.Event;
 import com.perrysetgo.illageSummerCamp.R;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
+//import com.parse.FindCallback;
+//import com.parse.ParseException;
+//import com.parse.ParseObject;
+//import com.parse.ParseQuery;
+//import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,35 +33,35 @@ public class AllEventsActivity extends ListActivity {
 
         mAdapter = new EventAdapter(this, mEvents);
         setListAdapter(mAdapter);
-        refreshEventList();
+//        refreshEventList();
     }
 
-    private void refreshEventList() {
-
-        showLoadingDialog();
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
-        query.fromLocalDatastore();
-
-        query.findInBackground(new FindCallback<ParseObject>() {
-
-            @Override
-            public void done(List<ParseObject> eventList, ParseException e) {
-                dismissLoadingDialog();
-                if (e == null) {
-                    //there is something to show
-                    mEvents.clear();
-                    for (ParseObject event : eventList) {//rebuild event objects from parse data
-                        Event newEvent = new Event(event.getString("title"), event.getString("location"),event.getString("description"),event.getDate("startDateTime"), event.getLong(""));
-                        mEvents.add(newEvent);
-                    }
-                    mAdapter.notifyDataSetChanged();
-                } else {
-
-                    Toast.makeText(getApplicationContext(),"There are no events currently stored in the database. Please check back", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
+//    private void refreshEventList() {
+//
+//        showLoadingDialog();
+//        ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
+//        query.fromLocalDatastore();
+//
+//        query.findInBackground(new FindCallback<ParseObject>() {
+//
+//            @Override
+//            public void done(List<ParseObject> eventList, ParseException e) {
+//                dismissLoadingDialog();
+//                if (e == null) {
+//                    //there is something to show
+//                    mEvents.clear();
+//                    for (ParseObject event : eventList) {//rebuild event objects from parse data
+//                        Event newEvent = new Event(event.getString("title"), event.getString("location"),event.getString("description"),event.getDate("startDateTime"), event.getLong(""));
+//                        mEvents.add(newEvent);
+//                    }
+//                    mAdapter.notifyDataSetChanged();
+//                } else {
+//
+//                    Toast.makeText(getApplicationContext(),"There are no events currently stored in the database. Please check back", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
+//    }
 
     private ProgressDialog progress;
 
@@ -83,12 +83,12 @@ public class AllEventsActivity extends ListActivity {
         }
     }
 
-    private boolean isRegistered() {
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser == null) {
-            return false;
-        } else {
-            return true;
-        }
-    }
+//    private boolean isRegistered() {
+//        ParseUser currentUser = ParseUser.getCurrentUser();
+//        if (currentUser == null) {
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
 }
