@@ -12,18 +12,16 @@ public class Event {
     private static final long WINDOW_END = 10800000; //3hrs in ms
     public String eventTitle;
     public String eventLocation;
-//    public Date eventStartDateTime;
-    public long eventEndTime;
+    public long eventStartDateTime;
+    public long eventEndDateTime;
     public String eventDescription;
 
-
-    //constructor changed to debug event listing
-    public Event(String eventTitle, String eventLocation, String eventDescription, long eventEndTime) {
+    public Event(String eventTitle, String eventLocation, long eventStartDateTime, String eventDescription, long eventEndDateTime) {
         this.eventTitle = eventTitle;
         this.eventLocation = eventLocation;
         this.eventDescription = eventDescription;
-       // this.mEventStartDateTime = dateTime;
-        this.eventEndTime = eventEndTime;
+        this.eventStartDateTime = eventStartDateTime;
+        this.eventEndDateTime = eventEndDateTime;
 
     }
 
@@ -79,8 +77,11 @@ public class Event {
 //        return getDateTime().compareTo(o.getDateTime());
 //    }
 
+    public long getEventStartTime() {
+        return eventStartDateTime;
+    }
     public long getEventEndTime() {
-        return eventEndTime;
+        return eventEndDateTime;
     }
 
     @Override
