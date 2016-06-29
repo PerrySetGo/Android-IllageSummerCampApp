@@ -25,6 +25,17 @@ public class Event {
 
     }
 
+    public int compare(Event one, Event two) {
+        return Long.compare(one.getEventStartDateTime(), two.getEventStartDateTime());
+    }
+
+    public static Comparator<Event> sortEventList = new Comparator<Event>() {
+        @Override
+        public int compare(Event lhs, Event rhs) {
+            return Long.compare(lhs.getEventStartDateTime(), rhs.getEventStartDateTime());
+        }
+    };
+
     public Event(){}; //req
 
     public String getEventDescription() {
@@ -35,30 +46,10 @@ public class Event {
         return eventLocation;
     }
 
-//    public void setDateFromString(String date) {
-//        SimpleDateFormat sf = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
-//        sf.setLenient(false);
-//        try {
-//            this.eventStartDateTime = sf.parse(date);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     public String getEventTitle() {
         return eventTitle;
     }
 
-//    public Date getDateTime() {
-//        return eventStartDateTime;
-//    }
-
-//    public static List<Event> all(){
-//        return new Select()
-//                .from(Event.class)
-//                .orderBy("EventDateTimeStart ASC")
-//                .execute();
-//    }
 //
 //    public static Event findRecent() {
 //        Calendar rightNow = Calendar.getInstance();
@@ -88,7 +79,6 @@ public class Event {
     public String toString() {
         return this.getEventTitle();
     }
-
 
 }
 
