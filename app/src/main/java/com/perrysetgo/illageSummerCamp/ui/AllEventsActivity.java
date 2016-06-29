@@ -28,8 +28,7 @@ public class AllEventsActivity extends ListActivity {
 
     private ArrayList<Event> mEvents = new ArrayList<Event>();
     public static final String TAG = AllEventsActivity.class.getSimpleName();
-
-
+    private ProgressDialog progress;
     private EventAdapter mAdapter;
 
     @Override
@@ -38,63 +37,53 @@ public class AllEventsActivity extends ListActivity {
         setContentView(R.layout.activity_all_events);
         ButterKnife.bind(this);
 
-
         mAdapter = new EventAdapter(this, mEvents);
         setListAdapter(mAdapter);
-      refreshEventList();
+        refreshEventList();
     }
 
     private void refreshEventList() {
 
-        //showLoadingDialog();
+        showLoadingDialog();
         
         //// TODO: 6/28/16 implement listener to listen for database changes. 
         //// TODO: 6/28/16 understand offline retrieval options.
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EVENTS);
-
-        //this currently does not pull events
-
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                dismissLoadingDialog();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    //seems to not be adding actual events here - maybe due to date/time issues and failing constructor?
-                    Log.d(TAG, snapshot.getValue().toString());
                     mEvents.add(snapshot.getValue(Event.class));
-
                 }
-
             }
             public void onCancelled(DatabaseError error){
+                dismissLoadingDialog();
+                Toast.makeText(getApplicationContext(),"There was an issue connecting to the database. Please try again later.", Toast.LENGTH_LONG).show();
                 Log.d(TAG, error.toString());
             }
-
-
-
-            //   Toast.makeText(getApplicationContext(),"There are no events currently stored in the database. Please check back", Toast.LENGTH_LONG).show();
-
         });
     }
 
 
-//    private ProgressDialog progress;
-//
-//
-//
-//    public void showLoadingDialog() {
-//
-//        if (progress == null) {
-//            progress = new ProgressDialog(this);
-//            progress.setMessage("Getting Events");
-//        }
-//        progress.show();
-//    }
-//
-//    public void dismissLoadingDialog() {
-//
-//        if (progress != null && progress.isShowing()) {
-//            progress.dismiss();
-//        }
+
+
+
+
+    public void showLoadingDialog() {
+
+        if (progress == null) {
+            progress = new ProgressDialog(this);
+            progress.setMessage("Getting Events");
+        }
+        progress.show();
     }
-//}
+
+    public void dismissLoadingDialog() {
+
+        if (progress != null && progress.isShowing()) {
+            progress.dismiss();
+        }
+    }
+}

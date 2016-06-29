@@ -71,6 +71,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     ArrayList<String> mLocationNames; //this is the names of the locations so we can use them for the spinner
     ArrayList<String> mDates;
 
+
     private DatabaseReference mSavedEventReference;
 
     @Override
@@ -149,15 +150,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                     Date eventDateAsDate = getDateFromString(dateTime);
                     //changed to match simpler constructor
                     Event newEvent = new Event(mEventTitle.getText().toString(), locationChoice, mEventDescription.getText().toString(), endTime );
-
-                        if (isNetworkAvailable()) {
-                        saveEvent(newEvent);
-                        }
-                        else {
-                            
-                            //// TODO: 6/28/16 verify that data saves to db after re-establishing connectivity 
-                            Toast.makeText(getApplicationContext(), "You are currently offline. Your Event will not be saved.", Toast.LENGTH_LONG).show();
-                        }
+                    saveEvent(newEvent);
                     }
 
 
@@ -282,23 +275,17 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     }
 
     public void saveEvent(Event newEvent) {
-        mSavedEventReference.push().setValue(newEvent);
-        Toast.makeText(getApplicationContext(), "Event " + newEvent.getEventDescription() + " was saved.", Toast.LENGTH_LONG).show();
-    }
-
-
-
-    private boolean isNetworkAvailable() {
-
+        String networkMessage="";
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
-        boolean isAvailable = false;
+        mSavedEventReference.push().setValue(newEvent);
 
         if (networkInfo != null && networkInfo.isConnected() ){
-            isAvailable = true;
+            networkMessage = "Your event + " + newEvent.getEventDescription() + " was saved. Yay! ";
         }
-        return isAvailable;
+        else {
+            networkMessage = "It looks like you are currently offline. Your event " + newEvent.getEventDescription() + " will be saved automatically when you are back online.";
+        }
+        Toast.makeText(getApplicationContext(), networkMessage, Toast.LENGTH_LONG).show();
     }
-
 }
