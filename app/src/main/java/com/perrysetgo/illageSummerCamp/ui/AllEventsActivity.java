@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
 
 public class AllEventsActivity extends ListActivity {
 
-    private ArrayList<Event> mEvents = new ArrayList<Event>();
+    private ArrayList<Event> mEvents;
     public static final String TAG = AllEventsActivity.class.getSimpleName();
     private ProgressDialog progress;
     private EventAdapter mAdapter;
@@ -36,7 +36,7 @@ public class AllEventsActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_events);
         ButterKnife.bind(this);
-
+        mEvents = new ArrayList<Event>();
         mAdapter = new EventAdapter(this, mEvents);
         setListAdapter(mAdapter);
         refreshEventList();
@@ -44,22 +44,23 @@ public class AllEventsActivity extends ListActivity {
 
     private void refreshEventList() {
 
-        showLoadingDialog();
-        
-        //// TODO: 6/28/16 implement listener to listen for database changes. 
+        //showLoadingDialog();
+
+        //// TODO: 6/28/16 implement listener to listen for database changes.
         //// TODO: 6/28/16 understand offline retrieval options.
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EVENTS);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                dismissLoadingDialog();
+                //dismissLoadingDialog();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     mEvents.add(snapshot.getValue(Event.class));
                 }
+                mAdapter.notifyDataSetChanged();
             }
             public void onCancelled(DatabaseError error){
-                dismissLoadingDialog();
+                //dismissLoadingDialog();
                 Toast.makeText(getApplicationContext(),"There was an issue connecting to the database. Please try again later.", Toast.LENGTH_LONG).show();
                 Log.d(TAG, error.toString());
             }
