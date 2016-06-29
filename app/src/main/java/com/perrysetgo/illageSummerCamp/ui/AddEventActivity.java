@@ -54,13 +54,16 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     @Bind(R.id.dateSpinner) Spinner mDateSpinner;
     @Bind(R.id.startTimeView) TextView startTimeView;
     @Bind(R.id.endTimeView) TextView endTimeView;
+
+    //time vars
     TimePickerFragment startTimePickerFragment;
     TimePickerFragment endTimePickerFragment;
-    int pickerHour = 0;
-    int pickerMin = 0;
-    int startPickerHour, startPickerMin, endPickerHour, endPickerMin;
+    int startPickerHour, startPickerMin, endPickerHour, endPickerMin, pickerHour, pickerMin;
     boolean isSettingStartTime = true;
+
+    //event, date, loc
     ArrayList<Event> mEvents;
+
     EventAdapter mAdapter;
     ArrayAdapter<String> locationAdapter;
     ArrayAdapter<String> datesAdapter;
@@ -71,7 +74,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     ArrayList<String> mLocationNames; //this is the names of the locations so we can use them for the spinner
     ArrayList<String> mDates;
 
-
+    //other
     private DatabaseReference mSavedEventReference;
 
     @Override
@@ -79,16 +82,15 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
         ButterKnife.bind(this);
+        final TextView newEventLabel = (TextView) findViewById(R.id.newEventLabel);
+        final TextView addNewEventLabel = (TextView) findViewById(R.id.addNewEventLabel);
 
-
-        //setup for firebase saving
         mSavedEventReference = FirebaseDatabase
                 .getInstance()
                 .getReference()
                 .child(Constants.FIREBASE_CHILD_EVENTS);
 
         mAdapter = new EventAdapter(this, mEvents);
-
 
         //get list of dates for date spinner
         mDates = new ArrayList<>();
@@ -115,12 +117,9 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                 locationChoice = mLocationSpinner.getSelectedItem().toString();
             }
 
-            public void onNothingSelected(AdapterView<?> arg0) {
-
-            }
-
+            public void onNothingSelected(AdapterView<?> arg0) {}
         });
-        //end location code
+
 
         datesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mDates);
         mDateSpinner.setAdapter(datesAdapter);
@@ -130,13 +129,8 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                 trimmedDateChoice = dateChoice.substring(5); //cut
             }
 
-            public void onNothingSelected(AdapterView<?> arg0) {
-
-            }
+            public void onNothingSelected(AdapterView<?> arg0) {} //nothing here
         });
-
-        final TextView newEventLabel = (TextView) findViewById(R.id.newEventLabel);
-        final TextView addNewEventLabel = (TextView) findViewById(R.id.addNewEventLabel);
 
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,55 +139,54 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                 if (mEventTitle.getText().toString().length() == 0 || mEventDescription.getText().toString().length() == 0 || startPickerHour == 0 || endPickerHour == 0) {
                     Toast.makeText(getApplicationContext(), "Please fill out all fields to save this event", Toast.LENGTH_LONG).show();
                 } else {
-                    String dateTime = trimmedDateChoice + " " + startPickerHour + ":" + startPickerMin;
-                    long endTime = createEndTimeInLong(endPickerMin, endPickerHour, trimmedDateChoice);
-                    Date eventDateAsDate = getDateFromString(dateTime);
-                    //changed to match simpler constructor
-                    Event newEvent = new Event(mEventTitle.getText().toString(), locationChoice, mEventDescription.getText().toString(), endTime );
+                    long startDateTimeLong = createTimeInLong(startPickerMin, startPickerHour, trimmedDateChoice);
+                    long endDateTimeLong = createTimeInLong(endPickerMin, endPickerHour, trimmedDateChoice);
+                    Event newEvent = new Event(mEventTitle.getText().toString(), locationChoice, startDateTimeLong, mEventDescription.getText().toString(), endDateTimeLong);
                     saveEvent(newEvent);
-                    }
-
-
-                    mAdapter.notifyDataSetChanged();
-                    mEventTitle.setVisibility(View.INVISIBLE);
-                    mLocationSpinner.setVisibility(View.INVISIBLE);
-                    mSubmitButton.setVisibility(View.INVISIBLE);
-                    newEventLabel.setVisibility(View.INVISIBLE);
-                    startTimeButton.setVisibility(View.INVISIBLE);
-                    endTimeButton.setVisibility(View.INVISIBLE);
-                    startTimeView.setVisibility(View.INVISIBLE);
-                    endTimeView.setVisibility(View.INVISIBLE);
-                    mEventDescription.setVisibility(View.INVISIBLE);
-                    mDateSpinner.setVisibility(View.INVISIBLE);
-
-
-                    addNewEventLabel.setVisibility(View.VISIBLE);
-                    mNewEventButton.setVisibility(View.VISIBLE);
-                    mNoNewEventButton.setVisibility(View.VISIBLE);
-
-                    mNewEventButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finish();
-                            startActivity(getIntent());
-                        }
-                    });
-
-                    mNoNewEventButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(AddEventActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        }
-                    });
                 }
-    });
+
+
+                mAdapter.notifyDataSetChanged();
+
+                mEventTitle.setVisibility(View.INVISIBLE);
+                mLocationSpinner.setVisibility(View.INVISIBLE);
+                mSubmitButton.setVisibility(View.INVISIBLE);
+                newEventLabel.setVisibility(View.INVISIBLE);
+                startTimeButton.setVisibility(View.INVISIBLE);
+                endTimeButton.setVisibility(View.INVISIBLE);
+                startTimeView.setVisibility(View.INVISIBLE);
+                endTimeView.setVisibility(View.INVISIBLE);
+                mEventDescription.setVisibility(View.INVISIBLE);
+                mDateSpinner.setVisibility(View.INVISIBLE);
+
+
+                addNewEventLabel.setVisibility(View.VISIBLE);
+                mNewEventButton.setVisibility(View.VISIBLE);
+                mNoNewEventButton.setVisibility(View.VISIBLE);
+
+                mNewEventButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                        startActivity(getIntent());
+                    }
+                });
+
+                mNoNewEventButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(AddEventActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+        });
 
 
         startTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isSettingStartTime = true;
+                isSettingStartTime = true; //switch between two pickers
                 startTimePickerFragment = new TimePickerFragment();
                 startTimePickerFragment.show(getFragmentManager(), "startTimePicker");
             }
@@ -207,8 +200,21 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                 endTimePickerFragment.show(getFragmentManager(), "endTimePicker");
             }
         });
+    }
 
+    public void saveEvent(Event newEvent) {
+        String networkMessage="";
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        mSavedEventReference.push().setValue(newEvent);
 
+        if (networkInfo != null && networkInfo.isConnected() ){
+            networkMessage = "Your event \"" + newEvent.getEventDescription() + "\" was saved. Yay! ";
+        }
+        else {
+            networkMessage = "It looks like you are currently offline. Your event \"" + newEvent.getEventDescription() + "\" will be saved automatically when you are back online.";
+        }
+        Toast.makeText(getApplicationContext(), networkMessage, Toast.LENGTH_LONG).show();
     }
 
     public void showTimePickerDialog(View v) {
@@ -231,7 +237,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
             amOrPm = "pm";
             pickerHour-=12;
         }
-        else if (hourOfDay <12){
+        else if (hourOfDay < 12){
             amOrPm = "am";
         }
         if (pickerMin < 10) {
@@ -250,42 +256,16 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
 
     }
 
-
-    //// TODO: 6/28/16 review saving the entry time in long vs date.
-    public Date getDateFromString(String date){
+    public long createTimeInLong (int pickerMin, int pickerHour, String trimmedDateChoice){
         DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
-        Date newDate = null;
+        Date dateAsDate = null;
         try {
-            newDate = format.parse(date);
+            dateAsDate = format.parse(trimmedDateChoice + " " + pickerHour + ":" + pickerMin); //match above
         } catch (ParseException e) {
             Toast.makeText(getApplicationContext(),"There was an error, please try again",Toast.LENGTH_LONG).show();
         }
-        return newDate;
+        return dateAsDate.getTime();
     }
 
-    public long createEndTimeInLong (int endPickerMin, int endPickerHour, String trimmedDateChoice){
-        DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
-        Date endDate = null;
-        try {
-            endDate = format.parse(trimmedDateChoice + " " + endPickerHour + ":" + endPickerMin);
-        } catch (ParseException e) {
-            Toast.makeText(getApplicationContext(),"There was an error, please try again",Toast.LENGTH_LONG).show();
-        }
-        return endDate.getTime();
-    }
 
-    public void saveEvent(Event newEvent) {
-        String networkMessage="";
-        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
-        mSavedEventReference.push().setValue(newEvent);
-
-        if (networkInfo != null && networkInfo.isConnected() ){
-            networkMessage = "Your event + " + newEvent.getEventDescription() + " was saved. Yay! ";
-        }
-        else {
-            networkMessage = "It looks like you are currently offline. Your event " + newEvent.getEventDescription() + " will be saved automatically when you are back online.";
-        }
-        Toast.makeText(getApplicationContext(), networkMessage, Toast.LENGTH_LONG).show();
-    }
 }
