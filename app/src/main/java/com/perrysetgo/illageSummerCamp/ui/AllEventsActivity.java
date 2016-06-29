@@ -21,6 +21,7 @@ import com.perrysetgo.illageSummerCamp.R;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -59,6 +60,7 @@ public class AllEventsActivity extends ListActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     mEvents.add(snapshot.getValue(Event.class));
                 }
+                sortEventsList(mEvents);
                 mAdapter.notifyDataSetChanged();
             }
             public void onCancelled(DatabaseError error){
@@ -71,7 +73,10 @@ public class AllEventsActivity extends ListActivity {
 
 
 
-
+    public ArrayList<Event> sortEventsList(ArrayList<Event> unsortedEvents){
+        Collections.sort(unsortedEvents, Event.sortEvents);
+        return unsortedEvents;
+    }
 
 
     public void showLoadingDialog() {

@@ -25,16 +25,14 @@ public class Event {
 
     }
 
-    public int compare(Event one, Event two) {
-        return Long.compare(one.getEventStartDateTime(), two.getEventStartDateTime());
-    }
+    public static Comparator<Event> sortEvents = new Comparator<Event>() {
 
-    public static Comparator<Event> sortEventList = new Comparator<Event>() {
         @Override
-        public int compare(Event lhs, Event rhs) {
-            return Long.compare(lhs.getEventStartDateTime(), rhs.getEventStartDateTime());
+        public int compare(Event e1, Event e2) {
+            return (int) (e1.getEventStartDateTime() - e2.getEventEndDateTime());
         }
     };
+
 
     public Event(){}; //req
 

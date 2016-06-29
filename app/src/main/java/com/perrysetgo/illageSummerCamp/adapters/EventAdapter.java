@@ -28,7 +28,10 @@ public class EventAdapter extends BaseAdapter {
         mEvents = events; //// TODO: 6/29/16 events should be sorted before displaying.probably easiest to just sort the arraylist.
     }
 
-//    Collections.sort(mEvents, new );
+//    public ArrayList<Event> sortEventsList(ArrayList<Event> unsortedEvents){
+//        Collections.sort(unsortedEvents, Event.sortEvents);
+//        return unsortedEvents;
+//    }
 
     @Override
     public int getCount() {
