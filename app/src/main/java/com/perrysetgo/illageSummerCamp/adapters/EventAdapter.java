@@ -10,21 +10,25 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
 
 import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.models.Event;
 
-public class EventAdapter extends BaseAdapter{
+public class EventAdapter extends BaseAdapter {
     public static final String TAG = EventAdapter.class.getSimpleName();
     private Context mContext;
     private ArrayList <Event> mEvents;
 
     public EventAdapter(Context context, ArrayList<Event> events) {
         mContext = context;
-        mEvents = events;
+        mEvents = events; //// TODO: 6/29/16 events should be sorted before displaying.probably easiest to just sort the arraylist.
     }
+
+//    Collections.sort(mEvents, new );
 
     @Override
     public int getCount() {
@@ -50,7 +54,6 @@ public class EventAdapter extends BaseAdapter{
             convertView = LayoutInflater.from(mContext).inflate(R.layout.event_list_item,parent,false);
             holder = new ViewHolder();
 
-
             holder.editButton = (ImageButton) convertView.findViewById(R.id.editButton);
             holder.deleteButton = (ImageButton) convertView.findViewById(R.id.deleteButton);
 //            if (isRegistered()){
@@ -63,23 +66,21 @@ public class EventAdapter extends BaseAdapter{
             holder.locationLabel = (TextView) convertView.findViewById(R.id.eventLocationLabel);
             holder.descriptionLabel = (TextView) convertView.findViewById(R.id.eventDescriptionLabel);
 
-
             convertView.setTag(holder);
         } else{
-            holder =(ViewHolder) convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
-
-
+        
         Event event = mEvents.get(position);
         holder.titleLabel.setText(event.getEventTitle());
 
 
-        //format start time
-        SimpleDateFormat startTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
+        //// TODO: 6/29/16 fix AM or PM display. Currently shows all times as AM.Will need rework of timer with flag a :C
+        SimpleDateFormat startTimeFormat = new SimpleDateFormat("EEE, MM/dd hh:mm", Locale.US);
         String startDateTime = startTimeFormat.format(event.getEventStartDateTime());
         Log.i(TAG, "startTime/date" + startDateTime);
         //END TIME
-        SimpleDateFormat endTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
+        SimpleDateFormat endTimeFormat = new SimpleDateFormat("EEE, MM/dd hh:mm", Locale.US);
         String endDateTime = endTimeFormat.format(event.getEventEndDateTime());
 
         holder.dateLabel.setText(startDateTime + " to " + endDateTime);
@@ -98,5 +99,4 @@ public class EventAdapter extends BaseAdapter{
         ImageButton editButton;
         ImageButton deleteButton;
     }
-
 }

@@ -11,6 +11,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.adapters.EventAdapter;
@@ -44,23 +45,24 @@ public class AllEventsActivity extends ListActivity {
 
     private void refreshEventList() {
 
-        //showLoadingDialog();
+        showLoadingDialog();
 
-        //// TODO: 6/28/16 implement listener to listen for database changes.
         //// TODO: 6/28/16 understand offline retrieval options.
+        ///Todo sort events by start tune,
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EVENTS);
-        ref.addValueEventListener(new ValueEventListener() {
+        Query queryRef = ref.orderByValue();
+        queryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //dismissLoadingDialog();
+                dismissLoadingDialog();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     mEvents.add(snapshot.getValue(Event.class));
                 }
                 mAdapter.notifyDataSetChanged();
             }
             public void onCancelled(DatabaseError error){
-                //dismissLoadingDialog();
+                dismissLoadingDialog();
                 Toast.makeText(getApplicationContext(),"There was an issue connecting to the database. Please try again later.", Toast.LENGTH_LONG).show();
                 Log.d(TAG, error.toString());
             }

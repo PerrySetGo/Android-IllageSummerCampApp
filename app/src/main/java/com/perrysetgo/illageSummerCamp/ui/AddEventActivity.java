@@ -135,6 +135,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //// TODO: 6/29/16 transitions should not happen if fields are not filled out. 
 
                 if (mEventTitle.getText().toString().length() == 0 || mEventDescription.getText().toString().length() == 0 || startPickerHour == 0 || endPickerHour == 0) {
                     Toast.makeText(getApplicationContext(), "Please fill out all fields to save this event", Toast.LENGTH_LONG).show();
@@ -158,7 +159,6 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                 endTimeView.setVisibility(View.INVISIBLE);
                 mEventDescription.setVisibility(View.INVISIBLE);
                 mDateSpinner.setVisibility(View.INVISIBLE);
-
 
                 addNewEventLabel.setVisibility(View.VISIBLE);
                 mNewEventButton.setVisibility(View.VISIBLE);
@@ -266,6 +266,4 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
         }
         return dateAsDate.getTime();
     }
-
-
 }
