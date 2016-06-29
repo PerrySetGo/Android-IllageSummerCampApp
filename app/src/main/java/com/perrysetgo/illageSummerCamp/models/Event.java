@@ -77,10 +77,10 @@ public class Event {
 //        return getDateTime().compareTo(o.getDateTime());
 //    }
 
-    public long getEventStartTime() {
+    public long getEventStartDateTime() {
         return eventStartDateTime;
     }
-    public long getEventEndTime() {
+    public long getEventEndDateTime() {
         return eventEndDateTime;
     }
 

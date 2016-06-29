@@ -1,6 +1,7 @@
 package com.perrysetgo.illageSummerCamp.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.models.Event;
 
 public class EventAdapter extends BaseAdapter{
+    public static final String TAG = EventAdapter.class.getSimpleName();
     private Context mContext;
     private ArrayList <Event> mEvents;
 
@@ -71,19 +73,16 @@ public class EventAdapter extends BaseAdapter{
         Event event = mEvents.get(position);
         holder.titleLabel.setText(event.getEventTitle());
 
-//        SimpleDateFormat startTimeFormat = new SimpleDateFormat("hh:mm", Locale.US);
-//        String startTime = startTimeFormat.format(event.getDateTime());
 
-//        SimpleDateFormat eventDateFormat = new SimpleDateFormat("MM/dd", Locale.US);
-//        String eventDateString = eventDateFormat.format(event.getDateTime());
+        //format start time
+        SimpleDateFormat startTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
+        String startDateTime = startTimeFormat.format(event.getEventStartDateTime());
+        Log.i(TAG, "startTime/date" + startDateTime);
+        //END TIME
+        SimpleDateFormat endTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
+        String endDateTime = endTimeFormat.format(event.getEventEndDateTime());
 
-        long endTimeInMillis = event.getEventEndTime();
-        Date endTimeDate = new Date (endTimeInMillis);
-
-        SimpleDateFormat endTimeFormat = new SimpleDateFormat("hh:mm", Locale.US);
-        String endTimeString = endTimeFormat.format(endTimeDate);
-
-//        holder.dateLabel.setText(startTime + " to " + endTimeString + " on: " + eventDateString);
+        holder.dateLabel.setText(startDateTime + " to " + endDateTime);
         holder.locationLabel.setText(event.getEventLocation());
         holder.descriptionLabel.setText(event.getEventDescription());
 
