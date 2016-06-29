@@ -1,61 +1,59 @@
 package com.perrysetgo.illageSummerCamp.models;
 
-//import com.activeandroid.Model;
-//import com.parse.ParseObject;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.*;
 import org.parceler.Parcel;
 
-@Parcel
 public class Event {
 
     //public static final String TAG = Event.class.getSimpleName();
     private static final long WINDOW_END = 10800000; //3hrs in ms
-    private String mEventTitle;
-    private String mEventLocation;
-    private Date mEventStartDateTime;
-    private long mEventEndTime;
-    private String mEventDescription;
+    public String eventTitle;
+    public String eventLocation;
+//    public Date eventStartDateTime;
+    public long eventEndTime;
+    public String eventDescription;
 
-    public Event(){}; //required no arg constructor
 
-    public Event(String eventTitle, String eventLocation, String eventDescription, Date dateTime, long eventEndTime) {
-        this.mEventTitle = eventTitle;
-        this.mEventLocation = eventLocation;
-        this.mEventDescription = eventDescription;
-        this.mEventStartDateTime = dateTime;
-        this.mEventEndTime = eventEndTime;
+    //constructor changed to debug event listing
+    public Event(String eventTitle, String eventLocation, String eventDescription, long eventEndTime) {
+        this.eventTitle = eventTitle;
+        this.eventLocation = eventLocation;
+        this.eventDescription = eventDescription;
+       // this.mEventStartDateTime = dateTime;
+        this.eventEndTime = eventEndTime;
 
     }
 
+    public Event(){}; //req
+
     public String getEventDescription() {
-        return mEventDescription;
+        return eventDescription;
     }
 
     public String getEventLocation() {
-        return mEventLocation;
+        return eventLocation;
     }
 
-    public void setDateFromString(String date) {
-        SimpleDateFormat sf = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
-        sf.setLenient(false);
-        try {
-            this.mEventStartDateTime = sf.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void setDateFromString(String date) {
+//        SimpleDateFormat sf = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
+//        sf.setLenient(false);
+//        try {
+//            this.eventStartDateTime = sf.parse(date);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public String getEventTitle() {
-        return mEventTitle;
+        return eventTitle;
     }
 
-    public Date getDateTime() {
-        return mEventStartDateTime;
-    }
+//    public Date getDateTime() {
+//        return eventStartDateTime;
+//    }
 
 //    public static List<Event> all(){
 //        return new Select()
@@ -82,7 +80,7 @@ public class Event {
 //    }
 
     public long getEventEndTime() {
-        return mEventEndTime;
+        return eventEndTime;
     }
 
     @Override
