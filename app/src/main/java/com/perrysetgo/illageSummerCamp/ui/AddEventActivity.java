@@ -147,7 +147,8 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                     String dateTime = trimmedDateChoice + " " + startPickerHour + ":" + startPickerMin;
                     long endTime = createEndTimeInLong(endPickerMin, endPickerHour, trimmedDateChoice);
                     Date eventDateAsDate = getDateFromString(dateTime);
-                    Event newEvent = new Event(mEventTitle.getText().toString(), locationChoice, mEventDescription.getText().toString(), eventDateAsDate, endTime );
+                    //changed to match simpler constructor
+                    Event newEvent = new Event(mEventTitle.getText().toString(), locationChoice, mEventDescription.getText().toString(), endTime );
 
                         if (isNetworkAvailable()) {
                         saveEvent(newEvent);

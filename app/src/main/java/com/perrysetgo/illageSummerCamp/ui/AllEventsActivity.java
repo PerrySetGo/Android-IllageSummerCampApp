@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
 
 public class AllEventsActivity extends ListActivity {
 
-    private ArrayList<Event> mEvents = new ArrayList<>();
+    private ArrayList<Event> mEvents = new ArrayList<Event>();
     public static final String TAG = AllEventsActivity.class.getSimpleName();
 
 
@@ -52,14 +52,17 @@ public class AllEventsActivity extends ListActivity {
         //// TODO: 6/28/16 understand offline retrieval options.
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EVENTS);
+
         //this currently does not pull events
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    //seems to not be adding actual events here - maybe due to date/time issues and failing constructor?
+                    Log.d(TAG, snapshot.getValue().toString());
                     mEvents.add(snapshot.getValue(Event.class));
-                    Log.d(TAG, mEvents.toString());
+
                 }
 
             }

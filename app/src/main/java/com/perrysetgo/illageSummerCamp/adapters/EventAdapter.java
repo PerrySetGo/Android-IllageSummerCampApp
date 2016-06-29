@@ -71,11 +71,11 @@ public class EventAdapter extends BaseAdapter{
         Event event = mEvents.get(position);
         holder.titleLabel.setText(event.getEventTitle());
 
-        SimpleDateFormat startTimeFormat = new SimpleDateFormat("hh:mm", Locale.US);
-        String startTime = startTimeFormat.format(event.getDateTime());
+//        SimpleDateFormat startTimeFormat = new SimpleDateFormat("hh:mm", Locale.US);
+//        String startTime = startTimeFormat.format(event.getDateTime());
 
-        SimpleDateFormat eventDateFormat = new SimpleDateFormat("MM/dd", Locale.US);
-        String eventDateString = eventDateFormat.format(event.getDateTime());
+//        SimpleDateFormat eventDateFormat = new SimpleDateFormat("MM/dd", Locale.US);
+//        String eventDateString = eventDateFormat.format(event.getDateTime());
 
         long endTimeInMillis = event.getEventEndTime();
         Date endTimeDate = new Date (endTimeInMillis);
@@ -83,7 +83,7 @@ public class EventAdapter extends BaseAdapter{
         SimpleDateFormat endTimeFormat = new SimpleDateFormat("hh:mm", Locale.US);
         String endTimeString = endTimeFormat.format(endTimeDate);
 
-        holder.dateLabel.setText(startTime + " to " + endTimeString + " on: " + eventDateString);
+//        holder.dateLabel.setText(startTime + " to " + endTimeString + " on: " + eventDateString);
         holder.locationLabel.setText(event.getEventLocation());
         holder.descriptionLabel.setText(event.getEventDescription());
 
