@@ -10,9 +10,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.Locale;
 
 import com.perrysetgo.illageSummerCamp.R;
@@ -27,11 +24,6 @@ public class EventAdapter extends BaseAdapter {
         mContext = context;
         mEvents = events; //// TODO: 6/29/16 events should be sorted before displaying.probably easiest to just sort the arraylist.
     }
-
-//    public ArrayList<Event> sortEventsList(ArrayList<Event> unsortedEvents){
-//        Collections.sort(unsortedEvents, Event.sortEvents);
-//        return unsortedEvents;
-//    }
 
     @Override
     public int getCount() {
@@ -59,11 +51,6 @@ public class EventAdapter extends BaseAdapter {
 
             holder.editButton = (ImageButton) convertView.findViewById(R.id.editButton);
             holder.deleteButton = (ImageButton) convertView.findViewById(R.id.deleteButton);
-//            if (isRegistered()){
-//                holder.editButton.setVisibility(View.VISIBLE);
-//                holder.deleteButton.setVisibility(View.VISIBLE);
-//            }
-
             holder.titleLabel = (TextView) convertView.findViewById(R.id.eventTitleLabel);
             holder.dateLabel = (TextView) convertView.findViewById(R.id.eventDateLabel);
             holder.locationLabel = (TextView) convertView.findViewById(R.id.eventLocationLabel);

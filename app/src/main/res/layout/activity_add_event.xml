@@ -110,7 +110,7 @@
         android:visibility="visible"
         android:layout_alignRight="@+id/addNewEventLabel"
         android:layout_alignEnd="@+id/addNewEventLabel"/>
-
+<!--todo improve this page's layout, especially the timepicker highlighting. Also make the description form multiline-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
