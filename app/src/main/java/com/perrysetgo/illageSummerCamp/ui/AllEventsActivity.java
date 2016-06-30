@@ -18,11 +18,9 @@ import com.perrysetgo.illageSummerCamp.adapters.EventAdapter;
 import com.perrysetgo.illageSummerCamp.models.Event;
 import com.perrysetgo.illageSummerCamp.R;
 
-import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -49,7 +47,7 @@ public class AllEventsActivity extends ListActivity {
         showLoadingDialog();
 
         //// TODO: 6/28/16 understand offline retrieval options.
-        ///Todo sort events by start tune,
+        //// TODO: 6/29/16 FIX am/pm display
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EVENTS);
         Query queryRef = ref.orderByValue();
@@ -71,13 +69,10 @@ public class AllEventsActivity extends ListActivity {
         });
     }
 
-
-
     public ArrayList<Event> sortEventsList(ArrayList<Event> unsortedEvents){
         Collections.sort(unsortedEvents, Event.sortEvents);
         return unsortedEvents;
     }
-
 
     public void showLoadingDialog() {
 
