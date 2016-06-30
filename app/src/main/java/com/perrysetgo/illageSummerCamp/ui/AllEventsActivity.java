@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,9 +44,6 @@ public class AllEventsActivity extends ListActivity {
     private void refreshEventList() {
 
         showLoadingDialog();
-
-        //// TODO: 6/28/16 understand offline retrieval options.
-        //// TODO: 6/29/16 FIX am/pm display
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EVENTS);
         Query queryRef = ref.orderByValue();

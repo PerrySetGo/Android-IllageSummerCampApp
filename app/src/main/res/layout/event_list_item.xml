@@ -17,7 +17,7 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/eventDescriptionLabel"
         android:layout_marginRight="4dp"/>
-
+<!--TODO fix the layout of this page. Make the date formatting smaller.-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
