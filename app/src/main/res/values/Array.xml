@@ -1,16 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="devices">
-        <item>Thursday Events</item>
-        <item>Friday Events</item>
-        <item>Saturday Events</item>
-        <item>Sunday Events</item>
-
-    </string-array>
-    <string-array name="device_description">
-        <item> Thursday Events description</item>item>
-        <item> Friday Events description</item>item>
-        <item> Saturday Events description</item>item>
-        <item> Sunday Events description</item>item>
-    </string-array>
-</resources>
+<resources></resources>

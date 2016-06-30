@@ -138,7 +138,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
             @Override
             public void onClick(View v) {
 
-                if (mEventTitle.getText().toString().length() == 0 || mEventDescription.getText().toString().length() == 0 || startPickerHour == 0 || endPickerHour == 0) {
+                if (mEventTitle.getText().toString().length() == 0 || mEventDescription.getText().toString().length() == 0 ) { //check these for validation.
                     Toast.makeText(getApplicationContext(), "Please fill out all fields to save this event", Toast.LENGTH_LONG).show();
                 } else {
                     Event newEvent = new Event(mEventTitle.getText().toString(), locationChoice, startDateTimeLong, mEventDescription.getText().toString(), endDateTimeLong);
@@ -223,34 +223,29 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     //time translator code
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        setTimeInLong(minute, hourOfDay, trimmedDateChoice); //create the time in long here
+        setTimeInLong(minute, hourOfDay, trimmedDateChoice); //create the time BEFORE here so it converts correctly in the listview
         String amOrPm = "pm";
-        pickerHour = hourOfDay;
-        pickerMin = minute;
+
         String minutesString = "";
-        if (hourOfDay == 0){ //translate to 12 hr clock. Little workaround to get both timepicker and am/pm label to show up correctly.
+        if (hourOfDay == 0){ //translate to 12 hr clock for display. Little workaround to get both timepicker and am/pm label to show up correctly.
             amOrPm = "am";
-            pickerHour+=12;
+            hourOfDay+=12;
         }
         else if(hourOfDay > 12){
             amOrPm = "pm";
-            pickerHour-=12;
+            hourOfDay-=12;
         }
         else if (hourOfDay < 12){
             amOrPm = "am";
         }
-        if (pickerMin < 10) {
+        if (minute < 10) {
             minutesString = "0"; //fix weird bug where only one zero is shown on times ending in :00
         }
 
         if (isSettingStartTime){ //global switch
-            startTimeView.setText("Start time set to: " + pickerHour + ":" + minutesString + pickerMin + " " + amOrPm);
-            startPickerHour = pickerHour;
-            startPickerMin  = pickerMin;
+            startTimeView.setText("Start time set to: " + hourOfDay + ":" + minutesString + minute + " " + amOrPm);
         } else {
-            endTimeView.setText("End time set to: " + pickerHour + ":" + minutesString + pickerMin + " " + amOrPm);
-            endPickerHour = pickerHour;
-            endPickerMin = pickerMin;
+            endTimeView.setText("End time set to: " + hourOfDay + ":" + minutesString + minute + " " + amOrPm);
         }
 
     }

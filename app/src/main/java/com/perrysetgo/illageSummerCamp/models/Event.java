@@ -1,15 +1,27 @@
 package com.perrysetgo.illageSummerCamp.models;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.*;
-import org.parceler.Parcel;
+import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.perrysetgo.illageSummerCamp.Constants;
+import com.perrysetgo.illageSummerCamp.adapters.EventAdapter;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
 
 public class Event {
 
-    //public static final String TAG = Event.class.getSimpleName();
-    private static final long WINDOW_END = 10800000; //3hrs in ms
+    public static final String TAG = Event.class.getSimpleName();
+    private ArrayList<Event> mEvents;
+    private EventAdapter mAdapter;
     public String eventTitle;
     public String eventLocation;
     public long eventStartDateTime;
@@ -47,24 +59,6 @@ public class Event {
     public String getEventTitle() {
         return eventTitle;
     }
-
-//
-//    public static Event findRecent() {
-//        Calendar rightNow = Calendar.getInstance();
-//        //get the next event if one starts between now and 3 hours from now
-//        long eventWindowEnd = rightNow.getTimeInMillis() + WINDOW_END;
-//        return new Select()
-//                .from(Event.class)
-//                .orderBy("EventDateTimeStart DESC")
-//                .where("EventDateTimeStart > ?", rightNow.getTimeInMillis()) //get current time
-//                .where("EventDateTimeStart < ?", eventWindowEnd) //add expiration time in MS
-//                .executeSingle();
-//    }
-
-//    @Override
-//    public int compareTo(Event o) {
-//        return getDateTime().compareTo(o.getDateTime());
-//    }
 
     public long getEventStartDateTime() {
         return eventStartDateTime;

@@ -22,7 +22,7 @@ public class EventAdapter extends BaseAdapter {
 
     public EventAdapter(Context context, ArrayList<Event> events) {
         mContext = context;
-        mEvents = events; //// TODO: 6/29/16 events should be sorted before displaying.probably easiest to just sort the arraylist.
+        mEvents = events;
     }
 
     @Override
@@ -64,11 +64,8 @@ public class EventAdapter extends BaseAdapter {
         Event event = mEvents.get(position);
         holder.titleLabel.setText(event.getEventTitle());
 
-
-        //// TODO: 6/29/16 fix AM or PM display. Currently shows all times as AM.Will need rework of timer with flag a :C
         SimpleDateFormat startTimeFormat = new SimpleDateFormat("EEE, MM/dd hh:mm a", Locale.US);
         String startDateTime = startTimeFormat.format(event.getEventStartDateTime());
-        Log.i(TAG, "startTime/date" + startDateTime);
         //END TIME
         SimpleDateFormat endTimeFormat = new SimpleDateFormat("EEE, MM/dd hh:mm a", Locale.US);
         String endDateTime = endTimeFormat.format(event.getEventEndDateTime());
