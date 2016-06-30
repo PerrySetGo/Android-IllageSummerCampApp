@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "226821017232",
+    "firebase_url": "https://illagesummercamp-9f12b.firebaseio.com",
+    "project_id": "illagesummercamp-9f12b",
+    "storage_bucket": "illagesummercamp-9f12b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226821017232:android:39f05cf05eb8dc31",
+        "android_client_info": {
+          "package_name": "com.perrysetgo.illageSummerCamp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226821017232-5db8jaq30aii0qbd2nk29s6fvrake82e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.perrysetgo.illageSummerCamp",
+            "certificate_hash": "FA626F2ACD1A65513704D4AFB2EF5B9776D5D048"
+          }
+        },
+        {
+          "client_id": "226821017232-8l207o3rjav76e062ua43tmi0fb5vq23.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3_bz7ZEnfRhhO-Tvc6GwdOFs1xwjtFQg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "226821017232-8l207o3rjav76e062ua43tmi0fb5vq23.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,8 +6,6 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 
-import com.perrysetgo.illageSummerCamp.R;
-
 import java.util.Calendar;
 
 public class TimePickerFragment extends DialogFragment {

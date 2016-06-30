@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.perrysetgo.illageSummerCamp.R;
-import com.parse.ParseUser;
+//import com.parse.ParseUser;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,12 +28,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        //this is here to circumvent needing to log in
+        addActivityButton.setVisibility(View.VISIBLE);
+        adminButton.setVisibility(View.INVISIBLE);
 
-        if (isRegistered()) {
-            addActivityButton.setVisibility(View.VISIBLE);
-            logoutButton.setVisibility(View.VISIBLE);
-            adminButton.setVisibility(View.INVISIBLE);
-        }
+//        if (isRegistered()) {
+//            addActivityButton.setVisibility(View.VISIBLE);
+//            logoutButton.setVisibility(View.VISIBLE);
+//            adminButton.setVisibility(View.INVISIBLE);
+//        }
 
         mAboutCampButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,23 +54,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ParseUser.logOut();
-                ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
-                finish();
-                startActivity(getIntent());
-            }
-        });
+//        logoutButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ParseUser.logOut();
+//                ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
+//                finish();
+//                startActivity(getIntent());
+//            }
+//        });
 
-        mCampMapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, IllageMapActivity.class);
-                startActivity(intent);
-            }
-        });
+//        mCampMapButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, IllageMapActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         mViewAllButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,22 +79,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+//
+//        mNextActivityButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, NextEventActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
-        mNextActivityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, NextEventActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        mContactUsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ContactActivity.class);
-                startActivity(intent);
-            }
-        });
+//        mContactUsButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, ContactActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         addActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,13 +106,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private boolean isRegistered() {
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser == null) {
-            return false;
-        } else {
-            return true;
-        }
-    }
+//    private boolean isRegistered() {
+//        ParseUser currentUser = ParseUser.getCurrentUser();
+//        if (currentUser == null) {
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
 
 }
