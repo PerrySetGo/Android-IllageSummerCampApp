@@ -1,65 +1,53 @@
 package com.perrysetgo.illageSummerCamp.models;
 
-import com.activeandroid.Model;
-//import com.parse.ParseObject;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.*;
+import org.parceler.Parcel;
 
 public class Event {
 
     //public static final String TAG = Event.class.getSimpleName();
     private static final long WINDOW_END = 10800000; //3hrs in ms
-    private String mEventTitle;
-    private String mEventLocation;
-    private Date mEventStartDateTime;
-    private long mEventEndTime;
-    private String mEventDescription;
+    public String eventTitle;
+    public String eventLocation;
+    public long eventStartDateTime;
+    public long eventEndDateTime;
+    public String eventDescription;
 
-
-    public Event(String eventTitle, String eventLocation, String eventDescription, Date dateTime, long eventEndTime) {
-        mEventTitle = eventTitle;
-        mEventLocation = eventLocation;
-        mEventDescription = eventDescription;
-        mEventStartDateTime = dateTime;
-        mEventEndTime = eventEndTime;
+    public Event(String eventTitle, String eventLocation, long eventStartDateTime, String eventDescription, long eventEndDateTime) {
+        this.eventTitle = eventTitle;
+        this.eventLocation = eventLocation;
+        this.eventDescription = eventDescription;
+        this.eventStartDateTime = eventStartDateTime;
+        this.eventEndDateTime = eventEndDateTime;
 
     }
 
+    public static Comparator<Event> sortEvents = new Comparator<Event>() {
+
+        @Override
+        public int compare(Event e1, Event e2) {
+            return (int) (e1.getEventStartDateTime() - e2.getEventEndDateTime());
+        }
+    };
+
+
+    public Event(){}; //req
+
     public String getEventDescription() {
-        return mEventDescription;
+        return eventDescription;
     }
 
     public String getEventLocation() {
-        return mEventLocation;
-    }
-
-    public void setDateFromString(String date) {
-        SimpleDateFormat sf = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
-        sf.setLenient(false);
-        try {
-            this.mEventStartDateTime = sf.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        return eventLocation;
     }
 
     public String getEventTitle() {
-        return mEventTitle;
+        return eventTitle;
     }
 
-    public Date getDateTime() {
-        return mEventStartDateTime;
-    }
-
-//    public static List<Event> all(){
-//        return new Select()
-//                .from(Event.class)
-//                .orderBy("EventDateTimeStart ASC")
-//                .execute();
-//    }
 //
 //    public static Event findRecent() {
 //        Calendar rightNow = Calendar.getInstance();
@@ -78,15 +66,17 @@ public class Event {
 //        return getDateTime().compareTo(o.getDateTime());
 //    }
 
-    public long getEventEndTime() {
-        return mEventEndTime;
+    public long getEventStartDateTime() {
+        return eventStartDateTime;
+    }
+    public long getEventEndDateTime() {
+        return eventEndDateTime;
     }
 
     @Override
     public String toString() {
         return this.getEventTitle();
     }
-
 
 }
 

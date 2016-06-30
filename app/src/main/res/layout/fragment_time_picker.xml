@@ -2,7 +2,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.example.guest.illageSummerCamp.fragments.TimePickerFragment">
+             tools:context="com.perrysetgo.illageSummerCamp.fragments.TimePickerFragment">
 
     <TextView
         android:layout_width="match_parent"

@@ -1,4 +1,5 @@
 package com.perrysetgo.illageSummerCamp.ui;
+
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-//import android.util.Log;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,17 +18,20 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.adapters.EventAdapter;
 import com.perrysetgo.illageSummerCamp.fragments.TimePickerFragment;
 import com.perrysetgo.illageSummerCamp.models.Event;
 import com.perrysetgo.illageSummerCamp.models.LocationLib;
-import com.parse.ParseObject;
-import com.parse.SaveCallback;
+import com.perrysetgo.illageSummerCamp.Constants;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -37,7 +41,7 @@ import butterknife.ButterKnife;
 
 public class AddEventActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
 
-    //public static final String TAG = AddEventActivity.class.getSimpleName();
+    public static final String TAG = AddEventActivity.class.getSimpleName();
 
     @Bind(R.id.editTitle) EditText mEventTitle;
     @Bind(R.id.editDescription) EditText mEventDescription;
@@ -50,13 +54,16 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     @Bind(R.id.dateSpinner) Spinner mDateSpinner;
     @Bind(R.id.startTimeView) TextView startTimeView;
     @Bind(R.id.endTimeView) TextView endTimeView;
+
+    //time vars
     TimePickerFragment startTimePickerFragment;
     TimePickerFragment endTimePickerFragment;
-    int pickerHour = 0;
-    int pickerMin = 0;
-    int startPickerHour, startPickerMin, endPickerHour, endPickerMin;
+    int startPickerHour, startPickerMin, endPickerHour, endPickerMin, pickerHour, pickerMin;
     boolean isSettingStartTime = true;
+
+    //event, date, loc
     ArrayList<Event> mEvents;
+
     EventAdapter mAdapter;
     ArrayAdapter<String> locationAdapter;
     ArrayAdapter<String> datesAdapter;
@@ -67,22 +74,35 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     ArrayList<String> mLocationNames; //this is the names of the locations so we can use them for the spinner
     ArrayList<String> mDates;
 
+    //other
+    private DatabaseReference mSavedEventReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
         ButterKnife.bind(this);
-        mAdapter = new EventAdapter(this, mEvents);
-        mLocationNames = new ArrayList<>();
+        final TextView newEventLabel = (TextView) findViewById(R.id.newEventLabel);
+        final TextView addNewEventLabel = (TextView) findViewById(R.id.addNewEventLabel);
 
-        //get list of dates for date spinner
+        mSavedEventReference = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child(Constants.FIREBASE_CHILD_EVENTS);
+
+        mAdapter = new EventAdapter(this, mEvents);
+
+//get list of dates for date spinner
         mDates = new ArrayList<>();
         mDates.add("Thu, 08/25/2016");
         mDates.add("Fri, 08/26/2016");
         mDates.add("Sat, 08/27/2016");
         mDates.add("Sun, 08/28/2016");
 
-        //get the list of locations for the spinner
+
+//start location
+//get the list of locations for the spinner
+        mLocationNames = new ArrayList<>();
         mLocationLib = new LocationLib();
         for (int i = 0; i < mLocationLib.getLocations().size(); i++) {
             String locName = mLocationLib.getLocations().get(i).getName();
@@ -97,11 +117,9 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                 locationChoice = mLocationSpinner.getSelectedItem().toString();
             }
 
-            public void onNothingSelected(AdapterView<?> arg0) {
-
-            }
-
+            public void onNothingSelected(AdapterView<?> arg0) {}
         });
+
 
         datesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mDates);
         mDateSpinner.setAdapter(datesAdapter);
@@ -111,25 +129,22 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                 trimmedDateChoice = dateChoice.substring(5); //cut
             }
 
-            public void onNothingSelected(AdapterView<?> arg0) {
-
-            }
+            public void onNothingSelected(AdapterView<?> arg0) {} //nothing here
         });
-
-        final TextView newEventLabel = (TextView) findViewById(R.id.newEventLabel);
-        final TextView addNewEventLabel = (TextView) findViewById(R.id.addNewEventLabel);
 
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mEventTitle.length() == 0 || mEventDescription.length() == 0 || startPickerHour == 0 || endPickerHour == 0) {
-                    Toast.makeText(getApplicationContext(), " You need to fill out all fields to be able to save this event", Toast.LENGTH_LONG).show();
+
+                if (mEventTitle.getText().toString().length() == 0 || mEventDescription.getText().toString().length() == 0 || startPickerHour == 0 || endPickerHour == 0) {
+                    Toast.makeText(getApplicationContext(), "Please fill out all fields to save this event", Toast.LENGTH_LONG).show();
                 } else {
-                    String dateTime = trimmedDateChoice + " " + startPickerHour + ":" + startPickerMin;
-                    long endTime = createEndTimeInLong(endPickerMin, endPickerHour, trimmedDateChoice);
-                    Date eventDateAsDate = getDateFromString(dateTime);
-                    saveEvent(eventDateAsDate, endTime);
+                    long startDateTimeLong = createTimeInLong(startPickerMin, startPickerHour, trimmedDateChoice);
+                    long endDateTimeLong = createTimeInLong(endPickerMin, endPickerHour, trimmedDateChoice);
+                    Event newEvent = new Event(mEventTitle.getText().toString(), locationChoice, startDateTimeLong, mEventDescription.getText().toString(), endDateTimeLong);
+                    saveEvent(newEvent);
                     mAdapter.notifyDataSetChanged();
+
                     mEventTitle.setVisibility(View.INVISIBLE);
                     mLocationSpinner.setVisibility(View.INVISIBLE);
                     mSubmitButton.setVisibility(View.INVISIBLE);
@@ -140,7 +155,6 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                     endTimeView.setVisibility(View.INVISIBLE);
                     mEventDescription.setVisibility(View.INVISIBLE);
                     mDateSpinner.setVisibility(View.INVISIBLE);
-
 
                     addNewEventLabel.setVisibility(View.VISIBLE);
                     mNewEventButton.setVisibility(View.VISIBLE);
@@ -153,7 +167,6 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                             startActivity(getIntent());
                         }
                     });
-
                     mNoNewEventButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -161,14 +174,17 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                             startActivity(intent);
                         }
                     });
+
+
                 }
             }
         });
 
+
         startTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isSettingStartTime = true;
+                isSettingStartTime = true; //switch between two pickers
                 startTimePickerFragment = new TimePickerFragment();
                 startTimePickerFragment.show(getFragmentManager(), "startTimePicker");
             }
@@ -182,19 +198,29 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                 endTimePickerFragment.show(getFragmentManager(), "endTimePicker");
             }
         });
-
-
     }
 
+    public void saveEvent(Event newEvent) {
+        String networkMessage="";
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        mSavedEventReference.push().setValue(newEvent);
 
-
-
+        if (networkInfo != null && networkInfo.isConnected() ){
+            networkMessage = "Your event \"" + newEvent.getEventDescription() + "\" was saved. Yay! ";
+        }
+        else {
+            networkMessage = "It looks like you are currently offline. Your event \"" + newEvent.getEventDescription() + "\" will be saved automatically when you are back online.";
+        }
+        Toast.makeText(getApplicationContext(), networkMessage, Toast.LENGTH_LONG).show();
+    }
 
     public void showTimePickerDialog(View v) {
         TimePickerFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
     }
 
+    //time translator code
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         String amOrPm = "pm";
@@ -209,7 +235,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
             amOrPm = "pm";
             pickerHour-=12;
         }
-        else if (hourOfDay <12){
+        else if (hourOfDay < 12){
             amOrPm = "am";
         }
         if (pickerMin < 10) {
@@ -228,69 +254,14 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
 
     }
 
-    public Date getDateFromString(String date){
+    public long createTimeInLong (int pickerMin, int pickerHour, String trimmedDateChoice){
         DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
-        Date newDate = null;
+        Date dateAsDate = null;
         try {
-            newDate = format.parse(date);
+            dateAsDate = format.parse(trimmedDateChoice + " " + pickerHour + ":" + pickerMin); //match above
         } catch (ParseException e) {
             Toast.makeText(getApplicationContext(),"There was an error, please try again",Toast.LENGTH_LONG).show();
         }
-        return newDate;
+        return dateAsDate.getTime();
     }
-
-    public long createEndTimeInLong (int endPickerMin, int endPickerHour, String trimmedDateChoice){
-        DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
-        Date endDate = null;
-        try {
-            endDate = format.parse(trimmedDateChoice + " " + endPickerHour + ":" + endPickerMin);
-        } catch (ParseException e) {
-            Toast.makeText(getApplicationContext(),"There was an error, please try again",Toast.LENGTH_LONG).show();
-        }
-        return endDate.getTime();
-    }
-
-    private void saveEvent(Date eventDateAsDate, long endTime){
-        ParseObject event = new ParseObject("Event");
-        event.put("title", mEventTitle.getText().toString());
-        event.put("location", locationChoice);
-        event.put("description", mEventDescription.getText().toString());
-        event.put("startDateTime", eventDateAsDate);
-        event.put("endTime", endTime);
-        event.pinInBackground();
-
-        if (isNetworkAvailable()) {
-            event.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(com.parse.ParseException e) {
-                    if (e == null) {
-                        Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Not saved", Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
-        }
-        else {
-            event.saveEventually();
-            Toast.makeText(getApplicationContext(), "You are currently offline. Your Event will be saved automatically when you reconnect.", Toast.LENGTH_LONG).show();
-        }
-
-
-
-    }
-
-    private boolean isNetworkAvailable() {
-
-        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
-        boolean isAvailable = false;
-
-        if (networkInfo != null && networkInfo.isConnected() ){
-            isAvailable = true;
-        }
-        return isAvailable;
-    }
-
 }
