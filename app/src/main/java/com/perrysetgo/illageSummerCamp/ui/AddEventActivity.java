@@ -92,7 +92,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
 
         mAdapter = new EventAdapter(this, mEvents);
 
-        //get list of dates for date spinner
+//get list of dates for date spinner
         mDates = new ArrayList<>();
         mDates.add("Thu, 08/25/2016");
         mDates.add("Fri, 08/26/2016");
@@ -100,8 +100,8 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
         mDates.add("Sun, 08/28/2016");
 
 
-        //start location
-        //get the list of locations for the spinner
+//start location
+//get the list of locations for the spinner
         mLocationNames = new ArrayList<>();
         mLocationLib = new LocationLib();
         for (int i = 0; i < mLocationLib.getLocations().size(); i++) {
@@ -135,7 +135,6 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //// TODO: 6/29/16 transitions should not happen if fields are not filled out. 
 
                 if (mEventTitle.getText().toString().length() == 0 || mEventDescription.getText().toString().length() == 0 || startPickerHour == 0 || endPickerHour == 0) {
                     Toast.makeText(getApplicationContext(), "Please fill out all fields to save this event", Toast.LENGTH_LONG).show();
@@ -144,41 +143,40 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                     long endDateTimeLong = createTimeInLong(endPickerMin, endPickerHour, trimmedDateChoice);
                     Event newEvent = new Event(mEventTitle.getText().toString(), locationChoice, startDateTimeLong, mEventDescription.getText().toString(), endDateTimeLong);
                     saveEvent(newEvent);
+                    mAdapter.notifyDataSetChanged();
+
+                    mEventTitle.setVisibility(View.INVISIBLE);
+                    mLocationSpinner.setVisibility(View.INVISIBLE);
+                    mSubmitButton.setVisibility(View.INVISIBLE);
+                    newEventLabel.setVisibility(View.INVISIBLE);
+                    startTimeButton.setVisibility(View.INVISIBLE);
+                    endTimeButton.setVisibility(View.INVISIBLE);
+                    startTimeView.setVisibility(View.INVISIBLE);
+                    endTimeView.setVisibility(View.INVISIBLE);
+                    mEventDescription.setVisibility(View.INVISIBLE);
+                    mDateSpinner.setVisibility(View.INVISIBLE);
+
+                    addNewEventLabel.setVisibility(View.VISIBLE);
+                    mNewEventButton.setVisibility(View.VISIBLE);
+                    mNoNewEventButton.setVisibility(View.VISIBLE);
+
+                    mNewEventButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                            startActivity(getIntent());
+                        }
+                    });
+                    mNoNewEventButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(AddEventActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+
+
                 }
-
-
-                mAdapter.notifyDataSetChanged();
-
-                mEventTitle.setVisibility(View.INVISIBLE);
-                mLocationSpinner.setVisibility(View.INVISIBLE);
-                mSubmitButton.setVisibility(View.INVISIBLE);
-                newEventLabel.setVisibility(View.INVISIBLE);
-                startTimeButton.setVisibility(View.INVISIBLE);
-                endTimeButton.setVisibility(View.INVISIBLE);
-                startTimeView.setVisibility(View.INVISIBLE);
-                endTimeView.setVisibility(View.INVISIBLE);
-                mEventDescription.setVisibility(View.INVISIBLE);
-                mDateSpinner.setVisibility(View.INVISIBLE);
-
-                addNewEventLabel.setVisibility(View.VISIBLE);
-                mNewEventButton.setVisibility(View.VISIBLE);
-                mNoNewEventButton.setVisibility(View.VISIBLE);
-
-                mNewEventButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                        startActivity(getIntent());
-                    }
-                });
-
-                mNoNewEventButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(AddEventActivity.this, MainActivity.class);
-                        startActivity(intent);
-                    }
-                });
             }
         });
 
