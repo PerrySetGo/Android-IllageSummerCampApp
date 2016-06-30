@@ -66,11 +66,11 @@ public class EventAdapter extends BaseAdapter {
 
 
         //// TODO: 6/29/16 fix AM or PM display. Currently shows all times as AM.Will need rework of timer with flag a :C
-        SimpleDateFormat startTimeFormat = new SimpleDateFormat("EEE, MM/dd hh:mm", Locale.US);
+        SimpleDateFormat startTimeFormat = new SimpleDateFormat("EEE, MM/dd hh:mm a", Locale.US);
         String startDateTime = startTimeFormat.format(event.getEventStartDateTime());
         Log.i(TAG, "startTime/date" + startDateTime);
         //END TIME
-        SimpleDateFormat endTimeFormat = new SimpleDateFormat("EEE, MM/dd hh:mm", Locale.US);
+        SimpleDateFormat endTimeFormat = new SimpleDateFormat("EEE, MM/dd hh:mm a", Locale.US);
         String endDateTime = endTimeFormat.format(event.getEventEndDateTime());
 
         holder.dateLabel.setText(startDateTime + " to " + endDateTime);

@@ -59,6 +59,8 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     TimePickerFragment startTimePickerFragment;
     TimePickerFragment endTimePickerFragment;
     int startPickerHour, startPickerMin, endPickerHour, endPickerMin, pickerHour, pickerMin;
+    long startDateTimeLong;
+    long endDateTimeLong;
     boolean isSettingStartTime = true;
 
     //event, date, loc
@@ -139,8 +141,6 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                 if (mEventTitle.getText().toString().length() == 0 || mEventDescription.getText().toString().length() == 0 || startPickerHour == 0 || endPickerHour == 0) {
                     Toast.makeText(getApplicationContext(), "Please fill out all fields to save this event", Toast.LENGTH_LONG).show();
                 } else {
-                    long startDateTimeLong = createTimeInLong(startPickerMin, startPickerHour, trimmedDateChoice);
-                    long endDateTimeLong = createTimeInLong(endPickerMin, endPickerHour, trimmedDateChoice);
                     Event newEvent = new Event(mEventTitle.getText().toString(), locationChoice, startDateTimeLong, mEventDescription.getText().toString(), endDateTimeLong);
                     saveEvent(newEvent);
                     mAdapter.notifyDataSetChanged();
@@ -223,6 +223,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
     //time translator code
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        setTimeInLong(minute, hourOfDay, trimmedDateChoice); //create the time in long here
         String amOrPm = "pm";
         pickerHour = hourOfDay;
         pickerMin = minute;
@@ -242,7 +243,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
             minutesString = "0"; //fix weird bug where only one zero is shown on times ending in :00
         }
 
-        if (isSettingStartTime){
+        if (isSettingStartTime){ //global switch
             startTimeView.setText("Start time set to: " + pickerHour + ":" + minutesString + pickerMin + " " + amOrPm);
             startPickerHour = pickerHour;
             startPickerMin  = pickerMin;
@@ -254,7 +255,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
 
     }
 
-    public long createTimeInLong (int pickerMin, int pickerHour, String trimmedDateChoice){
+    public void setTimeInLong ( int pickerMin, int pickerHour, String trimmedDateChoice){
         DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
         Date dateAsDate = null;
         try {
@@ -262,6 +263,14 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
         } catch (ParseException e) {
             Toast.makeText(getApplicationContext(),"There was an error, please try again",Toast.LENGTH_LONG).show();
         }
-        return dateAsDate.getTime();
+
+        if (isSettingStartTime){
+            startDateTimeLong = dateAsDate.getTime();
+            Log.i(TAG, Long.toString(startDateTimeLong));
+        }
+        else{
+            endDateTimeLong = dateAsDate.getTime();
+        }
+
     }
 }
