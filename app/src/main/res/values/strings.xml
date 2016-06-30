@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">IllageSummerCamp</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
     <string name="title_activity_home">Illage Summer Camp 2016</string>
      <string name="aboutCampText"><b>Things to know:</b>
     Illage Summer camp is a queer-founded, community-oriented, ally-supported, unicorn-inspired experience of pure magic. \n\nYou don\'t need to sign up for an activity, just show up!\n\nRespect the Illage community -- treat everyone with love, dignity, and compassion. Honor each other\'s identities and experiences.Don\'t make assumptions. Always do your best and be aware of each other. (This rule was written by our fiends at A-Camp)\n\nCamp runs on donations. Please bring cash to contribute. No one turned away for lack of funds!
@@ -10,20 +8,10 @@
     <string name="title_activity_illage_map">IllageMap</string>
     <string name="title_activity_all_events">View All Events</string>
     <string name="title_activity_add_event">AddEventActivity</string>
-    <string name="NewEventText">Your event has been Added! \n\nWould You Like To Add Another Event?</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_register">RegisterActivity</string>
-    <string name="title_activity_single_event">SingleEventActivity</string>
-    <string name="eventDescription">Description</string>
-    <string name="title_activity_day_events">View Events By Day</string>
 
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
     <string name="title_activity_contact">ContactActivity</string>
     <string name="contact_us_text">Illage Summer Camp is a volunteer driven effort! If you have questions or suggestions, or want to participate through volunteering, please get in touch!  You can reach us through the contact form below, and visit us on the web.</string>
     <string name="contact_form_intro">Fill out this form to get in touch! We will get back to you as soon as we can.</string>
-    <string name="next_event_title">New Text</string>
-    <string name="no_next_event_text">There are no events starting in the next three hours. But check the full schedule to see what is happening later tonight and tomorrow!</string>
-    <string name="title_activity_admin">AdminActivity</string>
+    <string name="no_next_event_text">\"Sorry\"</string>
 </resources>

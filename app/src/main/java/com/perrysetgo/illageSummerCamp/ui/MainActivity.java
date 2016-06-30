@@ -79,14 +79,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//
-//        mNextActivityButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, NextEventActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+
+        mNextActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, NextEventActivity.class);
+                startActivity(intent);
+            }
+        });
 
 //        mContactUsButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
