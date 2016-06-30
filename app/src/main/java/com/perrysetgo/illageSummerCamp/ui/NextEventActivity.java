@@ -76,8 +76,9 @@ public class NextEventActivity extends AppCompatActivity {
                         nextEventDateTimeLabel.setVisibility(View.INVISIBLE);
                         nextEventDescriptionLabel.setVisibility(View.INVISIBLE);
                         nextEventLocationLabel.setVisibility(View.INVISIBLE);
-                        eventsStatusBox.setVisibility(View.VISIBLE);
                         eventsStatusBox.setText(R.string.no_next_event_text);
+                        eventsStatusBox.setVisibility(View.VISIBLE);
+
                         nextEventDescriptionBox.setVisibility(View.INVISIBLE);
                         continue;
                     } else {
@@ -88,10 +89,11 @@ public class NextEventActivity extends AppCompatActivity {
                         nextEventLocationLabel.setVisibility(View.VISIBLE);
                         nextEventLocationBox.setText(nextEvent.getEventLocation());
                         nextEventLocationBox.setVisibility(View.VISIBLE);
-
-                        SimpleDateFormat startTimeFormat = new SimpleDateFormat("EEE, MM/dd hh:mm a", Locale.US);
-                        String startDateTime = startTimeFormat.format(nextEvent.getEventEndDateTime());
-                        nextEventDateTimeBox.setText(startDateTime);
+                        //TODO: display current date & time on page.
+                        SimpleDateFormat tf = new SimpleDateFormat("hh:mm a", Locale.US);
+                        String startDateTime = tf.format(nextEvent.getEventStartDateTime());
+                        String endDateTime = tf.format(nextEvent.getEventEndDateTime());
+                        nextEventDateTimeBox.setText(startDateTime + " to " + endDateTime);
                         nextEventDateTimeLabel.setVisibility(View.VISIBLE);
                         nextEventDateTimeBox.setVisibility(View.VISIBLE);
 
