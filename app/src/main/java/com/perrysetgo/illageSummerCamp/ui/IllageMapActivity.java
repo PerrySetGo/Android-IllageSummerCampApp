@@ -1,4 +1,4 @@
-package com.perrysetgo.illageSummerCamp.ui;
+//package com.perrysetgo.illageSummerCamp.ui;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
