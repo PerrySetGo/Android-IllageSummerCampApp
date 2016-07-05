@@ -29,25 +29,25 @@ public class AllEventsActivity extends ListActivity {
     public static final String TAG = AllEventsActivity.class.getSimpleName();
     private ProgressDialog progress;
     private EventAdapter mAdapter;
+    private ValueEventListener queryRefListener;
+    DatabaseReference ref = FirebaseDatabase
+            .getInstance()
+            .getReference(Constants.FIREBASE_CHILD_EVENTS);
+    Query queryRef = ref.orderByValue();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_events);
         ButterKnife.bind(this);
         mEvents = new ArrayList<Event>();
         mAdapter = new EventAdapter(this, mEvents);
         setListAdapter(mAdapter);
-        refreshEventList();
-    }
-
-    private void refreshEventList() {
 
         showLoadingDialog();
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EVENTS);
-        Query queryRef = ref.orderByValue();
-        queryRef.addValueEventListener(new ValueEventListener() {
+        queryRefListener = queryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 dismissLoadingDialog();
@@ -63,6 +63,12 @@ public class AllEventsActivity extends ListActivity {
                 Log.d(TAG, error.toString());
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        queryRef.removeEventListener(queryRefListener);
     }
 
     public ArrayList<Event> sortEventsList(ArrayList<Event> unsortedEvents){

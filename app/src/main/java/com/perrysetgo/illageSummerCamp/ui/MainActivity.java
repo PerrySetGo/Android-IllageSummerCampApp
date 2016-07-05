@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        //this is here to circumvent needing to log in
+        //this is here to circumvent needing to log in. REMOVE BEFORE PRODUCTION
         addActivityButton.setVisibility(View.VISIBLE);
         adminButton.setVisibility(View.INVISIBLE);
 
@@ -88,13 +88,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        mContactUsButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, ContactActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        mContactUsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ContactActivity.class);
+                startActivity(intent);
+            }
+        });
 
         addActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    //// TODO: 6/30/16 fix user registration to be able to admin things and show/hide admin panel.
+    //
 
 //    private boolean isRegistered() {
 //        ParseUser currentUser = ParseUser.getCurrentUser();
