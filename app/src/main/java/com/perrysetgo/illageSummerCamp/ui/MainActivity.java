@@ -32,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
         addActivityButton.setVisibility(View.VISIBLE);
         adminButton.setVisibility(View.INVISIBLE);
 
+        // TODO: 7/6/16 fix login/registration and switches
+        //todo push notifications??
+        //todo save events to "my events"
+        //todo upload photos?
+        //todo see participants
+        //todo contact participants
+        //todo navigation drawer
+
 //        if (isRegistered()) {
 //            addActivityButton.setVisibility(View.VISIBLE);
 //            logoutButton.setVisibility(View.VISIBLE);
