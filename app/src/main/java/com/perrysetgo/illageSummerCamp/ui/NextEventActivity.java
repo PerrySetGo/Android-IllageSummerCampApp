@@ -31,6 +31,8 @@ public class NextEventActivity extends AppCompatActivity {
     private Event nextEvent;
     long rightNowInMillis = Calendar.getInstance().getTimeInMillis();
     long eventWindowEnd = rightNowInMillis + WINDOW_END; //3hrs from now.
+
+    //todo fix "no event coming up" screen
     @Bind(R.id.nextEventTitleBox)
     TextView nextEventTitleBox;
     @Bind(R.id.nextEventTitleLabel)
