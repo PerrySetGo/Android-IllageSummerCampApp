@@ -30,14 +30,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
         </activity>
-
-        <meta-data
-            android:name="AA_DB_NAME"
-            android:value="IllageCamp.db" />
-        <meta-data
-            android:name="AA_DB_VERSION"
-            android:value="1" />
-
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyD5qGMJl2ZSQyrWQQHMITtquXzXiCINx0Q"/>
         <activity
             android:name=".ui.AllEventsActivity"
             android:label="@string/title_activity_all_events"
