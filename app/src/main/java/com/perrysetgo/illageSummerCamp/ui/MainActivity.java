@@ -64,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-//        mCampMapButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, IllageMapActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        mCampMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, IllageMapActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mViewAllButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -33,6 +33,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildTypes.each{
+        it.buildConfigField 'String', 'GMAPS_API_KEY', GoogleMapsApiKey
+    }
     sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
 }
 
@@ -43,6 +46,7 @@ repositories {
 }
 
 dependencies {
+    compile 'com.google.android.gms:play-services-maps:9.2.0'
     compile 'org.parceler:parceler-api:1.1.1'
     apt 'org.parceler:parceler:1.1.1'
     compile 'com.google.firebase:firebase-database:9.0.0'
