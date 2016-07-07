@@ -77,15 +77,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        logoutButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ParseUser.logOut();
-//                ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
-//                finish();
-//                startActivity(getIntent());
-//            }
-//        });
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEditor.putBoolean(Constants.PREFERENCES_LOGIN_STATUS, false).apply();
+                finish();
+                startActivity(getIntent());
+            }
+        });
 
         mCampMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
