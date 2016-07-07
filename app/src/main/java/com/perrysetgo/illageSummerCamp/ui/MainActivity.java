@@ -3,7 +3,9 @@ package com.perrysetgo.illageSummerCamp.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,10 +18,6 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
-
-
     @Bind(R.id.aboutCampButton)  Button mAboutCampButton;
     @Bind(R.id.campMapButton)  Button mCampMapButton;
     @Bind(R.id.nextActivityButton) Button mNextActivityButton;
@@ -29,17 +27,24 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.logoutButton) Button logoutButton;
     @Bind(R.id.addEventButton) Button addActivityButton;
 
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    private boolean loggedIn;
+    public static final String TAG = LoginActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mEditor.putString(Constants.PREFERENCES_USER_KEY, "goodChoices").apply();
-        mEditor.putString(Constants.PREFERENCES_PW_KEY, "l34d3r").apply();
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+        loggedIn = mSharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, true);
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         //this is here to circumvent needing to log in. REMOVE BEFORE PRODUCTION
         addActivityButton.setVisibility(View.VISIBLE);
-        adminButton.setVisibility(View.INVISIBLE);
+        adminButton.setVisibility(View.VISIBLE);
+        adminButton.setVisibility(View.VISIBLE);
 
         // TODO: 7/6/16 fix login/registration and switches
         //todo push notifications??
@@ -49,11 +54,12 @@ public class MainActivity extends AppCompatActivity {
         //todo contact participants
         //todo navigation drawer
 
-//        if (isRegistered()) {
-//            addActivityButton.setVisibility(View.VISIBLE);
-//            logoutButton.setVisibility(View.VISIBLE);
-//            adminButton.setVisibility(View.INVISIBLE);
-//        }
+        if (loggedIn) {
+            Log.d(TAG, "logged in!");
+            addActivityButton.setVisibility(View.VISIBLE);
+            logoutButton.setVisibility(View.VISIBLE);
+            adminButton.setVisibility(View.INVISIBLE);
+        }
 
         mAboutCampButton.setOnClickListener(new View.OnClickListener() {
             @Override
