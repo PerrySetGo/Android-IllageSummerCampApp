@@ -33,9 +33,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildTypes.each{
-        it.buildConfigField 'String', 'GMAPS_API_KEY', GoogleMapsApiKey
-    }
     sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
 }
 
