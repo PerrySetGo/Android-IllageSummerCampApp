@@ -29,7 +29,6 @@ public class IllageMapActivity extends FragmentActivity implements OnMapReadyCal
     private GoogleMap mMap;
     private ArrayList<Location> mLocations;
     private LocationLib mLocationLib;
-    //// TODO: 7/6/16 hide API KEY
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
