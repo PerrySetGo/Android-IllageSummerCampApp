@@ -41,14 +41,17 @@ public class LoginActivity extends AppCompatActivity {
 
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
+            //todo: add wait to show toast first, then start activity http://stackoverflow.com/questions/7607410/finish-activity-after-toast-message-disappears
             public void onClick(View v) {
                 String user = mNameEdit.getText().toString();
                 String pw = mPasswordEdit.getText().toString();
                 if (user.equals(mUser) && pw.equals(mPw)) {
                     Log.i(TAG, "both match");
-                    Toast.makeText(getApplicationContext(), "success! you are now logged in.", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     mEditor.putBoolean(Constants.PREFERENCES_LOGIN_STATUS, true).apply();
+                    Toast.makeText(getApplicationContext(), "success! you are now logged in.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+
                 }
                 else if ( user.equals(mUser) && !pw.equals(mPw))
                 {
