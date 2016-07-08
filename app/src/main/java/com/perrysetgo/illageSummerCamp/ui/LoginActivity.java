@@ -29,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     private String mUser;
     private String mPw;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +49,24 @@ public class LoginActivity extends AppCompatActivity {
                 String pw = mPasswordEdit.getText().toString();
                 if (user.equals(mUser) && pw.equals(mPw)) {
                     Log.i(TAG, "both match");
+                    final Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     mEditor.putBoolean(Constants.PREFERENCES_LOGIN_STATUS, true).apply();
                     Toast.makeText(getApplicationContext(), "success! you are now logged in.", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    Thread thread = new Thread(){
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(3000); //CHANGE if change in toast
+
+                                startActivity(intent);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+
+
+                    thread.start();
 
                 }
                 else if ( user.equals(mUser) && !pw.equals(mPw))
