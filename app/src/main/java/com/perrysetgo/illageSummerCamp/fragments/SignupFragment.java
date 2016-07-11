@@ -1,6 +1,7 @@
 package com.perrysetgo.illageSummerCamp.fragments;
 
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.perrysetgo.illageSummerCamp.R;
+import com.perrysetgo.illageSummerCamp.ui.SignUpActivity;
 
 
 public class SignupFragment extends DialogFragment {
@@ -32,17 +34,21 @@ public class SignupFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 //// TODO: 7/11/16 take user to account creation activity. carry selected event with you and then add to list.
-                Log.i(TAG, "signup");
+                //how to take event with??
+                Intent intent = new Intent(getActivity(), SignUpActivity.class);
+                startActivity(intent);
             }
         });
 
-        signinButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "signin");
-                //// TODO: 7/11/16 take user to sign in. carry selected event with you and then add to list.
-            }
-        });
+//        signinButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.i(TAG, "signin");
+//                Intent intent = new Intent(SignupFragment.this, SignInActivity.class);
+//                startActivity(intent);
+//                //// TODO: 7/11/16 take user to sign in. carry selected event with you and then add to list.
+//            }
+//        });
 
         dismissButton.setOnClickListener(new View.OnClickListener() {
             @Override
