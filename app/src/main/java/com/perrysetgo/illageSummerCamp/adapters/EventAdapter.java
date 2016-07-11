@@ -86,15 +86,11 @@ public class EventAdapter extends BaseAdapter {
         holder.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-       //         FragmentActivity activity = (FragmentActivity)(context);
-
                 SignupFragment signupFragment = new SignupFragment();
                 signupFragment.show(fm, "Sample Fragment");
-                Log.i(TAG, "click on save button");
+
             }
         });
-
-
 
         return convertView;
 

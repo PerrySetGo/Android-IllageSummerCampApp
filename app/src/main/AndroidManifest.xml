@@ -68,7 +68,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.perrysetgo.illageSummerCamp.ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.CreateAccountActivity"></activity>
+        <activity android:name=".ui.SignUpActivity"></activity>
     </application>
 
 </manifest>
