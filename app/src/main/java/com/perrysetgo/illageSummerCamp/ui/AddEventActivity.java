@@ -92,7 +92,7 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
                 .getReference()
                 .child(Constants.FIREBASE_CHILD_EVENTS);
 
-        mAdapter = new EventAdapter(this, mEvents);
+        mAdapter = new EventAdapter(this, mEvents, getFragmentManager());
 
 //get list of dates for date spinner
         mDates = new ArrayList<>();
