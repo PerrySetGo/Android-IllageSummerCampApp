@@ -51,6 +51,7 @@ public class EventAdapter extends BaseAdapter {
 
             holder.editButton = (ImageButton) convertView.findViewById(R.id.editButton);
             holder.deleteButton = (ImageButton) convertView.findViewById(R.id.deleteButton);
+            holder.saveButton = (ImageButton) convertView.findViewById(R.id.saveButton);
             holder.titleLabel = (TextView) convertView.findViewById(R.id.eventTitleLabel);
             holder.dateLabel = (TextView) convertView.findViewById(R.id.eventDateLabel);
             holder.locationLabel = (TextView) convertView.findViewById(R.id.eventLocationLabel);
@@ -74,6 +75,8 @@ public class EventAdapter extends BaseAdapter {
         holder.locationLabel.setText(event.getEventLocation());
         holder.descriptionLabel.setText(event.getEventDescription());
 
+
+
         return convertView;
 
     }
@@ -85,5 +88,6 @@ public class EventAdapter extends BaseAdapter {
         TextView locationLabel;
         ImageButton editButton;
         ImageButton deleteButton;
+        ImageButton saveButton;
     }
 }

@@ -43,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
 
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            //todo: add wait to show toast first, then start activity http://stackoverflow.com/questions/7607410/finish-activity-after-toast-message-disappears
             public void onClick(View v) {
                 String user = mNameEdit.getText().toString();
                 String pw = mPasswordEdit.getText().toString();
