@@ -37,6 +37,8 @@ public class AllEventsActivity extends ListActivity {
             .getReference(Constants.FIREBASE_CHILD_EVENTS);
     Query queryRef = ref.orderByValue();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -44,7 +46,8 @@ public class AllEventsActivity extends ListActivity {
         setContentView(R.layout.activity_all_events);
         ButterKnife.bind(this);
         mEvents = new ArrayList<Event>();
-        mAdapter = new EventAdapter(this, mEvents);
+        FragmentManager fm = getFragmentManager();
+        mAdapter = new EventAdapter(this, mEvents, fm);
         setListAdapter(mAdapter);
 
 //        showLoadingDialog();
@@ -66,9 +69,7 @@ public class AllEventsActivity extends ListActivity {
             }
         });
 
-        FragmentManager fm = getFragmentManager();
-        SignupFragment signupFragment = new SignupFragment();
-        signupFragment.show(fm, "Sample Fragment");
+
     }
 
     @Override

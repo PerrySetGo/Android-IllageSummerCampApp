@@ -1,6 +1,8 @@
 package com.perrysetgo.illageSummerCamp.adapters;
 
+import android.app.FragmentManager;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,15 +15,19 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import com.perrysetgo.illageSummerCamp.R;
+import com.perrysetgo.illageSummerCamp.fragments.SignupFragment;
 import com.perrysetgo.illageSummerCamp.models.Event;
 
 public class EventAdapter extends BaseAdapter {
     public static final String TAG = EventAdapter.class.getSimpleName();
-    private Context mContext;
+    private Context context;
     private ArrayList <Event> mEvents;
+    private FragmentManager fm;
 
-    public EventAdapter(Context context, ArrayList<Event> events) {
-        mContext = context;
+
+    public EventAdapter(Context context, ArrayList<Event> events, FragmentManager fm) {
+        this.context = context;
+        this.fm = fm;
         mEvents = events;
     }
 
@@ -46,7 +52,7 @@ public class EventAdapter extends BaseAdapter {
         ViewHolder holder;
         if (convertView == null)
         {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.event_list_item,parent,false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.event_list_item,parent,false);
             holder = new ViewHolder();
 
             holder.editButton = (ImageButton) convertView.findViewById(R.id.editButton);
@@ -65,6 +71,9 @@ public class EventAdapter extends BaseAdapter {
         Event event = mEvents.get(position);
         holder.titleLabel.setText(event.getEventTitle());
 
+
+
+
         SimpleDateFormat startTimeFormat = new SimpleDateFormat("EEE, MM/dd hh:mm a", Locale.US);
         String startDateTime = startTimeFormat.format(event.getEventStartDateTime());
         //END TIME
@@ -74,6 +83,16 @@ public class EventAdapter extends BaseAdapter {
         holder.dateLabel.setText(startDateTime + " to " + endDateTime);
         holder.locationLabel.setText(event.getEventLocation());
         holder.descriptionLabel.setText(event.getEventDescription());
+        holder.saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+       //         FragmentActivity activity = (FragmentActivity)(context);
+
+                SignupFragment signupFragment = new SignupFragment();
+                signupFragment.show(fm, "Sample Fragment");
+                Log.i(TAG, "click on save button");
+            }
+        });
 
 
 

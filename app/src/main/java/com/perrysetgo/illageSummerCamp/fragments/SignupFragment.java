@@ -31,6 +31,7 @@ public class SignupFragment extends DialogFragment {
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //// TODO: 7/11/16 take user to account creation activity. carry selected event with you and then add to list.
                 Log.i(TAG, "signup");
             }
         });
@@ -39,17 +40,18 @@ public class SignupFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "signin");
+                //// TODO: 7/11/16 take user to sign in. carry selected event with you and then add to list.
             }
         });
 
         dismissButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG, "dismiss");
+                dismiss();
             }
         });
 
-        getDialog().setTitle("Simple Dialog");
+        getDialog().setTitle("Hi there.");
         return rootView;
     }
 }
