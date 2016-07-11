@@ -1,5 +1,6 @@
 package com.perrysetgo.illageSummerCamp.ui;
 
+import android.app.FragmentManager;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.adapters.EventAdapter;
+import com.perrysetgo.illageSummerCamp.fragments.SignupFragment;
 import com.perrysetgo.illageSummerCamp.models.Event;
 import com.perrysetgo.illageSummerCamp.R;
 
@@ -45,12 +47,12 @@ public class AllEventsActivity extends ListActivity {
         mAdapter = new EventAdapter(this, mEvents);
         setListAdapter(mAdapter);
 
-        showLoadingDialog();
+//        showLoadingDialog();
 
         queryRefListener = queryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                dismissLoadingDialog();
+                //dismissLoadingDialog();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     mEvents.add(snapshot.getValue(Event.class));
                 }
@@ -58,11 +60,15 @@ public class AllEventsActivity extends ListActivity {
                 mAdapter.notifyDataSetChanged();
             }
             public void onCancelled(DatabaseError error){
-                dismissLoadingDialog();
+                //dismissLoadingDialog();
                 Toast.makeText(getApplicationContext(),"There was an issue connecting to the database. Please try again later.", Toast.LENGTH_LONG).show();
                 Log.d(TAG, error.toString());
             }
         });
+
+        FragmentManager fm = getFragmentManager();
+        SignupFragment signupFragment = new SignupFragment();
+        signupFragment.show(fm, "Sample Fragment");
     }
 
     @Override

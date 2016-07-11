@@ -18,8 +18,8 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Bind(R.id.aboutCampButton)  Button mAboutCampButton;
-    @Bind(R.id.campMapButton)  Button mCampMapButton;
+    @Bind(R.id.aboutCampButton) Button mAboutCampButton;
+    @Bind(R.id.campMapButton) Button mCampMapButton;
     @Bind(R.id.nextActivityButton) Button mNextActivityButton;
     @Bind(R.id.allActivitiesButton) Button mViewAllButton;
     @Bind(R.id.contactUsButton) Button mContactUsButton;
