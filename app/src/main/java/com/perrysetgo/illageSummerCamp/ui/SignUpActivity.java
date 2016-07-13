@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.perrysetgo.illageSummerCamp.R;
 
 import butterknife.Bind;
@@ -24,6 +25,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public static final String TAG = SignUpActivity.class.getSimpleName();
 
     private FirebaseAuth auth;
+    private FirebaseAuth.AuthStateListener authListener;
 
     @Bind(R.id.createUserButton) Button createUserButton;
     @Bind(R.id.nameEditText) EditText nameEditText;
@@ -37,10 +39,26 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         auth = FirebaseAuth.getInstance();
+        createAuthStateListener();
+
         ButterKnife.bind(this);
 
         loginTextView.setOnClickListener(this);
         createUserButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        auth.addAuthStateListener(authListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (authListener != null) {
+            auth.removeAuthStateListener(authListener);
+        }
     }
 
     @Override
@@ -82,6 +100,22 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     }
 
                 });
-
     }
+
+    private void createAuthStateListener(){
+        authListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                final FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };
+    }
+
+
 }
