@@ -50,8 +50,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.perrysetgo.illageSummerCamp.ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.NextEventActivity"></activity>
-        <activity android:name=".ui.AboutCampActivity"></activity>
+        <activity android:name=".ui.NextEventActivity" />
+        <activity android:name=".ui.AboutCampActivity" />
         <activity
             android:name=".ui.ContactActivity"
             android:label="@string/title_activity_contact"
@@ -68,7 +68,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.perrysetgo.illageSummerCamp.ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.CreateAccountActivity"></activity>
+        <activity android:name=".ui.SignUpActivity" />
+        <activity android:name=".ui.SignInActivity"></activity>
     </application>
 
 </manifest>

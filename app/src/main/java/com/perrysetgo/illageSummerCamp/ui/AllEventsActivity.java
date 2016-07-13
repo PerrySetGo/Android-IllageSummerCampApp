@@ -69,7 +69,6 @@ public class AllEventsActivity extends ListActivity {
             }
         });
 
-
     }
 
     @Override
