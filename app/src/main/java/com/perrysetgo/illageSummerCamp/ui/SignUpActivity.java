@@ -38,10 +38,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_sign_up);
         auth = FirebaseAuth.getInstance();
         ButterKnife.bind(this);
+
+        loginTextView.setOnClickListener(this);
+        createUserButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view){
+        Log.i(TAG, view.toString());
 
         if (view == loginTextView){
             Intent intent = new Intent (SignUpActivity.this, SignInActivity.class); //manage activity stack
@@ -52,6 +56,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
         if (view == createUserButton){
             createNewUser();
+        }
+        else {
+            Log.i(TAG, "broke");
         }
 
     }
