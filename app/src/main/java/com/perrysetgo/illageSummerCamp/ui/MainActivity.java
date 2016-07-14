@@ -156,16 +156,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-    //// TODO: 6/30/16 fix user registration to be able to admin things and show/hide admin panel.
-    //
-
-//    private boolean isRegistered() {
-//        ParseUser currentUser = ParseUser.getCurrentUser();
-//        if (currentUser == null) {
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
 
 }

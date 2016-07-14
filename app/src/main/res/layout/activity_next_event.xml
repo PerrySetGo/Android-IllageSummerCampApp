@@ -44,17 +44,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="More Illage Coming Right Up...!"
-        android:id="@+id/nextEventLabel"
+        android:text="Current time"
+        android:id="@+id/currentTimeLabel"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="The Next Event Is"
         android:id="@+id/nextEventTitleLabel"
-        android:layout_below="@+id/nextEventLabel"
+        android:layout_below="@+id/currentTimeLabel"
         android:layout_marginTop="31dp"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical|center_horizontal"

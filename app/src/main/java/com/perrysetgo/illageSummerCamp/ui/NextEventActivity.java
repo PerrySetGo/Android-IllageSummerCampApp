@@ -38,6 +38,8 @@ public class NextEventActivity extends AppCompatActivity {
     @Bind(R.id.nextEventTitleLabel)
     TextView nextEventTitleLabel;
 
+    @Bind(R.id.currentTimeLabel) TextView currentTimeLabel;
+
 
     @Bind(R.id.nextEventLocationBox)
     TextView nextEventLocationBox;
@@ -58,11 +60,20 @@ public class NextEventActivity extends AppCompatActivity {
     TextView eventsStatusBox;
 
 
+
+
     public static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SimpleDateFormat fullDateTime = new SimpleDateFormat("EEE MMMM d, hh:mm a", Locale.US);
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_next_event);
+        ButterKnife.bind(this);
+        //add date to current time
+        String currentTime = fullDateTime.format(rightNowInMillis);
+        currentTimeLabel.setText(currentTime);
+
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EVENTS);
         Query queryRef = ref.orderByChild("eventStartDateTime");
@@ -70,6 +81,7 @@ public class NextEventActivity extends AppCompatActivity {
         queryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                SimpleDateFormat tf = new SimpleDateFormat("hh:mm a", Locale.US);
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Event nextEvent = snapshot.getValue(Event.class);
                     if (!(nextEvent.getEventStartDateTime() > rightNowInMillis && nextEvent.getEventStartDateTime() < eventWindowEnd)) {
@@ -91,8 +103,7 @@ public class NextEventActivity extends AppCompatActivity {
                         nextEventLocationLabel.setVisibility(View.VISIBLE);
                         nextEventLocationBox.setText(nextEvent.getEventLocation());
                         nextEventLocationBox.setVisibility(View.VISIBLE);
-                        //TODO: display current date & time on page.
-                        SimpleDateFormat tf = new SimpleDateFormat("hh:mm a", Locale.US);
+
                         String startDateTime = tf.format(nextEvent.getEventStartDateTime());
                         String endDateTime = tf.format(nextEvent.getEventEndDateTime());
                         nextEventDateTimeBox.setText(startDateTime + " to " + endDateTime);
@@ -115,7 +126,6 @@ public class NextEventActivity extends AppCompatActivity {
                 Log.d(TAG, error.toString());
             }
         });
-        setContentView(R.layout.activity_next_event);
-        ButterKnife.bind(this);
+
    }
 }

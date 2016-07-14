@@ -22,14 +22,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class SignInActivity extends AppCompatActivity  implements View.OnClickListener{
-    @Bind(R.id.registerTextView)
-    TextView registerTextView;
     @Bind(R.id.passwordLoginButton)
-    Button mPasswordLoginButton;
+    Button passwordLoginButton;
     @Bind(R.id.emailEditText)
-    EditText mEmailEditText;
-    @Bind(R.id.passwordEditText) EditText mPasswordEditText;
-    @Bind(R.id.registerTextView) TextView mRegisterTextView;
+    EditText emailEditText;
+    @Bind(R.id.passwordEditText) EditText passwordEditText;
+    @Bind(R.id.registerTextView) TextView registerTextView;
     public static final String TAG = SignInActivity.class.getSimpleName();
 
     private FirebaseAuth mAuth;
@@ -58,14 +56,14 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
             }
         };
 
-        mPasswordLoginButton.setOnClickListener(this);
+        passwordLoginButton.setOnClickListener(this);
         registerTextView.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v){
-        if (v == mPasswordLoginButton) {
+        if (v == passwordLoginButton) {
             loginWithPassword();
         }
             if (v == registerTextView){
@@ -76,14 +74,14 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
     }
 
     private void loginWithPassword() {
-        String email = mEmailEditText.getText().toString().trim();
-        String password = mPasswordEditText.getText().toString().trim();
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
         if (email.equals("")) {
-            mEmailEditText.setError("Please enter your email");
+            emailEditText.setError("Please enter your email");
             return;
         }
         if (password.equals("")) {
-            mPasswordEditText.setError("Password cannot be blank");
+            passwordEditText.setError("Password cannot be blank");
             return;
         }
 
