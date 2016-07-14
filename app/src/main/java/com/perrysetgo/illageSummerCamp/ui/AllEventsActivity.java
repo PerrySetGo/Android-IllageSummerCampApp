@@ -5,8 +5,12 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,7 +40,6 @@ public class AllEventsActivity extends ListActivity {
             .getInstance()
             .getReference(Constants.FIREBASE_CHILD_EVENTS);
     Query queryRef = ref.orderByValue();
-
 
 
     @Override
@@ -97,4 +100,6 @@ public class AllEventsActivity extends ListActivity {
             progress.dismiss();
         }
     }
+
+
 }
