@@ -2,6 +2,8 @@ package com.perrysetgo.illageSummerCamp.adapters;
 
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,15 +16,22 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.fragments.SignupFragment;
 import com.perrysetgo.illageSummerCamp.models.Event;
+import com.perrysetgo.illageSummerCamp.ui.MainActivity;
 
 public class EventAdapter extends BaseAdapter {
     public static final String TAG = EventAdapter.class.getSimpleName();
     private Context context;
     private ArrayList <Event> mEvents;
     private FragmentManager fm;
+    private boolean isAuthed;
+    private FirebaseAuth auth;
+    private FirebaseAuth.AuthStateListener authListener;
+
 
 
     public EventAdapter(Context context, ArrayList<Event> events, FragmentManager fm) {
@@ -86,8 +95,13 @@ public class EventAdapter extends BaseAdapter {
         holder.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SignupFragment signupFragment = new SignupFragment();
-                signupFragment.show(fm, "Sample Fragment");
+                if (isAuthUser()) {
+                    Log.i(TAG, "u ok");
+                }
+                else {
+                    SignupFragment signupFragment = new SignupFragment();
+                    signupFragment.show(fm, "Sample Fragment");
+                }
 
             }
         });
@@ -104,5 +118,20 @@ public class EventAdapter extends BaseAdapter {
         ImageButton editButton;
         ImageButton deleteButton;
         ImageButton saveButton;
+    }
+
+
+    private boolean isAuthUser(){
+        authListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                final FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    isAuthed = true;
+                    Log.i(TAG,"user logged in" );
+                }
+            }
+        };
+        return isAuthed;
     }
 }
