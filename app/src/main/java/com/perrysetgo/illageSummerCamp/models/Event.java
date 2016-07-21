@@ -27,6 +27,7 @@ public class Event {
     public long eventStartDateTime;
     public long eventEndDateTime;
     public String eventDescription;
+    private String pushId;
 
     public Event(String eventTitle, String eventLocation, long eventStartDateTime, String eventDescription, long eventEndDateTime) {
         this.eventTitle = eventTitle;
@@ -65,6 +66,14 @@ public class Event {
     }
     public long getEventEndDateTime() {
         return eventEndDateTime;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 
     @Override

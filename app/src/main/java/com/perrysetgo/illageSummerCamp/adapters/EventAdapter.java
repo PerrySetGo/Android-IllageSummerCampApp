@@ -12,12 +12,17 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.fragments.SignupFragment;
 import com.perrysetgo.illageSummerCamp.models.Event;
@@ -31,6 +36,8 @@ public class EventAdapter extends BaseAdapter {
     private boolean isAuthed;
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    Event event;
 
 
 
@@ -77,7 +84,7 @@ public class EventAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         
-        Event event = mEvents.get(position);
+        event = mEvents.get(position);
         holder.titleLabel.setText(event.getEventTitle());
 
 
@@ -95,8 +102,26 @@ public class EventAdapter extends BaseAdapter {
         holder.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isAuthUser()) {
+                if (user != null ) {
                     Log.i(TAG, "u ok");
+
+                    //save to firebase as a user's faved thing
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); //get the currently logged in user.
+                    String uid = user.getUid(); //get that user's id.
+                    DatabaseReference faveEventRef = FirebaseDatabase
+                            .getInstance()
+                            .getReference(Constants.FIREBASE_CHILD_EVENTS)
+                            .child(uid); //but i don't have this yet.
+
+                    DatabaseReference pushRef = faveEventRef.push();
+                    String pushId = pushRef.getKey();
+
+                    //how do i get current event here?
+
+                       event.setPushId(pushId);
+                       pushRef.setValue(event);
+
+                    Toast.makeText(context, "Event was saved", Toast.LENGTH_LONG).show();
                 }
                 else {
                     SignupFragment signupFragment = new SignupFragment();
@@ -121,17 +146,17 @@ public class EventAdapter extends BaseAdapter {
     }
 
 
-    private boolean isAuthUser(){
-        authListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                final FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    isAuthed = true;
-                    Log.i(TAG,"user logged in" );
-                }
-            }
-        };
-        return isAuthed;
-    }
+//    private boolean isAuthUser(){
+//        authListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                final FirebaseUser user = firebaseAuth.getCurrentUser();
+//                if (user != null) {
+//                    isAuthed = true;
+//                    Log.i(TAG,"user logged in" );
+//                }
+//            }
+//        };
+//        return isAuthed;
+//    }
 }

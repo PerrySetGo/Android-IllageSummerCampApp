@@ -204,7 +204,15 @@ public class AddEventActivity extends AppCompatActivity implements TimePickerDia
         String networkMessage="";
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
-        mSavedEventReference.push().setValue(newEvent);
+        String key = mSavedEventReference.push().getKey();
+
+                DatabaseReference faveEventRef = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FIREBASE_CHILD_EVENTS)
+                .child(key);
+
+        newEvent.setPushId(key);
+        faveEventRef.setValue(newEvent);
 
         if (networkInfo != null && networkInfo.isConnected() ){
             networkMessage = "Your event \"" + newEvent.getEventDescription() + "\" was saved. Yay! ";
