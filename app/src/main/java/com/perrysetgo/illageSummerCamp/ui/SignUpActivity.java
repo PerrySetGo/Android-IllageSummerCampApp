@@ -16,7 +16,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
+import com.perrysetgo.illageSummerCamp.models.User;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -34,11 +38,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Bind(R.id.confirmPasswordEditText) EditText confirmPasswordEditText;
     @Bind(R.id.loginTextView) TextView loginTextView;
 
+    private DatabaseReference newUserReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         auth = FirebaseAuth.getInstance();
+        newUserReference = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FIREBASE_CHILD_USERS);
         createAuthStateListener();
 
         ButterKnife.bind(this);
@@ -92,6 +101,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onComplete (@NonNull Task<AuthResult> task){
                         if (task.isSuccessful()){
+                            String key = newUserReference.push().getKey();
+                            //add the user to a users table too.
+                            User newUser = new User(name, email, key );
+                            DatabaseReference newRef = FirebaseDatabase
+                                    .getInstance()
+                                    .getReference(Constants.FIREBASE_CHILD_USERS)
+                                    .child(key);
+
+                            newRef.setValue(newUser);
                             Log.i(TAG, "success");
                         }
                         else {

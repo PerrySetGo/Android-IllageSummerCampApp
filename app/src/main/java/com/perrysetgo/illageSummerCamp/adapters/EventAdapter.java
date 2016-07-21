@@ -2,9 +2,6 @@ package com.perrysetgo.illageSummerCamp.adapters;
 
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,9 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
-import com.perrysetgo.illageSummerCamp.fragments.SignupFragment;
+import com.perrysetgo.illageSummerCamp.fragments.SignUpFragment;
 import com.perrysetgo.illageSummerCamp.models.Event;
-import com.perrysetgo.illageSummerCamp.ui.MainActivity;
 
 public class EventAdapter extends BaseAdapter {
     public static final String TAG = EventAdapter.class.getSimpleName();
@@ -38,6 +34,7 @@ public class EventAdapter extends BaseAdapter {
     private FirebaseAuth.AuthStateListener authListener;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     Event event;
+    private DatabaseReference makeUserReference;
 
 
 
@@ -105,26 +102,45 @@ public class EventAdapter extends BaseAdapter {
                 if (user != null ) {
                     Log.i(TAG, "u ok");
 
+//                    makeUserReference = FirebaseDatabase
+//                            .getInstance()
+//                            .getReference()
+//                            .child(Constants.FIREBASE_CHILD_USERS);
+
                     //save to firebase as a user's faved thing
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); //get the currently logged in user.
                     String uid = user.getUid(); //get that user's id.
-                    DatabaseReference faveEventRef = FirebaseDatabase
-                            .getInstance()
-                            .getReference(Constants.FIREBASE_CHILD_EVENTS)
-                            .child(uid); //but i don't have this yet.
 
-                    DatabaseReference pushRef = faveEventRef.push();
-                    String pushId = pushRef.getKey();
+                    String key = makeUserReference.push().getKey();
+
+
+//
+//                    DatabaseReference faveEventRef = FirebaseDatabase
+//                            .getInstance()
+//                            .getReference(Constants.FIREBASE_CHILD_USERS)
+//                            .child(key);
+//                    String eventKey = event.getPushId();
+//
+//                    faveEventRef.setValue(eventKey);
+//
+//                    newEvent.setPushId(key);
+//                    faveEventRef.setValue(newEvent);
+
+
+//
+//                    DatabaseReference faveEventRef = FirebaseDatabase
+//                            .getInstance()
+//                            .getReference(Constants.FIREBASE_CHILD_EVENTS)
+//                            .child(uid); //but i don't have this yet.
+
 
                     //how do i get current event here?
 
-                       event.setPushId(pushId);
-                       pushRef.setValue(event);
 
                     Toast.makeText(context, "Event was saved", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    SignupFragment signupFragment = new SignupFragment();
+                    SignUpFragment signupFragment = new SignUpFragment();
                     signupFragment.show(fm, "Sample Fragment");
                 }
 

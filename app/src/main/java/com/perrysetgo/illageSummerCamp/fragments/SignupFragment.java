@@ -14,12 +14,12 @@ import com.perrysetgo.illageSummerCamp.ui.SignInActivity;
 import com.perrysetgo.illageSummerCamp.ui.SignUpActivity;
 
 
-public class SignupFragment extends DialogFragment {
+public class SignUpFragment extends DialogFragment {
 
     public Button signupButton;
     public Button signinButton;
     public Button dismissButton;
-    public static final String TAG = SignupFragment.class.getSimpleName();
+    public static final String TAG = SignUpFragment.class.getSimpleName();
 
 
     @Override
