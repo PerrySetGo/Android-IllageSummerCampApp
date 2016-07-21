@@ -101,41 +101,17 @@ public class EventAdapter extends BaseAdapter {
             public void onClick(View v) {
                 if (user != null ) {
                     Log.i(TAG, "u ok");
-
-//                    makeUserReference = FirebaseDatabase
-//                            .getInstance()
-//                            .getReference()
-//                            .child(Constants.FIREBASE_CHILD_USERS);
-
-                    //save to firebase as a user's faved thing
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); //get the currently logged in user.
                     String uid = user.getUid(); //get that user's id.
 
-                    String key = makeUserReference.push().getKey();
+                    DatabaseReference faveEventRef = FirebaseDatabase //get reference for events DB based on key.
+                            .getInstance()
+                            .getReference(Constants.FIREBASE_CHILD_EVENTS)
+                            .child(event.getPushId());
 
+                    //does this add one by one? NO. they get overwritten.
 
-//
-//                    DatabaseReference faveEventRef = FirebaseDatabase
-//                            .getInstance()
-//                            .getReference(Constants.FIREBASE_CHILD_USERS)
-//                            .child(key);
-//                    String eventKey = event.getPushId();
-//
-//                    faveEventRef.setValue(eventKey);
-//
-//                    newEvent.setPushId(key);
-//                    faveEventRef.setValue(newEvent);
-
-
-//
-//                    DatabaseReference faveEventRef = FirebaseDatabase
-//                            .getInstance()
-//                            .getReference(Constants.FIREBASE_CHILD_EVENTS)
-//                            .child(uid); //but i don't have this yet.
-
-
-                    //how do i get current event here?
-
+                    faveEventRef.child("attendees").setValue(uid);
 
                     Toast.makeText(context, "Event was saved", Toast.LENGTH_LONG).show();
                 }

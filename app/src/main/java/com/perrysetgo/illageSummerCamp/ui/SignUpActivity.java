@@ -102,7 +102,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete (@NonNull Task<AuthResult> task){
                         if (task.isSuccessful()){
                             String key = newUserReference.push().getKey();
-                            //add the user to a users table too.
+                            //add the user to a users table too so we can use it to connect it to events.
                             User newUser = new User(name, email, key );
                             DatabaseReference newRef = FirebaseDatabase
                                     .getInstance()
