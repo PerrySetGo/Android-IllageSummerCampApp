@@ -66,14 +66,13 @@ public class NextEventActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SimpleDateFormat fullDateTime = new SimpleDateFormat("EEE MMMM d, hh:mm a", Locale.US);
+        SimpleDateFormat fullDateTime = new SimpleDateFormat("EEE MM d, hh:mm a", Locale.US);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_next_event);
         ButterKnife.bind(this);
         //add date to current time
         String currentTime = fullDateTime.format(rightNowInMillis);
-        currentTimeLabel.setText(currentTime);
-
+        currentTimeLabel.setText("Today is: " + currentTime);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EVENTS);
         Query queryRef = ref.orderByChild("eventStartDateTime");
@@ -90,6 +89,9 @@ public class NextEventActivity extends AppCompatActivity {
                         nextEventDateTimeLabel.setVisibility(View.INVISIBLE);
                         nextEventDescriptionLabel.setVisibility(View.INVISIBLE);
                         nextEventLocationLabel.setVisibility(View.INVISIBLE);
+                        nextEventLocationBox.setVisibility(View.INVISIBLE);
+                        nextEventTitleLabel.setVisibility(View.INVISIBLE);
+
                         eventsStatusBox.setText(R.string.no_next_event_text);
                         eventsStatusBox.setVisibility(View.VISIBLE);
 
