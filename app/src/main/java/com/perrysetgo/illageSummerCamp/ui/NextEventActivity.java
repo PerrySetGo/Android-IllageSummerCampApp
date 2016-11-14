@@ -66,7 +66,7 @@ public class NextEventActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SimpleDateFormat fullDateTime = new SimpleDateFormat("EEE MM d, hh:mm a", Locale.US);
+        SimpleDateFormat fullDateTime = new SimpleDateFormat("EEE, MM/d yyyy, hh:mm a", Locale.US);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_next_event);
         ButterKnife.bind(this);

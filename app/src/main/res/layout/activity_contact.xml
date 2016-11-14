@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="23dp"
-        android:typeface="serif"
+        android:typeface="normal"
         android:textSize="20sp"/>
 
     <TextView
@@ -26,29 +26,28 @@
         android:layout_below="@+id/titleLabel"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="29dp"
-        android:text="@string/contact_us_text"/>
+        android:text="@string/contact_us_text"
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View Our Website"
         android:id="@+id/viewWebsiteButton"
-        android:layout_below="@+id/contactUsText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:gravity="center_vertical"
-        android:layout_centerHorizontal="true"/>
+        android:layout_weight="0.5"
+        android:layout_below="@+id/contactUsText"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Send Us a Message"
         android:id="@+id/sendNoteForm"
-        android:layout_alignTop="@+id/viewWebsiteButton"
-        android:layout_toRightOf="@+id/viewWebsiteButton"
-        android:layout_toEndOf="@+id/viewWebsiteButton"
         android:gravity="center_vertical"
-        android:layout_centerHorizontal="true"/>
+        android:layout_weight="0.5"
+        android:layout_below="@+id/contactUsText"
+        android:layout_alignParentEnd="true" />
 
     <LinearLayout
         android:orientation="vertical"
