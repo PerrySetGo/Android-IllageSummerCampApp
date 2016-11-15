@@ -18,6 +18,7 @@
         android:id="@+id/nextEventTitleBox"
         android:layout_below="@+id/nextEventTitleLabel"
         android:layout_alignParentLeft="true"
+        android:visibility="invisible"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="8dp"/>
@@ -28,6 +29,7 @@
         android:text="New Text"
         android:id="@+id/nextEventLocationBox"
         android:layout_marginTop="10dp"
+        android:visibility="invisible"
         android:layout_below="@+id/nextEventLocationLabel"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
@@ -36,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
+        android:visibility="invisible"
         android:id="@+id/nextEventDateTimeBox"
         android:layout_below="@+id/nextDateTimeLabel"
         android:layout_alignParentLeft="true"
@@ -45,6 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Current time"
+        android:visibility="visible"
         android:id="@+id/currentTimeLabel"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -52,6 +56,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         android:text="The Next Event Is"
         android:id="@+id/nextEventTitleLabel"
         android:layout_below="@+id/currentTimeLabel"
@@ -68,6 +73,7 @@
         android:id="@+id/nextEventLocationLabel"
         android:gravity="center_vertical|center_horizontal"
         android:background="#ff1438"
+        android:visibility="invisible"
         android:textColor="#ffffff"
         android:layout_below="@+id/nextEventTitleBox"
         android:layout_centerHorizontal="true"/>
@@ -80,6 +86,7 @@
         android:gravity="center_vertical|center_horizontal"
         android:background="#ff1438"
         android:textColor="#ffffff"
+        android:visibility="invisible"
         android:layout_below="@+id/nextEventLocationBox"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
@@ -93,6 +100,7 @@
         android:gravity="center_vertical|center_horizontal"
         android:background="#ff1438"
         android:textColor="#ffffff"
+        android:visibility="invisible"
         android:layout_below="@+id/nextEventDateTimeBox"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
@@ -103,6 +111,7 @@
         android:layout_height="wrap_content"
         android:text="You&apos;re Invited!"
         android:id="@+id/invitedText"
+        android:visibility="invisible"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:textSize="40dp"/>
@@ -113,7 +122,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Loading Event..."
         android:id="@+id/eventsStatusBox"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:textAlignment="center"
         android:gravity="center"
         android:layout_below="@+id/nextEventDescriptionBox"
@@ -124,6 +133,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
+        android:visibility="invisible"
         android:id="@+id/nextEventDescriptionBox"
         android:layout_below="@+id/nextEventDescriptionLabel"
         android:layout_alignParentStart="true" />

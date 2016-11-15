@@ -70,20 +70,23 @@ public class NextEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_next_event);
         ButterKnife.bind(this);
-        //add date to current time
         String currentTime = fullDateTime.format(rightNowInMillis);
         currentTimeLabel.setText("Today is: " + currentTime);
+        eventsStatusBox.setVisibility(View.VISIBLE);
+
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EVENTS);
         Query queryRef = ref.orderByChild("eventStartDateTime");
+        
+        //// TODO: 11/15/16 verify that correct fields whow when event is added.
 
         queryRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange (DataSnapshot dataSnapshot) {
                 SimpleDateFormat tf = new SimpleDateFormat("hh:mm a", Locale.US);
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Event nextEvent = snapshot.getValue(Event.class);
-                    if (!(nextEvent.getEventStartDateTime() > rightNowInMillis && nextEvent.getEventStartDateTime() < eventWindowEnd)) {
+                    if (nextEvent.getEventStartDateTime() > rightNowInMillis && nextEvent.getEventStartDateTime() < eventWindowEnd) {
                         nextEventTitleBox.setVisibility(View.INVISIBLE);
                         nextEventDateTimeBox.setVisibility(View.INVISIBLE);
                         nextEventDateTimeLabel.setVisibility(View.INVISIBLE);

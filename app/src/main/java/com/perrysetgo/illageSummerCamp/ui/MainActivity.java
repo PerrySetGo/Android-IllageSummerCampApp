@@ -3,56 +3,52 @@ package com.perrysetgo.illageSummerCamp.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
-//import com.parse.ParseUser;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Bind(R.id.aboutCampButton) Button mAboutCampButton;
-    @Bind(R.id.campMapButton) Button mCampMapButton;
-    @Bind(R.id.nextActivityButton) Button mNextActivityButton;
-    @Bind(R.id.allActivitiesButton) Button mViewAllButton;
-    @Bind(R.id.contactUsButton) Button mContactUsButton;
-    @Bind(R.id.adminButton) Button adminButton;
-    @Bind(R.id.logoutButton) Button logoutButton;
-    @Bind(R.id.addEventButton) Button addActivityButton;
+    public static final String TAG = MainActivity.class.getSimpleName();
+
+    // TODO: 7/6/16 fix login/registration and switches
+    //todo push notifications??
+    //todo save events to "my events"
+    //todo upload photos?
+    //todo see participants
+    //todo contact participants
+
+
+    //shared pref & login
 
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private boolean loggedIn;
-    public static final String TAG = MainActivity.class.getSimpleName();
+
     public Context context;
 
-
+    //drawer
     private ListView mDrawerList;
     private ArrayAdapter<String> navDrawAdapter;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
-    private String mActivityTitle;
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -112,14 +108,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         //this is here to circumvent needing to log in. REMOVE BEFORE PRODUCTION
 
-        // TODO: 7/6/16 fix login/registration and switches
-        //todo push notifications??
-        //todo save events to "my events"
-        //todo upload photos?
-        //todo see participants
-        //todo contact participants
-        //todo navigation drawer
-
         addDrawerItems();
         setupDrawer();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -128,41 +116,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addDrawerItems(){
-
-
-        String[] osArray = { "About Camp", "Camp Map", "See Next Event", "See All Events", "Contact Us", "Add Event" };
+        String[] osArray = { "About Camp", "Camp Map", "See Next Event", "See All Events", "Contact Us", "Add Event" };//// TODO: 11/15/16 find a way to make this more dynamic and/or retrieve prgrammatically
         navDrawAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(navDrawAdapter);
-
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
     }
 
     private void setupDrawer() {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
-
-            /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 getSupportActionBar().setTitle("Navigation!");
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                invalidateOptionsMenu();
             }
 
-            /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getSupportActionBar().setTitle(mActivityTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                getSupportActionBar().setTitle("Back");
+                invalidateOptionsMenu();
             }
         };
 
         mDrawerToggle.setDrawerIndicatorEnabled(true);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
+        mDrawerLayout.setScrimColor(Color.argb(140, 194, 194, 194));
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
     }
 
@@ -171,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -181,21 +165,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.string.action_setting) {
             return true;
         }
-
-        // Activate the navigation drawer toggle
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -206,12 +182,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void logout() {
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(MainActivity.this, SignInActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-    }
+//    private void logout() {
+//        FirebaseAuth.getInstance().signOut();
+//        Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        startActivity(intent);
+//        finish();
+//    }
 
 }
