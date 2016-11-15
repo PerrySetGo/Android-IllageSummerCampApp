@@ -14,5 +14,8 @@
     <string name="contact_us_text">Illage Summer Camp is a volunteer driven effort! If you have questions or suggestions, or want to participate through volunteering, please get in touch!  You can reach us through the contact form below, and visit us on the web.</string>
     <string name="contact_form_intro">Fill out this form to get in touch! We will get back to you as soon as we can.</string>
     <string name="no_next_event_text">Sorry - there are no current events. Illage Summer Camp takes place every August - please check back closer to August 2017.</string>
+    <string name="drawer_open">Options</string>
+    <string name="drawer_close">Close Options</string>
+    <string name="action_setting">Settings</string>
 
 </resources>
