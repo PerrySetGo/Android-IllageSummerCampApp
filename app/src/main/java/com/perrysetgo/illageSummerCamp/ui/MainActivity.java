@@ -54,7 +54,47 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
 
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            switch (position) {
+                case 0: {
+                    Intent intent = new Intent(MainActivity.this, AboutCampActivity.class);
+                    startActivity(intent);
+                    break;
+                }
+                case 1: {
+                    Intent intent = new Intent(MainActivity.this, IllageMapActivity.class);
+                    startActivity(intent);
+                    break;
+                }
+                case 2: {
+                    Intent intent = new Intent(MainActivity.this, NextEventActivity.class);
+                    startActivity(intent);
+                    break;
+                }
+                case 3: {
+                    Intent intent = new Intent(MainActivity.this, AllEventsActivity.class);
+                    startActivity(intent);
+                    break;
+                }
+                case 4: {
+                    Intent intent = new Intent(MainActivity.this, ContactActivity.class);
+                    startActivity(intent);
+                    break;
+                }
+                case 5: {
+                    Intent intent = new Intent(MainActivity.this, AddEventActivity.class);
+                    startActivity(intent);
+                    break;
+                }
 
+                default:
+                    break;
+            }
+            mDrawerLayout.closeDrawer(mDrawerList);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,37 +127,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    private static ActivityInfo[] listAllActivities(Context context) {
-        PackageManager pManager = context.getPackageManager();
-        String packageName = context.getApplicationContext().getPackageName() + ".ui";
-        ActivityInfo[] list = {};
-
-        try {
-            list = pManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).activities;
-            for (ActivityInfo activityInfo : list) {
-                Log.d(TAG, "ActivityInfo = " + activityInfo.name);
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-
     private void addDrawerItems(){
-        listAllActivities(context);
 
 
-        String[] osArray = { "Android", "iOS", "Windows", "OS X", "Linux" };//is there a way to dynamically retrieve list from manifest?
+        String[] osArray = { "About Camp", "Camp Map", "See Next Event", "See All Events", "Contact Us", "Add Event" };
         navDrawAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(navDrawAdapter);
 
-        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
     }
 
     private void setupDrawer() {
