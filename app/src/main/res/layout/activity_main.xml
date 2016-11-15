@@ -25,95 +25,95 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="300dp"
-        android:layout_height="25dp"
-        android:text="About Camp"
-        android:id="@+id/aboutCampButton"
-        android:background="#229678"
-        android:textColor="@android:color/white"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="top"
-        android:layout_marginBottom="200dp" />
+    <!--<Button-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:text="About Camp"-->
+        <!--android:id="@+id/aboutCampButton"-->
+        <!--android:background="#229678"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_gravity="top"-->
+        <!--android:layout_marginBottom="200dp" />-->
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="300dp"
-        android:layout_height="25dp"
-        android:text="See Camp Map"
-        android:id="@+id/campMapButton"
-        android:background="#229678"
-        android:textColor="@android:color/white"
-        android:layout_alignTop="@+id/aboutCampButton"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="30dp" />
+    <!--<Button-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:text="See Camp Map"-->
+        <!--android:id="@+id/campMapButton"-->
+        <!--android:background="#229678"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:layout_alignTop="@+id/aboutCampButton"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginTop="30dp" />-->
 
-    <Button
-    style="?android:attr/buttonStyleSmall"
-        android:layout_width="300dp"
-        android:layout_height="25dp"
-        android:text="Next Activity"
-        android:id="@+id/nextActivityButton"
-        android:background="#229678"
-        android:textColor="@android:color/white"
-        android:layout_alignTop="@+id/aboutCampButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="60dp" />
+    <!--<Button-->
+    <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:text="Next Activity"-->
+        <!--android:id="@+id/nextActivityButton"-->
+        <!--android:background="#229678"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:layout_alignTop="@+id/aboutCampButton"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginTop="60dp" />-->
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="300dp"
-        android:layout_height="25dp"
-        android:text="View All Activities"
-        android:id="@+id/allActivitiesButton"
-        android:background="#229678"
-        android:textColor="@android:color/white"
-        android:layout_alignTop="@+id/aboutCampButton"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="90dp" />
+    <!--<Button-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:text="View All Activities"-->
+        <!--android:id="@+id/allActivitiesButton"-->
+        <!--android:background="#229678"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:layout_alignTop="@+id/aboutCampButton"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginTop="90dp" />-->
 
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="300dp"
-        android:layout_height="25dp"
-        android:text="Contact Us"
-        android:id="@+id/contactUsButton"
-        android:background="#229678"
-        android:textColor="@android:color/white"
-        android:layout_alignTop="@+id/aboutCampButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="120dp" />
+    <!--<Button-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:text="Contact Us"-->
+        <!--android:id="@+id/contactUsButton"-->
+        <!--android:background="#229678"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:layout_alignTop="@+id/aboutCampButton"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginTop="120dp" />-->
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:visibility="invisible"
-        android:layout_width="300dp"
-        android:layout_height="25dp"
-        android:text="Add Event"
-        android:id="@+id/addEventButton"
-        android:background="#229678"
-        android:textColor="@android:color/white"
-        android:layout_alignTop="@+id/aboutCampButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="190dp" />
+    <!--<Button-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:visibility="invisible"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:text="Add Event"-->
+        <!--android:id="@+id/addEventButton"-->
+        <!--android:background="#229678"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:layout_alignTop="@+id/aboutCampButton"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginTop="190dp" />-->
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="300dp"
-        android:layout_height="25dp"
-        android:text="Admin Login"
-        android:id="@+id/adminButton"
-        android:background="#229678"
-        android:textColor="@android:color/white"
-        android:layout_alignTop="@+id/aboutCampButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="190dp" />
+    <!--<Button-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:text="Admin Login"-->
+        <!--android:id="@+id/adminButton"-->
+        <!--android:background="#229678"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:layout_alignTop="@+id/aboutCampButton"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginTop="190dp" />-->
 
     <TextView
         android:layout_width="wrap_content"
@@ -129,26 +129,28 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="70dp"
-        android:layout_height="25dp"
-        android:visibility="invisible"
-        android:text="Logout"
-        android:id="@+id/logoutButton"
-        android:background="#229678"
-        android:paddingLeft="5sp"
-        android:textColor="@android:color/white"
-        android:layout_alignTop="@+id/addEventButton"
-        android:layout_alignRight="@+id/allActivitiesButton"
-        android:layout_alignEnd="@+id/allActivitiesButton"/>
+    <!--<Button-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="70dp"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:visibility="invisible"-->
+        <!--android:text="Logout"-->
+        <!--android:id="@+id/logoutButton"-->
+        <!--android:background="#229678"-->
+        <!--android:paddingLeft="5sp"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:layout_alignTop="@+id/addEventButton"-->
+        <!--android:layout_alignRight="@+id/allActivitiesButton"-->
+        <!--android:layout_alignEnd="@+id/allActivitiesButton"/>-->
 
 </RelativeLayout>
 
     <ListView
         android:id="@+id/navList"
         android:layout_width="200dp"
+        android:textColor="@android:color/white"
         android:layout_height="match_parent"
         android:layout_gravity="left|start"
-        android:background="#ffeeeeee"/>
+        android:paddingLeft="5sp"
+        android:background="#229678"/>
 </android.support.v4.widget.DrawerLayout>
