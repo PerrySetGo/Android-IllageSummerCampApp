@@ -5,6 +5,8 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +24,7 @@ import com.perrysetgo.illageSummerCamp.R;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class AllEventsActivity extends ListActivity {
@@ -31,6 +34,7 @@ public class AllEventsActivity extends ListActivity {
     private ProgressDialog progress;
     private EventAdapter mAdapter;
     private ValueEventListener queryRefListener;
+    @Bind (R.id.noEventsBox) TextView noEventsBox;
     DatabaseReference ref = FirebaseDatabase
             .getInstance()
             .getReference(Constants.FIREBASE_CHILD_EVENTS);
@@ -66,6 +70,18 @@ public class AllEventsActivity extends ListActivity {
                 Log.d(TAG, error.toString());
             }
         });
+
+        if (mEvents.size() == 0){
+            
+            //// TODO: 11/14/16 show no events message here.
+            Log.i("TEST", "length is 0");
+            noEventsBox.setVisibility(View.VISIBLE);
+        }
+        else {
+
+            Log.i("TEST", "length is >0");
+        }
+
 
     }
 

@@ -21,4 +21,17 @@
         android:layout_height="wrap_content"
         android:id="@android:id/list"
         />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/no_next_event_text"
+        android:id="@+id/noEventsBox"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:visibility="invisible"
+         />
 </RelativeLayout>

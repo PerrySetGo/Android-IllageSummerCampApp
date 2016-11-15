@@ -36,8 +36,6 @@ public class EventAdapter extends BaseAdapter {
     Event event;
     private DatabaseReference makeUserReference;
 
-
-
     public EventAdapter(Context context, ArrayList<Event> events, FragmentManager fm) {
         this.context = context;
         this.fm = fm;
@@ -78,14 +76,11 @@ public class EventAdapter extends BaseAdapter {
 
             convertView.setTag(holder);
         } else{
-            holder = (ViewHolder) convertView.getTag();
+            holder = (ViewHolder) convertView.getTag(); //what?
         }
         
         event = mEvents.get(position);
         holder.titleLabel.setText(event.getEventTitle());
-
-
-
 
         SimpleDateFormat startTimeFormat = new SimpleDateFormat("EEE, MM/dd hh:mm a", Locale.US);
         String startDateTime = startTimeFormat.format(event.getEventStartDateTime());
@@ -96,20 +91,21 @@ public class EventAdapter extends BaseAdapter {
         holder.dateLabel.setText(startDateTime + " to " + endDateTime);
         holder.locationLabel.setText(event.getEventLocation());
         holder.descriptionLabel.setText(event.getEventDescription());
+
+
+
         holder.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (user != null ) {
                     Log.i(TAG, "u ok");
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); //get the currently logged in user.
-                    String uid = user.getUid(); //get that user's id.
+                    String uid = user.getUid();
 
-                    DatabaseReference faveEventRef = FirebaseDatabase //get reference for events DB based on key.
+                    DatabaseReference faveEventRef = FirebaseDatabase
                             .getInstance()
                             .getReference(Constants.FIREBASE_CHILD_EVENTS)
                             .child(event.getPushId());
-
-                    //does this add one by one? NO. they get overwritten.
 
                     faveEventRef.child("attendees").setValue(uid);
 
