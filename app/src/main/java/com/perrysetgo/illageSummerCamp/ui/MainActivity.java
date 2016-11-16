@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     //todo upload photos?
     //todo see participants
     //todo contact participants
+    //// TODO: 11/15/16 fix navigation to have better UX on all activities.
 
 
     //shared pref & login
@@ -84,6 +85,11 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 }
+                case 6: {
+                    Intent intent = new Intent(MainActivity.this, AddPhotoActivity.class);
+                    startActivity(intent);
+                    break;
+                }
 
                 default:
                     break;
@@ -116,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addDrawerItems(){
-        String[] osArray = { "About Camp", "Camp Map", "See Next Event", "See All Events", "Contact Us", "Add Event" };//// TODO: 11/15/16 find a way to make this more dynamic and/or retrieve prgrammatically
+        String[] osArray = { "About Camp", "Camp Map", "See Next Event", "See All Events", "Contact Us", "Add Event", "Upload Photo" };//// TODO: 11/15/16 find a way to make this more dynamic and/or retrieve prgrammatically
         navDrawAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(navDrawAdapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
