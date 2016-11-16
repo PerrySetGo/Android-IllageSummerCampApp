@@ -47,7 +47,7 @@ public class Event {
     };
 
 
-    public Event(){}; //req
+    public Event(){} //req
 
     public String getEventDescription() {
         return eventDescription;
