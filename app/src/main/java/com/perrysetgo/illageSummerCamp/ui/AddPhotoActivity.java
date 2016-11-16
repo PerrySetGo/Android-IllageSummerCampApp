@@ -58,6 +58,7 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             addImageLabel.setImageBitmap(imageBitmap);
+            encodeBitmapAndSaveToFirebase(imageBitmap);
         }
     }
 
@@ -66,8 +67,8 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
         DatabaseReference ref = FirebaseDatabase.getInstance()
-                .getReference(Constants.FIREBASE_CHILD_PHOTOS)
-                .child("imageUrl");
+                .getReference(Constants.FIREBASE_CHILD_PHOTOS);
+//                .child("imageUrl"); change this if nesting is needed.
         ref.push().setValue(imageEncoded);
     }
 
