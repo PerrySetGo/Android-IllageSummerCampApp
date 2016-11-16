@@ -1,11 +1,8 @@
 package com.perrysetgo.illageSummerCamp.ui;
 
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,7 +11,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,11 +20,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -41,7 +37,7 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_FROM_GALLERY = 2;
-    static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 3;
+    private Context context = getApplicationContext();
 
     @Bind(R.id.addPhotoButton) Button addPhotoButton;
     @Bind(R.id.galleryUploadButton) Button galleryUploadButton;
@@ -56,7 +52,6 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
         ButterKnife.bind(this);
         addPhotoButton.setOnClickListener(this);
         galleryUploadButton.setOnClickListener(this);
-
     }
 
     @Override
@@ -70,24 +65,35 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-//        if (requestCode == MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//            // We got the permission
-//
-//            System.out.println("number 6");
-//
-//        } else {
-//
-//            System.out.println("number 7");
-//
-//            // We were not granted permission this time, so don't try to show the contact picker
-//            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//
-//            System.out.println("number 8");
-//        }
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Drawable myDrawable = ContextCompat.getDrawable(context,R.drawable.no_image);
+        Bitmap imageBitmap = ((BitmapDrawable) myDrawable).getBitmap();
 
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            imageBitmap = (Bitmap) extras.get("data");
+        }
+
+        else if (requestCode == REQUEST_FROM_GALLERY && resultCode == RESULT_OK) {
+            final Uri imageUri = data.getData();
+            try {
+                getOrientation(context,imageUri);
+                imageBitmap = getCorrectlyOrientedImage(context, imageUri, 300);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            //do nothing - original img placeholder will show.
+            Log.d(TAG, "no image");
+        }
+
+        encodeBitmapAndSaveToFirebase(imageBitmap);
+        addImageLabel.setImageBitmap(imageBitmap);
+    }
+
+    //static methods
 
     public void onLaunchCamera() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -103,66 +109,6 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
         startActivityForResult(intent, REQUEST_FROM_GALLERY);
     }
 
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Drawable myDrawable = getResources().getDrawable(R.drawable.no_image);
-        Bitmap imageBitmap = ((BitmapDrawable) myDrawable).getBitmap();
-
-//        if (ContextCompat.checkSelfPermission(AddPhotoActivity.this,
-//                Manifest.permission.READ_EXTERNAL_STORAGE)
-//                != PackageManager.PERMISSION_GRANTED) {
-//
-//            // Should we show an explanation?
-//            if (ActivityCompat.shouldShowRequestPermissionRationale(AddPhotoActivity.this,
-//                    Manifest.permission.READ_CONTACTS)) {
-//
-//                // Show an expanation to the user *asynchronously* -- don't block
-//                // this thread waiting for the user's response! After the user
-//                // sees the explanation, try again to request the permission.
-//
-//            } else {
-//
-//                // No explanation needed, we can request the permission.
-//
-//                ActivityCompat.requestPermissions(AddPhotoActivity.this,
-//                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-//                        MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
-//                Log.d(TAG, "TWO");
-//
-//                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-//                // app-defined int constant. The callback method gets the
-//                // result of the request.
-//            }
-//        }
-
-
-
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            imageBitmap = (Bitmap) extras.get("data");
-        }
-
-        else if (requestCode == REQUEST_FROM_GALLERY && resultCode == RESULT_OK) {
-            final Uri imageUri = data.getData();
-            try {
-                getOrientation(getApplicationContext(),imageUri);
-                imageBitmap = getCorrectlyOrientedImage(getApplicationContext(), imageUri, 300);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            //do nothing - original img placeholder will show.
-            Log.d(TAG, "no image");
-        }
-
-        encodeBitmapAndSaveToFirebase(imageBitmap);
-        addImageLabel.setImageBitmap(imageBitmap);
-    }
-
-
     public static int getOrientation(Context context, Uri photoUri) {
 
         Cursor cursor = context.getContentResolver().query(photoUri, new String[] { MediaStore.Images.ImageColumns.ORIENTATION }, null, null, null);
@@ -171,6 +117,7 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
             return 90;  //Assuming it was taken portrait
         }
         cursor.moveToFirst();
+        cursor.close();
         return cursor.getInt(0);
     }
 
