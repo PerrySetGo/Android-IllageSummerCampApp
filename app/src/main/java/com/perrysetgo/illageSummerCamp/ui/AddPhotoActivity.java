@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 
 public class AddPhotoActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
     @Bind(R.id.addPhotoButton) Button addPhotoButton;
     @Bind(R.id.addImageLabel) ImageView addImageLabel;
 
@@ -48,8 +48,8 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            Log.d(TAG, "success taking photo"); //we get to here.
-        }
+
+    }
     }
 
     @Override
