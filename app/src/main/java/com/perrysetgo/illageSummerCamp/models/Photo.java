@@ -11,18 +11,16 @@ public class Photo {
     private String photoAuthor;
     private String photoCaption;
 
-    public Photo (String photoUri, String photoAuthor, String photoCaption){
-
-        this.photoUri = photoUri;
+    public Photo (String photoAuthor, String photoCaption, String photoUri){
         this.photoAuthor = photoAuthor;
         this.photoCaption = photoCaption;
+        this.photoUri = photoUri;
 
     }
 
     public String getPhotoUri() {
         return photoUri;
     }
-
     public void setPhotoUri(String photoUri) {
         this.photoUri = photoUri;
     }

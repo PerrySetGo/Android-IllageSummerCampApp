@@ -18,12 +18,14 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
+import com.perrysetgo.illageSummerCamp.models.Photo;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -36,13 +38,21 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_FROM_GALLERY = 2;
-    private Context context = getApplicationContext();
+
+    public Bitmap bitmap;
 
     @Bind(R.id.addPhotoButton) Button addPhotoButton;
     @Bind(R.id.galleryUploadButton) Button galleryUploadButton;
+    @Bind(R.id.savePhotoButton) Button savePhotoButton;
+
     @Bind(R.id.addImageLabel) ImageView addImageLabel;
 
-    String TAG = AddPhotoActivity.class.getSimpleName();
+    @Bind(R.id.photoAuthorEditText) EditText photoAuthorEditText;
+    @Bind(R.id.photoCaptionEditText) EditText photoCaptionEditText;
+
+
+
+//    String TAG = AddPhotoActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +61,7 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
         ButterKnife.bind(this);
         addPhotoButton.setOnClickListener(this);
         galleryUploadButton.setOnClickListener(this);
+        savePhotoButton.setOnClickListener(this);
     }
 
     @Override
@@ -62,34 +73,51 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
         if (view == galleryUploadButton){
             accessPhoneGallery();
         }
+        if (view == savePhotoButton){
+            savePhoto(photoAuthorEditText.getText().toString(), photoCaptionEditText.getText().toString(), bitmap);
+        }
     }
+
+
+    public void savePhoto (String photoAuthor, String photoCaption, Bitmap bitmap){
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
+
+        Photo newPhoto = new Photo (photoAuthor, photoCaption, imageEncoded);
+
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReference(Constants.FIREBASE_CHILD_PHOTOS);
+
+        ref.push().setValue(newPhoto);
+
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Drawable myDrawable = ContextCompat.getDrawable(context,R.drawable.no_image);
-        Bitmap imageBitmap = ((BitmapDrawable) myDrawable).getBitmap();
+
 
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            imageBitmap = (Bitmap) extras.get("data");
+            bitmap = (Bitmap) extras.get("data");
         }
 
         else if (requestCode == REQUEST_FROM_GALLERY && resultCode == RESULT_OK) {
             final Uri imageUri = data.getData();
             try {
-                getOrientation(context,imageUri);
-                imageBitmap = getCorrectlyOrientedImage(context, imageUri, 300);
+                getOrientation(getApplicationContext(),imageUri);
+                bitmap = getCorrectlyOrientedImage(getApplicationContext(), imageUri, 300);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
-            //do nothing - original img placeholder will show.
-            Log.d(TAG, "no image");
+            Drawable myDrawable = ContextCompat.getDrawable(getApplicationContext(),R.drawable.no_image);
+            bitmap = ((BitmapDrawable) myDrawable).getBitmap();
         }
-
-        encodeBitmapAndSaveToFirebase(imageBitmap);
-        addImageLabel.setImageBitmap(imageBitmap);
+        addImageLabel.setImageBitmap(bitmap);
     }
 
     //static methods
@@ -116,8 +144,9 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
             return 90;  //Assuming it was taken portrait
         }
         cursor.moveToFirst();
+        int cursorInt = cursor.getInt(0);
         cursor.close();
-        return cursor.getInt(0);
+        return cursorInt;
     }
 
     public static Bitmap getCorrectlyOrientedImage(Context context, Uri photoUri, int maxWidth)
@@ -140,7 +169,7 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
             rotatedHeight = dbo.outHeight;
         }
 
-        Bitmap srcBitmap;
+        Bitmap bitmap;
         is = context.getContentResolver().openInputStream(photoUri);
         if (rotatedWidth > maxWidth || rotatedHeight > maxWidth) {
             float widthRatio = ((float) rotatedWidth) / ((float) maxWidth);
@@ -152,9 +181,9 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
             // Create the bitmap from file
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = (int) maxRatio;
-            srcBitmap = BitmapFactory.decodeStream(is, null, options);
+            bitmap = BitmapFactory.decodeStream(is, null, options);
         } else {
-            srcBitmap = BitmapFactory.decodeStream(is);
+            bitmap = BitmapFactory.decodeStream(is);
         }
         is.close();
 
@@ -166,23 +195,11 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
             Matrix matrix = new Matrix();
             matrix.postRotate(orientation);
 
-            srcBitmap = Bitmap.createBitmap(srcBitmap, 0, 0, srcBitmap.getWidth(),
-                    srcBitmap.getHeight(), matrix, true);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                    bitmap.getHeight(), matrix, true);
         }
 
-        return srcBitmap;
-    }
-
-
-
-    public void encodeBitmapAndSaveToFirebase(Bitmap bitmap) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
-        DatabaseReference ref = FirebaseDatabase.getInstance()
-                .getReference(Constants.FIREBASE_CHILD_PHOTOS);
-//                .child("imageUrl"); change this if nesting is needed.
-        ref.push().setValue(imageEncoded);
+        return bitmap;
     }
 
 }

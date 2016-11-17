@@ -24,8 +24,10 @@
         android:minWidth="300sp"
         android:minHeight="300sp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="47dp" />
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/addPhotoButton"
+        android:layout_toStartOf="@+id/galleryUploadButton"
+        android:layout_marginBottom="215dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -34,5 +36,36 @@
         android:id="@+id/galleryUploadButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Who took this photo?"
+        android:ems="10"
+        android:id="@+id/photoAuthorEditText"
+        android:layout_above="@+id/addPhotoButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="129dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/photoCaptionEditText"
+        android:layout_alignTop="@+id/photoAuthorEditText"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="51dp"
+        android:layout_alignEnd="@+id/galleryUploadButton"
+        android:text="Photo Caption" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/savePhotoButton"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/addPhotoButton" />
 
 </RelativeLayout>

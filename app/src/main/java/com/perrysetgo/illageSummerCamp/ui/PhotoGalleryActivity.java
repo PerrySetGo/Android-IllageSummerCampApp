@@ -34,8 +34,12 @@ public class PhotoGalleryActivity extends AppCompatActivity {
         Photo photoTwo = new Photo("Uri2", "Author2", "Caption2");
         mPhotos.add(photoTwo);
 
+        //retrieve all images from Firebase here.
 
-        mAdapter = new PhotoGalleryAdapter(getApplicationContext(), mPhotos);
+
+
+
+        mAdapter = new PhotoGalleryAdapter(mPhotos);
         mRecyclerView.setAdapter(mAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PhotoGalleryActivity.this);
         mRecyclerView.setLayoutManager(layoutManager);
