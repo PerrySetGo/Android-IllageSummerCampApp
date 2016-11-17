@@ -42,7 +42,7 @@ public class PhotoGalleryAdapter extends RecyclerView.Adapter<PhotoGalleryAdapte
     }
 
     @Override
-    public void onBindViewHolder(PhotoGalleryViewHolder holder, int position) {
+    public void onBindViewHolder(PhotoGalleryAdapter.PhotoGalleryViewHolder holder, int position) {
         holder.bindPhoto(mPhotos.get(position));
     }
 
@@ -51,20 +51,19 @@ public class PhotoGalleryAdapter extends RecyclerView.Adapter<PhotoGalleryAdapte
         return mPhotos.size();
     }
 
-
     public class PhotoGalleryViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.photoCaptionTextView) TextView photoCaptionTextView;
         @Bind(R.id.photoAuthorTextView) TextView photoAuthorTextView;
         @Bind(R.id.photoImageView) ImageView photoImageView;
 
         private Context mContext;
+        private ArrayList<Photo> mPhotos = new ArrayList<>();
 
         public PhotoGalleryViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
         }
-
 
         public void bindPhoto(Photo photo) {
             photoCaptionTextView.setText(photo.getPhotoCaption());
