@@ -24,7 +24,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
-import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

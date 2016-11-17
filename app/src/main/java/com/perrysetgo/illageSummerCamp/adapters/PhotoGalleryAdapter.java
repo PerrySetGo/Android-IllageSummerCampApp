@@ -6,7 +6,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +16,7 @@ import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.models.Photo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,11 +27,33 @@ import butterknife.ButterKnife;
 public class PhotoGalleryAdapter extends RecyclerView.Adapter<PhotoGalleryAdapter.PhotoGalleryViewHolder> {
 
 
+    private ArrayList<Photo> mPhotos = new ArrayList<>();
+    private Context mContext;
+
+
     public PhotoGalleryAdapter(Context context, ArrayList photos){
-        ArrayList mPhotos = new ArrayList<>();
+        ArrayList mPhotos = new ArrayList<Photo>();
         Context mContext;
 
     }
+
+    @Override
+    public PhotoGalleryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.photo_list_item, parent, false);
+        PhotoGalleryViewHolder viewHolder = new PhotoGalleryViewHolder(view);
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(PhotoGalleryViewHolder holder, int position) {
+        holder.bindPhoto(mPhotos.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return mPhotos.size();
+    }
+
 
     public class PhotoGalleryViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.photoCaptionTextView)
@@ -46,9 +71,8 @@ public class PhotoGalleryAdapter extends RecyclerView.Adapter<PhotoGalleryAdapte
             mContext = itemView.getContext();
         }
 
-        //cannot proceed here until I have created datamodel.
 
-        public void bindRestaurant(Photo photo) {
+        public void bindPhoto(Photo photo) {
             photoCaptionTextView.setText(photo.getPhotoCaption());
             photoAuthorTextView.setText(photo.getPhotoAuthor());
             Drawable myDrawable = ContextCompat.getDrawable(mContext, R.drawable.no_image);

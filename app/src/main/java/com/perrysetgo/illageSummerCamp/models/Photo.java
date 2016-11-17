@@ -22,7 +22,7 @@ public class Photo {
     public String getPhotoUri() {
         return photoUri;
     }
-//how to save
+
     public void setPhotoUri(String photoUri) {
         this.photoUri = photoUri;
     }
