@@ -28,8 +28,11 @@ public class PhotoGalleryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_photo_gallery);
         ButterKnife.bind(this);
 
-        Photo photo = new Photo("Uri", "Author", "Caption");
+        Photo photo = new Photo("Test", "Test", "Test");
         mPhotos.add(photo);
+
+        Photo photoTwo = new Photo("Uri2", "Author2", "Caption2");
+        mPhotos.add(photoTwo);
 
 
         mAdapter = new PhotoGalleryAdapter(getApplicationContext(), mPhotos);
