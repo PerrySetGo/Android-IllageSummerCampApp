@@ -8,35 +8,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="--"
+        android:text="@string/empty_placeholder"
         android:id="@+id/eventDateLabel"
         android:background="#8ec1da"
         android:textColor="@android:color/black"
         android:padding="4dp"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/eventDescriptionLabel"
-        android:layout_marginRight="4dp"
-        android:textSize="12dp" />
+        android:layout_marginEnd="4dp"
+        android:textSize="12sp" />
 <!--TODO fix the layout of this page. Make the date formatting smaller.-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This is a 140 character tweet used to test the dimensions of my Text View box. Here are 50 extra characters used as a placeholder for tests!"
+        android:text="@string/this_is_a_140_character_tweet_used_to_test_the_dimensions_of_my_text_view_box_here_are_50_extra_characters_used_as_a_placeholder_for_tests"
         android:id="@+id/eventDescriptionLabel"
         android:textSize="17sp"
         android:textColor="@android:color/black"
         android:padding="8dp"
         android:layout_below="@+id/eventTitleLabel"
-        android:layout_alignRight="@+id/eventDateLabel"
         android:layout_alignEnd="@+id/eventDateLabel"
-        android:layout_marginRight="50dp"/>
+        android:layout_marginEnd="50dp"/>
 
     <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Awesome Event!"
+        android:text="@string/awesome_event"
         android:id="@+id/eventTitleLabel"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -47,17 +45,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="--"
+        android:text="@string/empty_placeholder"
         android:id="@+id/eventLocationLabel"
         android:background="#8ec1da"
         android:textColor="@android:color/black"
         android:padding="4dp"
         android:layout_alignTop="@+id/eventDateLabel"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:paddingLeft="8dp"
-        android:layout_marginLeft="4dp"
-        android:textSize="12dp" />
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:layout_marginStart="4dp"
+        android:textSize="12sp" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -71,6 +69,7 @@
         android:layout_marginBottom="22dp" />
 
     <ImageButton
+        android:contentDescription="@string/delete_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/deleteButton"
@@ -78,9 +77,10 @@
         android:padding="0dp"
         android:visibility="invisible"
         android:layout_above="@+id/editButton"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentEnd="true" />
 
     <ImageButton
+        android:contentDescription="@string/save_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/saveButton"

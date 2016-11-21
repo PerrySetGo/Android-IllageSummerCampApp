@@ -50,8 +50,6 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
     @Bind(R.id.photoAuthorEditText) EditText photoAuthorEditText;
     @Bind(R.id.photoCaptionEditText) EditText photoCaptionEditText;
 
-
-
 //    String TAG = AddPhotoActivity.class.getSimpleName();
 
     @Override
@@ -156,7 +154,6 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
         BitmapFactory.Options dbo = new BitmapFactory.Options();
         dbo.inJustDecodeBounds = true;
         BitmapFactory.decodeStream(is, null, dbo);
-        is.close();
 
         int rotatedWidth, rotatedHeight;
         int orientation = getOrientation(context, photoUri);
@@ -185,7 +182,6 @@ public class AddPhotoActivity extends AppCompatActivity implements View.OnClickL
         } else {
             bitmap = BitmapFactory.decodeStream(is);
         }
-        is.close();
 
         /*
          * if the orientation is not 0 (or -1, which means we don't know), we
