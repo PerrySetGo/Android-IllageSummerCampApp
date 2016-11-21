@@ -1,5 +1,6 @@
 package com.perrysetgo.illageSummerCamp.ui;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,6 +27,7 @@ public class PhotoGalleryActivity extends AppCompatActivity {
     public static final String TAG = PhotoGalleryActivity.class.getSimpleName();
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
     PhotoGalleryAdapter mAdapter;
+    ProgressDialog progress;
 
     ValueEventListener mPhotosListener;
     DatabaseReference mPhotosReference;
@@ -35,7 +37,7 @@ public class PhotoGalleryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_gallery);
-        Log.d(TAG, "loading begin");
+        handleLoadingDialog();
 
         ButterKnife.bind(this);
 
@@ -58,8 +60,7 @@ public class PhotoGalleryActivity extends AppCompatActivity {
                                                                          mRecyclerView.setLayoutManager(layoutManager);
                                                                          mRecyclerView.setHasFixedSize(true);
 
-                                                                         //call end of loading
-                                                                         Log.d(TAG, "loading done");
+                                                                         handleLoadingDialog();
                                                                      }
 
                                                                      @Override
@@ -72,6 +73,19 @@ public class PhotoGalleryActivity extends AppCompatActivity {
 
 
         }
+
+    public void handleLoadingDialog() {
+
+        if (progress == null) {
+            progress = new ProgressDialog(this);
+            progress.setMessage("Loading Photos, hang on...");
+            progress.show();
+        }
+        else  {
+            progress.dismiss();
+        }
+
     }
+}
 
 
