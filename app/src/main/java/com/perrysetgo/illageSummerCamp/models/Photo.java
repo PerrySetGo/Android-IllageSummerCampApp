@@ -18,6 +18,10 @@ public class Photo {
 
     }
 
+    public Photo(){
+
+    }
+
     public String getPhotoUri() {
         return photoUri;
     }
