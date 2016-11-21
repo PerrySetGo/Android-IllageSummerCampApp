@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="IllageSummerCamp"
+        android:text="@string/illagesummercamp"
         android:id="@+id/titleLabel"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -32,20 +32,18 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Our Website"
+        android:text="@string/view_our_website"
         android:id="@+id/viewWebsiteButton"
         android:gravity="center_vertical"
-        android:layout_weight="0.5"
         android:layout_below="@+id/contactUsText"
         android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send Us a Message"
+        android:text="@string/send_us_a_message"
         android:id="@+id/sendNoteForm"
         android:gravity="center_vertical"
-        android:layout_weight="0.5"
         android:layout_below="@+id/contactUsText"
         android:layout_alignParentEnd="true" />
 
@@ -54,7 +52,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/viewWebsiteButton"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:weightSum="1">
 
@@ -72,7 +69,7 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/nameContact"
-            android:hint="Name"
+            android:hint="@string/name"
             android:visibility="invisible"/>
 
         <EditText
@@ -81,7 +78,7 @@
             android:inputType="textEmailAddress"
             android:ems="10"
             android:id="@+id/emailContact"
-            android:hint="Email"
+            android:hint="@string/email"
             android:visibility="invisible"/>
 
         <EditText
@@ -90,13 +87,13 @@
             android:inputType="textMultiLine"
             android:ems="10"
             android:id="@+id/messageContact"
-            android:hint="Your message for us"
+            android:hint="@string/your_message_for_us"
             android:visibility="invisible"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send It!"
+            android:text="@string/send_it"
             android:id="@+id/formSubmitButton"
             android:layout_gravity="center_horizontal"
             android:visibility="invisible"/>
