@@ -12,12 +12,13 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Take a Photo"
+        android:text="@string/take_a_photo"
         android:id="@+id/addPhotoButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
     <ImageView
+        android:contentDescription="@string/image_to_be_added"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/addImageLabel"
@@ -32,7 +33,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gallery Upload"
+        android:text="@string/gallery_upload"
         android:id="@+id/galleryUploadButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
@@ -41,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Who took this photo?"
+        android:hint="@string/who_took_this_photo"
         android:ems="10"
         android:id="@+id/photoAuthorEditText"
         android:layout_above="@+id/addPhotoButton"
@@ -58,12 +59,12 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="51dp"
         android:layout_alignEnd="@+id/galleryUploadButton"
-        android:text="Photo Caption" />
+        android:hint="@string/photo_caption" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/save"
         android:id="@+id/savePhotoButton"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/addPhotoButton" />

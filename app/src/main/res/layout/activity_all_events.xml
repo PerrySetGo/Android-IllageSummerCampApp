@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="All Camp Events!"
+        android:text="@string/all_camp_events"
         android:id="@+id/newEventLabel"
         android:layout_centerHorizontal="true"/>
 

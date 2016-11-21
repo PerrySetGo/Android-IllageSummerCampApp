@@ -6,13 +6,13 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
-                tools:context=".MainActivity">
+                tools:context=".ui.MainActivity">
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Event"
+        android:text="@string/new_event"
         android:id="@+id/newEventLabel"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -21,7 +21,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Yes"
+        android:text="@string/yes"
         android:id="@+id/newEventButton"
         android:visibility="invisible"
         android:layout_above="@+id/startTimeView"
@@ -30,7 +30,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No Thanks"
+        android:text="@string/no_thanks"
         android:id="@+id/noNewButton"
         android:visibility="invisible"
         android:layout_alignBaseline="@+id/endTimeView"
@@ -40,7 +40,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Would You Like To Add Another Event?"
+        android:text="@string/would_you_like_to_add_another_event"
         android:id="@+id/addNewEventLabel"
         android:layout_below="@+id/editTitle"
         android:layout_centerHorizontal="true"
@@ -55,8 +55,7 @@
         android:id="@+id/editTitle"
         android:layout_below="@+id/newEventLabel"
         android:layout_marginTop="32dp"
-        android:hint="What&apos;s this event called?"
-        android:layout_alignRight="@+id/eventSubmitButton"
+        android:hint="@string/what_apos_s_this_event_called"
         android:layout_alignEnd="@+id/eventSubmitButton"
         android:visibility="visible"/>
 
@@ -64,9 +63,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/locationSpinner"
-        android:hint="Location?"
+        android:hint="@string/location"
         android:layout_above="@+id/showStartTimeButton"
-        android:layout_toLeftOf="@+id/dateView"
         android:layout_toStartOf="@+id/dateView"
         android:visibility="visible"/>
 
@@ -75,29 +73,24 @@
         android:layout_height="wrap_content"
         android:id="@+id/dateView"
         android:layout_alignBottom="@+id/addNewEventLabel"
-        android:layout_alignRight="@+id/editTitle"
         android:layout_alignEnd="@+id/editTitle"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Set Start Time"
+        android:text="@string/set_start_time"
         android:id="@+id/showStartTimeButton"
         android:layout_above="@+id/endTimeButton"
-        android:layout_toLeftOf="@+id/newEventLabel"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:visibility="visible"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Set End Time"
+        android:text="@string/set_end_time"
         android:id="@+id/endTimeButton"
         android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/showStartTimeButton"
         android:layout_alignEnd="@+id/showStartTimeButton"
         android:visibility="visible"/>
 
@@ -108,7 +101,6 @@
         android:background="#76ff62"
         android:layout_above="@+id/endTimeButton"
         android:visibility="visible"
-        android:layout_alignRight="@+id/addNewEventLabel"
         android:layout_alignEnd="@+id/addNewEventLabel"/>
 <!--todo improve this page's layout, especially the timepicker highlighting. Also make the description form multiline-->
     <TextView
@@ -117,7 +109,6 @@
         android:id="@+id/endTimeView"
         android:background="#40bcff"
         android:layout_alignBottom="@+id/endTimeButton"
-        android:layout_alignRight="@+id/locationSpinner"
         android:layout_alignEnd="@+id/locationSpinner"
         android:visibility="visible"/>
 
@@ -126,7 +117,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/dateSpinner"
         android:layout_alignTop="@+id/dateView"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:visibility="visible"/>
 
@@ -137,19 +127,17 @@
         android:ems="10"
         android:id="@+id/editDescription"
         android:layout_below="@+id/endTimeButton"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:visibility="visible"
-        android:hint="Please enter a description"/>
+        android:hint="@string/please_enter_a_description"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:text="@string/submit"
         android:id="@+id/eventSubmitButton"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:visibility="visible"/>
 

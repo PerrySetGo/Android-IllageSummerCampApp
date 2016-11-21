@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">IllageSummerCamp</string>
-
     <string name="title_activity_home">Illage Summer Camp 2016</string>
      <string name="aboutCampText"><b>Things to know:</b>
     Illage Summer camp is a queer-founded, community-oriented, ally-supported, unicorn-inspired experience of pure magic. \n\nYou don\'t need to sign up for an activity, just show up!\n\nRespect the Illage community -- treat everyone with love, dignity, and compassion. Honor each other\'s identities and experiences.Don\'t make assumptions. Always do your best and be aware of each other. (This rule was written by our fiends at A-Camp)\n\nCamp runs on donations. Please bring cash to contribute. No one turned away for lack of funds!
@@ -9,7 +8,6 @@
     <string name="title_activity_all_events">View All Events</string>
     <string name="title_activity_add_event">AddEventActivity</string>
     <string name="title_activity_login">LoginActivity</string>
-
     <string name="title_activity_contact">ContactActivity</string>
     <string name="contact_us_text">Illage Summer Camp is a volunteer driven effort! If you have questions or suggestions, or want to participate through volunteering, please get in touch!  You can reach us through the contact form below, and visit us on the web.</string>
     <string name="contact_form_intro">Fill out this form to get in touch! We will get back to you as soon as we can.</string>
@@ -17,5 +15,56 @@
     <string name="drawer_open">Options</string>
     <string name="drawer_close">Close Options</string>
     <string name="action_setting">Settings</string>
-
+    <string name="take_a_photo">Take a Photo</string>
+    <string name="gallery_upload">Gallery Upload</string>
+    <string name="who_took_this_photo">Who took this photo?</string>
+    <string name="photo_caption">Photo Caption</string>
+    <string name="save">Save</string>
+    <string name="image_to_be_added">Image to be Added</string>
+    <string name="caption">Caption</string>
+    <string name="one_cuisine_type">One Cuisine Type</string>
+    <string name="event_photo">Event Photo</string>
+    <string name="illagesummercamp_logo">IllageSummerCamp Logo</string>
+    <string name="new_event">New Event</string>
+    <string name="yes">Yes</string>
+    <string name="no_thanks">No Thanks</string>
+    <string name="would_you_like_to_add_another_event">Would You Like To Add Another Event?</string>
+    <string name="what_apos_s_this_event_called">What\'s this event called?</string>
+    <string name="location">Location?</string>
+    <string name="set_start_time">Set Start Time</string>
+    <string name="set_end_time">Set End Time</string>
+    <string name="please_enter_a_description">Please enter a description</string>
+    <string name="submit">Submit</string>
+    <string name="all_camp_events">All Camp Events!</string>
+    <string name="illagesummercamp">IllageSummerCamp</string>
+    <string name="view_our_website">View Our Website</string>
+    <string name="send_us_a_message">Send Us a Message</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="your_message_for_us">Your message for us</string>
+    <string name="send_it">Send It!</string>
+    <string name="please_log_in_to_create_events_in_order_to_create_an_account_please_send_us_an_email">Please log in to create events. In order to create an account, please send us an email.</string>
+    <string name="password">Password</string>
+    <string name="testing_test_123">Testing: test/123</string>
+    <string name="camp_description">Camp Description</string>
+    <string name="current_time">Current time</string>
+    <string name="the_next_event_is">The Next Event Is</string>
+    <string name="location_next">Location:</string>
+    <string name="time_next">Time:</string>
+    <string name="description_next">Description:</string>
+    <string name="you_apos_re_invited">You\'re Invited!</string>
+    <string name="loading_event">Loading Event...</string>
+    <string name="sign_in">Sign In</string>
+    <string name="don_t_have_an_account_sign_up_here">Don\'t have an account? Sign up here!</string>
+    <string name="login">Login</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_have_an_account_log_in_here">Already have an account? Log in here!</string>
+    <string name="create_account">Create Account</string>
+    <string name="empty_placeholder">--</string>
+    <string name="this_is_a_140_character_tweet_used_to_test_the_dimensions_of_my_text_view_box_here_are_50_extra_characters_used_as_a_placeholder_for_tests">This is a 140 character tweet used to test the dimensions of my Text View box. Here are 50 extra characters used as a placeholder for tests!</string>
+    <string name="awesome_event">Awesome Event!</string>
+    <string name="save_event">Save Event</string>
+    <string name="delete_event">Delete Event</string>
+    <string name="lorem_ipsum_dolor_sit_amet">Lorem ipsum dolor sit amet...</string>
 </resources>

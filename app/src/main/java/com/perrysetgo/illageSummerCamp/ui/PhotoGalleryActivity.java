@@ -37,14 +37,6 @@ public class PhotoGalleryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_photo_gallery);
         ButterKnife.bind(this);
 
-//        Photo photo = new Photo("Test", "Test", "Test");
-//        mPhotos.add(photo);
-//
-//        Photo photoTwo = new Photo("Uri2", "Author2", "Caption2");
-//        mPhotos.add(photoTwo);
-
-        //retrieve all images from Firebase here.
-
         mPhotosReference = FirebaseDatabase
                 .getInstance()
                 .getReference()
@@ -66,12 +58,12 @@ public class PhotoGalleryActivity extends AppCompatActivity {
 
                                                                  });
 
-
         mAdapter = new PhotoGalleryAdapter(photos);
         mRecyclerView.setAdapter(mAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PhotoGalleryActivity.this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
+
         }
     }
 
