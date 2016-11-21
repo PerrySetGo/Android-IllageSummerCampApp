@@ -35,6 +35,8 @@ public class PhotoGalleryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_gallery);
+        Log.d(TAG, "loading begin");
+
         ButterKnife.bind(this);
 
         mPhotosReference = FirebaseDatabase
@@ -49,6 +51,15 @@ public class PhotoGalleryActivity extends AppCompatActivity {
                                                                          for (DataSnapshot photoSnapshot : dataSnapshot.getChildren()) {
                                                                              photos.add(photoSnapshot.getValue(Photo.class));
                                                                          }
+
+                                                                         mAdapter = new PhotoGalleryAdapter(photos);
+                                                                         mRecyclerView.setAdapter(mAdapter);
+                                                                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PhotoGalleryActivity.this);
+                                                                         mRecyclerView.setLayoutManager(layoutManager);
+                                                                         mRecyclerView.setHasFixedSize(true);
+
+                                                                         //call end of loading
+                                                                         Log.d(TAG, "loading done");
                                                                      }
 
                                                                      @Override
@@ -58,11 +69,7 @@ public class PhotoGalleryActivity extends AppCompatActivity {
 
                                                                  });
 
-        mAdapter = new PhotoGalleryAdapter(photos);
-        mRecyclerView.setAdapter(mAdapter);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PhotoGalleryActivity.this);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setHasFixedSize(true);
+
 
         }
     }
