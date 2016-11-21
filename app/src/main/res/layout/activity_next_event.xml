@@ -17,7 +17,6 @@
         android:text="New Text"
         android:id="@+id/nextEventTitleBox"
         android:layout_below="@+id/nextEventTitleLabel"
-        android:layout_alignParentLeft="true"
         android:visibility="invisible"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="10dp"
@@ -31,7 +30,6 @@
         android:layout_marginTop="10dp"
         android:visibility="invisible"
         android:layout_below="@+id/nextEventLocationLabel"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 
     <TextView
@@ -41,13 +39,12 @@
         android:visibility="invisible"
         android:id="@+id/nextEventDateTimeBox"
         android:layout_below="@+id/nextDateTimeLabel"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Current time"
+        android:text="@string/current_time"
         android:visibility="visible"
         android:id="@+id/currentTimeLabel"
         android:layout_alignParentTop="true"
@@ -57,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        android:text="The Next Event Is"
+        android:text="@string/the_next_event_is"
         android:id="@+id/nextEventTitleLabel"
         android:layout_below="@+id/currentTimeLabel"
         android:layout_marginTop="31dp"
@@ -69,7 +66,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Location:"
+        android:text="@string/location_next"
         android:id="@+id/nextEventLocationLabel"
         android:gravity="center_vertical|center_horizontal"
         android:background="#ff1438"
@@ -81,7 +78,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Time:"
+        android:text="@string/time_next"
         android:id="@+id/nextDateTimeLabel"
         android:gravity="center_vertical|center_horizontal"
         android:background="#ff1438"
@@ -95,7 +92,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Description:"
+        android:text="@string/description_next"
         android:id="@+id/nextEventDescriptionLabel"
         android:gravity="center_vertical|center_horizontal"
         android:background="#ff1438"
@@ -109,18 +106,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You&apos;re Invited!"
+        android:text="@string/you_apos_re_invited"
         android:id="@+id/invitedText"
         android:visibility="invisible"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:textSize="40dp"/>
+        android:textSize="40sp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Loading Event..."
+        android:text="@string/loading_event"
         android:id="@+id/eventsStatusBox"
         android:visibility="invisible"
         android:textAlignment="center"

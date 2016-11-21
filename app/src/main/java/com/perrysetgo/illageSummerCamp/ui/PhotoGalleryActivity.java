@@ -1,10 +1,18 @@
 package com.perrysetgo.illageSummerCamp.ui;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.adapters.PhotoGalleryAdapter;
 import com.perrysetgo.illageSummerCamp.models.Photo;
@@ -19,31 +27,65 @@ public class PhotoGalleryActivity extends AppCompatActivity {
     public static final String TAG = PhotoGalleryActivity.class.getSimpleName();
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
     PhotoGalleryAdapter mAdapter;
+    ProgressDialog progress;
 
-    public ArrayList<Photo> mPhotos = new ArrayList<>();
+    ValueEventListener mPhotosListener;
+    DatabaseReference mPhotosReference;
+    ArrayList<Photo> photos = new ArrayList<Photo>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_gallery);
+        handleLoadingDialog();
+
         ButterKnife.bind(this);
 
-        Photo photo = new Photo("Test", "Test", "Test");
-        mPhotos.add(photo);
+        mPhotosReference = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child(Constants.FIREBASE_CHILD_PHOTOS);
 
-        Photo photoTwo = new Photo("Uri2", "Author2", "Caption2");
-        mPhotos.add(photoTwo);
+        mPhotosListener = mPhotosReference.addValueEventListener(new ValueEventListener() {
 
-        //retrieve all images from Firebase here.
+                                                                     @Override
+                                                                     public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                         for (DataSnapshot photoSnapshot : dataSnapshot.getChildren()) {
+                                                                             photos.add(photoSnapshot.getValue(Photo.class));
+                                                                         }
+
+                                                                         mAdapter = new PhotoGalleryAdapter(photos);
+                                                                         mRecyclerView.setAdapter(mAdapter);
+                                                                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PhotoGalleryActivity.this);
+                                                                         mRecyclerView.setLayoutManager(layoutManager);
+                                                                         mRecyclerView.setHasFixedSize(true);
+
+                                                                         handleLoadingDialog();
+                                                                     }
+
+                                                                     @Override
+                                                                     public void onCancelled(DatabaseError databaseError) {
+
+                                                                     }
+
+                                                                 });
 
 
 
+        }
 
-        mAdapter = new PhotoGalleryAdapter(mPhotos);
-        mRecyclerView.setAdapter(mAdapter);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PhotoGalleryActivity.this);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setHasFixedSize(true);
+    public void handleLoadingDialog() {
+
+        if (progress == null) {
+            progress = new ProgressDialog(this);
+            progress.setMessage("Loading Photos, hang on...");
+            progress.show();
+        }
+        else  {
+            progress.dismiss();
+        }
+
     }
-
 }
+
+
