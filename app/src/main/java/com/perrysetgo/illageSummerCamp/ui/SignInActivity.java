@@ -28,12 +28,13 @@ import com.perrysetgo.illageSummerCamp.R;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class SignInActivity extends AppCompatActivity implements View.OnClickListener{
+public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.passwordLoginButton) Button passwordLoginButton;
     @Bind(R.id.emailEditText) EditText emailEditText;
     @Bind(R.id.passwordEditText) EditText passwordEditText;
     @Bind(R.id.registerTextView) TextView registerTextView;
     @Bind(R.id.forgotPasswordTextView) TextView forgotPassWordTextView;
+
     public static final String TAG = SignInActivity.class.getSimpleName();
 
     private FirebaseAuth mAuth;
@@ -72,61 +73,49 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    public void onClick(View v){
+    public void onClick(View v) {
+        //make it more specific later.
+        final AlertDialog.Builder passwordForgotDialog = new AlertDialog.Builder(SignInActivity.this);
+        passwordForgotDialog.setTitle("Password Reset Request");
+        passwordForgotDialog.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // nothing happens here.
+            }
+        });
+
+
         email = emailEditText.getText().toString().trim();
         password = passwordEditText.getText().toString().trim();
         Log.d(TAG, "email in onClick");
         if (v == passwordLoginButton) {
             loginWithPassword(email, password);
         }
-        if (v == registerTextView){
-            Intent intent = new Intent (SignInActivity.this, SignUpActivity.class);
+        if (v == registerTextView) {
+            Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
             startActivity(intent);
             finish();
         }
-        if (v == forgotPassWordTextView){
-            mAuth.sendPasswordResetEmail(email) //need user here
+        if (v == forgotPassWordTextView) {
+            mAuth.sendPasswordResetEmail(email)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Log.d(TAG, "Email sent.");
-                                new AlertDialog.Builder(SignInActivity.this)
-                                        .setTitle("Password Reset Request")
-                                        .setMessage("A email was sent to you allowing you to reset your password! See you soon.")
-                                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                // nothing happens here.
-                                            }
-                                        })
+                                passwordForgotDialog
+                                        .setMessage(R.string.pw_reset_email_sent)
                                         .create()
                                         .show();
-                            }
-                            else {
-                                Log.d(TAG, "something broke"); //email not VERIFY WITH NEW ACC
+                            } else {
 
                                 if (!isValidEmail(email)) {
-
-                                    new AlertDialog.Builder(SignInActivity.this)
-                                            .setTitle("Password Reset Request")
-                                            .setMessage("It looks like something went wrong. Typo?")
-                                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    // nothing happens here.
-                                                }
-                                            })
+                                    passwordForgotDialog
+                                            .setMessage(R.string.pw_reset_incomplete_email)
                                             .create()
                                             .show();
-                                }
-                                else {
-                                    new AlertDialog.Builder(SignInActivity.this)
-                                    .setTitle("Password Reset Request")
-                                            .setMessage("It looks like something went wrong. We don't have a record for that email address. Please try again.")
-                                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    // nothing happens here.
-                                                }
-                                            })
+                                } else {
+                                    passwordForgotDialog
+                                            .setMessage(R.string.pw_reset_email_not_found)
                                             .create()
                                             .show();
                                 }
@@ -164,7 +153,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 });
     }
 
-    public final static boolean isValidEmail(CharSequence target) {
+    public static boolean isValidEmail(CharSequence target) {
         return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
@@ -181,4 +170,5 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
+
 }

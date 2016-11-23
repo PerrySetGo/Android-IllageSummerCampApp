@@ -74,4 +74,7 @@
     <string name="user_pw_mismatch">incorrect credentials, try again.</string>
     <string name="enter_email">Please enter your email</string>
     <string name="blank_password">Password cannot be blank</string>
+    <string name="pw_reset_email_sent">A email was sent to you allowing you to reset your password! See you soon.</string>
+    <string name="pw_reset_incomplete_email">It looks like something went wrong - are you sure you entered a full email address?</string>
+    <string name="pw_reset_email_not_found">It looks like something went wrong. We don\'t have a record for that email address. Please try again.</string>
 </resources>
