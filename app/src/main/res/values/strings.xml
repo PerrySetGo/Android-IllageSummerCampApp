@@ -53,7 +53,7 @@
     <string name="time_next">Time:</string>
     <string name="description_next">Description:</string>
     <string name="you_apos_re_invited">You\'re Invited!</string>
-    <string name="loading_event">Loading Event...</string>
+    <string name="loading_event">Loading Event&#8230;</string>
     <string name="sign_in">Sign In</string>
     <string name="don_t_have_an_account_sign_up_here">Don\'t have an account? Sign up here!</string>
     <string name="login">Login</string>
@@ -66,5 +66,6 @@
     <string name="awesome_event">Awesome Event!</string>
     <string name="save_event">Save Event</string>
     <string name="delete_event">Delete Event</string>
-    <string name="lorem_ipsum_dolor_sit_amet">Lorem ipsum dolor sit amet...</string>
+    <string name="lorem_ipsum_dolor_sit_amet">Sign Up or Sign In to save events and more. </string>
+    <string name="dont_show_again">You can still select either option in the main menu</string>
 </resources>
