@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.perrysetgo.illageSummerCamp.ui.SignUpActivity"
     >
-
+    <!--android:theme="@style/Theme.AppCompat.Dialog"-->
+<!--todo: how to handle forgotten username/pw-->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -58,6 +59,16 @@
             android:textSize="15sp"
             android:text="@string/don_t_have_an_account_sign_up_here"
             android:id="@+id/registerTextView"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="Forgot your password? Click here."
+            android:id="@+id/forgotPasswordTextView"
             android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
