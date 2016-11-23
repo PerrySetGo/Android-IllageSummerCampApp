@@ -1,5 +1,6 @@
 package com.perrysetgo.illageSummerCamp.ui;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,19 +8,23 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
+import com.perrysetgo.illageSummerCamp.fragments.SignUpFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,21 +32,24 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
+    @Bind(R.id.signinButton) Button signInButton;
+    @Bind(R.id.signupButton) Button signUpButton;
 
     // TODO: 7/6/16 fix login/registration and switches
     //todo push notifications??
     //todo save events to "my events"
-    //todo upload photos?
     //todo see participants
     //todo contact participants
     //// TODO: 11/15/16 fix navigation to have better UX on all activities.
 
 
     //shared pref & login
-
+    private boolean loggedIn;
+    private boolean showSignOnDialog;
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
-    private boolean loggedIn;
+
+
 
     public Context context;
 
@@ -51,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+    //dialog
+
+    private class DrawerItemClickListener implements ListView.OnItemClickListener, View.OnClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
             switch (position) {
@@ -95,31 +105,62 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 }
-
-
+                case 8:{
+                    Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+                    startActivity(intent);
+                    break;
+                }
+                case 9: {
+                    Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                    startActivity(intent);
+                    break;
+                }
 
                 default:
                     break;
             }
             mDrawerLayout.closeDrawer(mDrawerList);
         }
+
+        @Override
+        public void onClick(View view) {
+
+            if (view == signInButton){
+                Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+                startActivity(intent);
+            }
+            if (view == signUpButton){
+                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+
+
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mEditor = mSharedPreferences.edit();
         loggedIn = mSharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, true);
+        showSignOnDialog =  mSharedPreferences.getBoolean(Constants.PREFERENCES_SHOW_SIGN_ON_DIALOG,true);
+
+        if (!showSignOnDialog) {
+            SignUpFragment signupFragment = new SignUpFragment();
+            signupFragment.show(getFragmentManager(), "Sample Fragment");
+        }
 
         context = getApplicationContext();
-        setContentView(R.layout.activity_main);
 
         mDrawerList = (ListView)findViewById(R.id.navList);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 
         ButterKnife.bind(this);
-        //this is here to circumvent needing to log in. REMOVE BEFORE PRODUCTION
 
         addDrawerItems();
         setupDrawer();
@@ -129,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addDrawerItems(){
-        String[] osArray = { "About Camp", "Camp Map", "See Next Event", "See All Events", "Contact Us", "Add Event", "Upload Photo", "See All Photos" };//// TODO: 11/15/16 find a way to make this more dynamic and/or retrieve prgrammatically
+        String[] osArray = { "About Camp", "Camp Map", "See Next Event", "See All Events", "Contact Us", "Add Event", "Upload Photo", "See All Photos", "Sign In", "Sign Up" };//// TODO: 11/15/16 find a way to make this more dynamic and/or retrieve prgrammatically
         navDrawAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(navDrawAdapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
