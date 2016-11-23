@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -56,10 +57,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
+//                    Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    startActivity(intent);
+//                    finish();
                 }
             }
         };
@@ -102,7 +103,33 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                                         .show();
                             }
                             else {
-                                Log.d(TAG, "something broke"); //email not ound??
+                                Log.d(TAG, "something broke"); //email not VERIFY WITH NEW ACC
+
+                                if (!isValidEmail(email)) {
+
+                                    new AlertDialog.Builder(SignInActivity.this)
+                                            .setTitle("Password Reset Request")
+                                            .setMessage("It looks like something went wrong. Typo?")
+                                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    // nothing happens here.
+                                                }
+                                            })
+                                            .create()
+                                            .show();
+                                }
+                                else {
+                                    new AlertDialog.Builder(SignInActivity.this)
+                                    .setTitle("Password Reset Request")
+                                            .setMessage("It looks like something went wrong. We don't have a record for that email address. Please try again.")
+                                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    // nothing happens here.
+                                                }
+                                            })
+                                            .create()
+                                            .show();
+                                }
                             }
                         }
                     });
@@ -135,6 +162,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         }
                     }
                 });
+    }
+
+    public final static boolean isValidEmail(CharSequence target) {
+        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
     @Override

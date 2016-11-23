@@ -113,7 +113,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             Log.i(TAG, "success");
                         }
                         else {
-                            Toast.makeText(SignUpActivity.this, "Failed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUpActivity.this, "Failed", Toast.LENGTH_LONG).show(); //this may happen because username or email already exists. what to do?
                         }
                     }
 
