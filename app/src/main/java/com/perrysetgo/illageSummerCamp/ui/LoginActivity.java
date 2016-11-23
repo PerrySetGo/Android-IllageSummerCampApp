@@ -24,8 +24,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public static final String TAG = LoginActivity.class.getSimpleName();
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
+    SharedPreferences mSharedPreferences;
+    SharedPreferences.Editor mEditor;
     private String mUser;
     private String mPw;
 
@@ -50,13 +50,12 @@ public class LoginActivity extends AppCompatActivity {
                     Log.i(TAG, "both match");
                     final Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     mEditor.putBoolean(Constants.PREFERENCES_LOGIN_STATUS, true).apply();
-                    Toast.makeText(getApplicationContext(), "success! you are now logged in.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.success_admin_login, Toast.LENGTH_SHORT).show();
                     Thread thread = new Thread(){
                         @Override
                         public void run() {
                             try {
                                 Thread.sleep(3000); //CHANGE if change in toast
-
                                 startActivity(intent);
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -64,23 +63,18 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     };
 
-
                     thread.start();
-
                 }
                 else if ( user.equals(mUser) && !pw.equals(mPw))
                 {
-                    Log.i(TAG, "user match only");
-                    Toast.makeText(getApplicationContext(), "incorrect password, try again.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.incorrect_password, Toast.LENGTH_LONG).show();
                 }
                 else if ( !user.equals(mUser) && pw.equals(mPw))
                 {
-                    Log.i(TAG, "pw match only");
-                    Toast.makeText(getApplicationContext(), "incorrect username, try again.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.incorrect_username, Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Log.i(TAG, "neither match");
-                    Toast.makeText(getApplicationContext(), "incorrect credentials, try again.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.user_pw_mismatch, Toast.LENGTH_LONG).show();
                 }
 
             }

@@ -68,4 +68,8 @@
     <string name="delete_event">Delete Event</string>
     <string name="lorem_ipsum_dolor_sit_amet">Sign Up or Sign In to save events and more. </string>
     <string name="dont_show_again">You can still select either option in the main menu</string>
+    <string name="success_admin_login">success! you are now logged in as an administrator.</string>
+    <string name="incorrect_password">incorrect password, try again.</string>
+    <string name="incorrect_username">incorrect username, try again.</string>
+    <string name="user_pw_mismatch">incorrect credentials, try again.</string>
 </resources>
