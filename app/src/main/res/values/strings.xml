@@ -43,7 +43,7 @@
     <string name="email">Email</string>
     <string name="your_message_for_us">Your message for us</string>
     <string name="send_it">Send It!</string>
-    <string name="please_log_in_to_create_events_in_order_to_create_an_account_please_send_us_an_email">Please log in to create events. In order to create an account, please send us an email.</string>
+    <string name="please_log_in_to_create_events_in_order_to_create_an_account_please_send_us_an_email">Please log in to create events, edit events, and other admin type activities. In order to create an account, or if you lose your username and password, please send us an email.</string>
     <string name="password">Password</string>
     <string name="testing_test_123">Testing: test/123</string>
     <string name="camp_description">Camp Description</string>
