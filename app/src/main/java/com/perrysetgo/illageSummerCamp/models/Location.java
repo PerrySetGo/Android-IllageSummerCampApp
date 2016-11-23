@@ -1,7 +1,5 @@
 package com.perrysetgo.illageSummerCamp.models;
 
-import java.util.ArrayList;
-
 public class Location {
     private String mName;
     private String mAddress;
@@ -29,31 +27,17 @@ public class Location {
         return mAddress;
     }
 
-    public void setAddress(String address) {
-        mAddress = address;
-    }
 
     public double getLongitude() {
         return mLongitude;
-    }
-
-    public void setLongitude(double longitude) {
-        mLongitude = longitude;
     }
 
     public double getLatitude() {
         return mLatitude;
     }
 
-    public void setLatitude(double latitude) {
-        mLatitude = latitude;
-    }
-
     public String getDescription() {
         return mDescription;
     }
 
-    public void setDescription(String description) {
-        mDescription = description;
-    }
 }
