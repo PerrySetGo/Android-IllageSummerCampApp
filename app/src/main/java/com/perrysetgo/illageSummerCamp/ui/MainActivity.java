@@ -1,6 +1,5 @@
 package com.perrysetgo.illageSummerCamp.ui;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,7 +7,6 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -44,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //shared pref & login
-    private boolean loggedIn;
+    private boolean loggedInAsAdmin;
     private boolean showSignOnDialog;
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
@@ -146,8 +144,9 @@ public class MainActivity extends AppCompatActivity {
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mEditor = mSharedPreferences.edit();
-        loggedIn = mSharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, true);
-        showSignOnDialog =  mSharedPreferences.getBoolean(Constants.PREFERENCES_SHOW_SIGN_ON_DIALOG,true);
+
+        showSignOnDialog =  mSharedPreferences.getBoolean(Constants.PREFERENCES_SHOW_SIGN_ON_DIALOG,true); //OK with seeing sign in/up dialog?
+        loggedInAsAdmin = mSharedPreferences.getBoolean(Constants.PREFERENCES_USER_LOGIN_STATUS, true); //logged in as admin?
 
         if (!showSignOnDialog) {
             SignUpFragment signupFragment = new SignUpFragment();
@@ -168,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //nav drawer start.
     private void addDrawerItems(){
         String[] osArray = { "About Camp", "Camp Map", "See Next Event", "See All Events", "Contact Us", "Add Event", "Upload Photo", "See All Photos", "Sign In", "Sign Up","Admin Panel" };//// TODO: 11/15/16 find a way to make this more dynamic and/or retrieve prgrammatically
         navDrawAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
@@ -208,14 +208,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return true; //minor change here
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -225,17 +217,31 @@ public class MainActivity extends AppCompatActivity {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+        if (id == R.id.action_logout) { //handle admin logout click
+            logAdminOut();
+            finish();
+            startActivity(getIntent());
+            return true;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    //nav drawer end
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(loggedInAsAdmin) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_main, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
     }
 
 
 
 
 
-
-
-
-//    private void logout() {
+//    private void logUserOut() {
 //        FirebaseAuth.getInstance().signOut();
 //        Intent intent = new Intent(MainActivity.this, SignInActivity.class);
 //        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -243,4 +249,7 @@ public class MainActivity extends AppCompatActivity {
 //        finish();
 //    }
 
+    private void logAdminOut(){
+        mEditor.putBoolean(Constants.PREFERENCES_USER_LOGIN_STATUS, false).apply();
+    }
 }
