@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -71,56 +72,86 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    public void onClick(View view){
+    public void onClick(View view) {
         Log.i(TAG, view.toString());
 
-        if (view == loginTextView){
-            Intent intent = new Intent (SignUpActivity.this, SignInActivity.class); //manage activity stack
-                                                                                    //custom control back button
+        if (view == loginTextView) {
+            Intent intent = new Intent(SignUpActivity.this, SignInActivity.class); //manage activity stack
+            //custom control back button
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         }
-        if (view == createUserButton){
+        if (view == createUserButton) {
             createNewUser();
-        }
-        else {
+        } else {
             Log.i(TAG, "broke");
         }
 
     }
 
-    private void createNewUser(){
+    private void createNewUser() {
         final String name = nameEditText.getText().toString().trim();
         final String email = emailEditText.getText().toString().trim();
-        String password = passwordEditText.toString().trim();
+        String password = passwordEditText.getText().toString().trim();
         String confirmPassword = confirmPasswordEditText.getText().toString().trim();
 
-        auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>(){
-                    @Override
-                    public void onComplete (@NonNull Task<AuthResult> task){
-                        if (task.isSuccessful()){
-                            String key = newUserReference.push().getKey();
-                            //add the user to a users table too so we can use it to connect it to events.
-                            User newUser = new User(name, email, key );
-                            DatabaseReference newRef = FirebaseDatabase
-                                    .getInstance()
-                                    .getReference(Constants.FIREBASE_CHILD_USERS)
-                                    .child(key);
+        if (password.length() < 6){
+            Toast.makeText(SignUpActivity.this, "Passwords must be six or more characters long.", Toast.LENGTH_LONG).show();
+        }
 
-                            newRef.setValue(newUser);
-                            Log.i(TAG, "success");
-                        }
-                        else {
-                            Toast.makeText(SignUpActivity.this, "Failed", Toast.LENGTH_LONG).show(); //this may happen because username or email already exists. what to do?
-                        }
-                    }
+        else if (!checkMatchingPw(password, confirmPassword) && !isValidEmail(email)) {
+            Toast.makeText(SignUpActivity.this, "Passwords do not match or are blank, and your email isn't valid. Try harder pls.", Toast.LENGTH_LONG).show();
+        }
+        else if (!isValidEmail(email) && checkMatchingPw(password, confirmPassword)) {
+            Toast.makeText(SignUpActivity.this, "Passwords match, but something is wrong with the email you entered. Oopsies.", Toast.LENGTH_LONG).show();
+        }
+        else if (!checkMatchingPw(password, confirmPassword) && isValidEmail(email)) {
+            Toast.makeText(SignUpActivity.this, "Passwords do not match.", Toast.LENGTH_LONG).show();
+        }
+        else { //all good
 
-                });
+            auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                String key = newUserReference.push().getKey();
+                                //add the user to a users table too so we can use it to connect it to events.
+                                User newUser = new User(name, email, key);
+                                DatabaseReference newRef = FirebaseDatabase
+                                        .getInstance()
+                                        .getReference(Constants.FIREBASE_CHILD_USERS)
+                                        .child(key);
+
+                                newRef.setValue(newUser);
+                                Log.i(TAG, "success");
+                                final Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                Toast.makeText(getApplicationContext(), "Account created. Logging you in...", Toast.LENGTH_SHORT).show();
+
+                                Thread thread = new Thread(){
+                                    @Override
+                                    public void run() { //slight delay to not switch activities while toast still showing.
+                                        try {
+                                            Thread.sleep(4000); //CHANGE if change in toast
+                                            startActivity(intent);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                };
+
+                                thread.start();
+                            } else {
+                                Toast.makeText(SignUpActivity.this, "Something strange happened. Maybe this email address is already registered? Try signing in instead.", Toast.LENGTH_LONG).show(); //this may happen because username or email already exists. what to do?
+                            }
+                        }
+
+                    });
+        }
     }
 
-    private void createAuthStateListener(){
+    private void createAuthStateListener() {
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -136,4 +167,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
+    public static boolean isValidEmail(CharSequence target) {
+        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+
+    public static boolean checkMatchingPw(String pw, String confirmPw) {
+        boolean pwsMatch = false;
+        if (pw.equals(confirmPw)) {
+            pwsMatch = true;
+        }
+        return pwsMatch;
+    }
 }

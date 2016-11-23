@@ -67,7 +67,7 @@
             android:layout_marginTop="20dp"
             android:textStyle="bold"
             android:textSize="15sp"
-            android:text="Forgot your password? Click here."
+            android:text="@string/forgot_your_password_click_here"
             android:id="@+id/forgotPasswordTextView"
             android:layout_gravity="center_horizontal" />
 

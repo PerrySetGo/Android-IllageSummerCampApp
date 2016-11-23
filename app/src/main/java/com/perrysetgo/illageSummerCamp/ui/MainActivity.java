@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.fragments.SignUpFragment;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
             switch (position) {
+                //// TODO: 11/23/16 i need to be reformatted and some options moved to admin menu.
                 case 0: {
                     Intent intent = new Intent(MainActivity.this, AboutCampActivity.class);
                     startActivity(intent);
@@ -108,6 +110,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case 9: {
                     Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
                     startActivity(intent);
+                    break;
+                }
+                case 11: {
+                    logUserOut();
                     break;
                 }
 
@@ -171,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //nav drawer start.
     private void addDrawerItems(){
-        String[] osArray = { "About Camp", "Camp Map", "See Next Event", "See All Events", "Contact Us", "Add Event", "Upload Photo", "See All Photos", "Sign In", "Sign Up","Admin Panel" };//// TODO: 11/15/16 find a way to make this more dynamic and/or retrieve prgrammatically
+        String[] osArray = { "About Camp", "Camp Map", "See Next Event", "See All Events", "Contact Us", "Add Event", "Upload Photo", "See All Photos", "Sign In", "Sign Up","Sign Out","Admin Panel" };//// TODO: 11/15/16 find a way to make this more dynamic and/or retrieve prgrammatically
         navDrawAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(navDrawAdapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -242,16 +248,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-
-
-//    private void logUserOut() {
-//        FirebaseAuth.getInstance().signOut();
-//        Intent intent = new Intent(MainActivity.this, SignInActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        startActivity(intent);
-//        finish();
-//    }
+    private void logUserOut() {
+        FirebaseAuth.getInstance().signOut();
+        finish();
+        startActivity(getIntent());
+    }
 
     private void logAdminOut(){
         mEditor.putBoolean(Constants.PREFERENCES_USER_LOGIN_STATUS, false).apply();

@@ -1,12 +1,8 @@
 package com.perrysetgo.illageSummerCamp.ui;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,11 +53,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-//                    Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                    startActivity(intent);
-//                    finish();
+                if (user != null) { //if user is logged in then can take them direct back to main.
+                    Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
                 }
             }
         };
@@ -74,12 +70,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        //make it more specific later.
-        final AlertDialog.Builder passwordForgotDialog = new AlertDialog.Builder(SignInActivity.this);
+
+        final AlertDialog.Builder passwordForgotDialog = new AlertDialog.Builder(SignInActivity.this);         //make it more specific later.
         passwordForgotDialog.setTitle("Password Reset Request");
         passwordForgotDialog.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                // nothing happens here.
+                // nothing
             }
         });
 
