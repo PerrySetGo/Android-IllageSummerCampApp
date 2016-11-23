@@ -32,8 +32,8 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
-    @Bind(R.id.signinButton) Button signInButton;
-    @Bind(R.id.signupButton) Button signUpButton;
+    @Bind(R.id.signInButton) Button signInButton;
+    @Bind(R.id.signUpButton) Button signUpButton;
 
     // TODO: 7/6/16 fix login/registration and switches
     //todo push notifications??
@@ -49,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
 
-
-
     public Context context;
 
     //drawer
@@ -60,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
 
     //dialog
-
     private class DrawerItemClickListener implements ListView.OnItemClickListener, View.OnClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -117,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 default:
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
                     break;
             }
             mDrawerLayout.closeDrawer(mDrawerList);
@@ -170,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addDrawerItems(){
-        String[] osArray = { "About Camp", "Camp Map", "See Next Event", "See All Events", "Contact Us", "Add Event", "Upload Photo", "See All Photos", "Sign In", "Sign Up" };//// TODO: 11/15/16 find a way to make this more dynamic and/or retrieve prgrammatically
+        String[] osArray = { "About Camp", "Camp Map", "See Next Event", "See All Events", "Contact Us", "Add Event", "Upload Photo", "See All Photos", "Sign In", "Sign Up","Admin Panel" };//// TODO: 11/15/16 find a way to make this more dynamic and/or retrieve prgrammatically
         navDrawAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(navDrawAdapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
