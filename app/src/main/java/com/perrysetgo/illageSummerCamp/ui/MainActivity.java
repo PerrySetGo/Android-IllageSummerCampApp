@@ -27,7 +27,7 @@ import com.perrysetgo.illageSummerCamp.fragments.SignUpFragment;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = MainActivity.class.getSimpleName();
     @Bind(R.id.signInButton) Button signInButton;
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
 
     //dialog
-    private class DrawerItemClickListener implements ListView.OnItemClickListener, View.OnClickListener {
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
             switch (position) {
@@ -119,19 +119,6 @@ public class MainActivity extends AppCompatActivity {
             mDrawerLayout.closeDrawer(mDrawerList);
         }
 
-        @Override
-        public void onClick(View view) {
-
-            if (view == signInButton){
-                Intent intent = new Intent(MainActivity.this, SignInActivity.class);
-                startActivity(intent);
-            }
-            if (view == signUpButton){
-                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
-                startActivity(intent);
-            }
-
-        }
     }
 
     @Override
@@ -140,7 +127,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-
+        signInButton.setOnClickListener(this);
+        signUpButton.setOnClickListener(this);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mEditor = mSharedPreferences.edit();
@@ -164,6 +152,20 @@ public class MainActivity extends AppCompatActivity {
         setupDrawer();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+    }
+
+    @Override //no menu clicks are handled here!
+    public void onClick(View view) {
+
+        if (view == signInButton){
+            Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+            startActivity(intent);
+        }
+        if (view == signUpButton){
+            Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+            startActivity(intent);
+        }
 
     }
 
@@ -217,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        if (id == R.id.action_logout) { //handle admin logout click
+        if (id == R.id.action_admin_logout) { //handle admin logout click
             logAdminOut();
             finish();
             startActivity(getIntent());
@@ -228,6 +230,8 @@ public class MainActivity extends AppCompatActivity {
 
     //nav drawer end
 
+
+    //admin overflow
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if(loggedInAsAdmin) {

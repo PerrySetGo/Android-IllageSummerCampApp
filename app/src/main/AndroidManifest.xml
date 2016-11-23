@@ -24,7 +24,6 @@
             android:label="@string/title_activity_home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -75,7 +74,13 @@
                 android:value="com.perrysetgo.illageSummerCamp.ui.MainActivity" />
         </activity>
         <activity android:name=".ui.SignUpActivity" />
-        <activity android:name=".ui.SignInActivity" />
+        <activity android:name=".ui.SignInActivity"
+            android:label="Sign In Activity"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".ui.MainActivity"/>
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.perrysetgo.illageSummerCamp.ui.MainActivity" />
         <activity android:name=".ui.AddPhotoActivity" />
         <activity android:name=".ui.PhotoGalleryActivity"></activity>
     </application>
