@@ -136,10 +136,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         showSignOnDialog =  mSharedPreferences.getBoolean(Constants.PREFERENCES_SHOW_SIGN_ON_DIALOG,true); //OK with seeing sign in/up dialog?
         loggedInAsAdmin = mSharedPreferences.getBoolean(Constants.PREFERENCES_USER_LOGIN_STATUS, true); //logged in as admin?
 
-        if (!showSignOnDialog) {
-            SignUpFragment signupFragment = new SignUpFragment();
-            signupFragment.show(getFragmentManager(), "Sample Fragment");
-        }
+//        if (!showSignOnDialog) {
+//            SignUpFragment signupFragment = new SignUpFragment();
+//            signupFragment.show(getFragmentManager(), "Sample Fragment");
+//        }
 
         context = getApplicationContext();
 
