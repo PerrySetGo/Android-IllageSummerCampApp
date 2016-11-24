@@ -10,7 +10,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,7 +22,6 @@ import android.widget.ListView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
-import com.perrysetgo.illageSummerCamp.fragments.SignUpFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -52,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //drawer
     private ListView mDrawerList;
-    private ArrayAdapter<String> navDrawAdapter;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -177,8 +174,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //nav drawer start.
     private void addDrawerItems(){
-        String[] osArray = { "About Camp", "Camp Map", "See Next Event", "See All Events", "Contact Us", "Add Event", "Upload Photo", "See All Photos", "Sign In", "Sign Up","Sign Out","Admin Panel" };//// TODO: 11/15/16 find a way to make this more dynamic and/or retrieve prgrammatically
-        navDrawAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        ArrayAdapter <CharSequence> navDrawAdapter = ArrayAdapter.createFromResource(this, R.array.main_menu_array, android.R.layout.simple_list_item_1);
         mDrawerList.setAdapter(navDrawAdapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
     }
@@ -242,7 +238,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onCreateOptionsMenu(Menu menu) {
         if(loggedInAsAdmin) {
             MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu_main, menu);
+            inflater.inflate(R.menu.menu_admin, menu);
         }
         return super.onCreateOptionsMenu(menu);
     }

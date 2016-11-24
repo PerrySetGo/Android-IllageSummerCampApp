@@ -78,4 +78,20 @@
     <string name="pw_reset_incomplete_email">It looks like something went wrong - are you sure you entered a full email address?</string>
     <string name="pw_reset_email_not_found">It looks like something went wrong. We don\'t have a record for that email address. Please try again.</string>
     <string name="forgot_your_password_click_here">Forgot your password? Click here.</string>
+
+    <string-array name="main_menu_array">
+        <item>About Camp</item>
+        <item>Camp Map</item>
+        <item>See Next Event</item>
+        <item>See All Events</item>
+        <item>Contact Us</item>
+        <item>Add Event</item>
+        <item>Upload Photo</item>
+        <item>See All Photos</item>
+        <item>Sign In</item>
+        <item>Sign Up</item>
+        <item>Sign Out</item>
+        <item>Admin Panel</item>
+    </string-array>
 </resources>
+

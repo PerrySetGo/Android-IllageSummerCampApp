@@ -47,11 +47,13 @@
 
     <ListView
         android:id="@+id/navList"
-        android:layout_width="200dp"
+        android:layout_width="200sp"
         android:textColor="@android:color/white"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:paddingStart="5sp"
-        android:paddingEnd="5sp"
+        android:paddingStart="2sp"
+        android:divider="#CCCCCC"
+        android:dividerHeight="2sp"
+        android:entries="@array/main_menu_array"
         android:background="#229678"/>
 </android.support.v4.widget.DrawerLayout>
