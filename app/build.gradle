@@ -44,12 +44,14 @@ repositories {
 }
 
 dependencies {
+    compile 'com.android.support:appcompat-v7:24.1.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.google.android.gms:play-services:9.0.2'
     compile 'com.google.firebase:firebase-core:9.0.2'
     compile 'com.google.firebase:firebase-database:9.0.2'
     compile 'com.google.firebase:firebase-auth:9.0.2'
     compile 'com.firebaseui:firebase-ui-database:0.4.0'
+    compile 'com.android.support:design:24.2.1'
     compile 'org.parceler:parceler-api:1.1.1'
     compile 'com.android.support:recyclerview-v7:24.2.1'
     apt 'org.parceler:parceler:1.1.1'

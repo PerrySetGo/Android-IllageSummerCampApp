@@ -3,15 +3,20 @@ package com.perrysetgo.illageSummerCamp;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.support.annotation.LayoutRes;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.perrysetgo.illageSummerCamp.ui.AboutCampActivity;
@@ -21,7 +26,6 @@ import com.perrysetgo.illageSummerCamp.ui.AllEventsActivity;
 import com.perrysetgo.illageSummerCamp.ui.ContactActivity;
 import com.perrysetgo.illageSummerCamp.ui.IllageMapActivity;
 import com.perrysetgo.illageSummerCamp.ui.LoginActivity;
-import com.perrysetgo.illageSummerCamp.ui.MainActivity;
 import com.perrysetgo.illageSummerCamp.ui.NextEventActivity;
 import com.perrysetgo.illageSummerCamp.ui.PhotoGalleryActivity;
 import com.perrysetgo.illageSummerCamp.ui.SignInActivity;
@@ -29,23 +33,110 @@ import com.perrysetgo.illageSummerCamp.ui.SignUpActivity;
 
 import butterknife.ButterKnife;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener {
 
-    //drawer
+    private NavigationView navigationView;
+    private DrawerLayout fullLayout;
+    private Toolbar toolbar;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private int selectedNavItemId;
     private ListView mDrawerList;
     private ArrayAdapter<String> navDrawAdapter;
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mDrawerToggle;
-
     public static final String TAG = BaseActivity.class.getSimpleName();
 
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener, View.OnClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-            switch (position) {
+
+    /**
+     * Helper method that can be used by child classes to
+     * specify that they don't want a {@link Toolbar}
+     * @return true
+     */
+    protected boolean useToolbar()
+    {
+        return true;
+    }
+
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        /**
+         * This is going to be our actual root layout.
+         */
+        fullLayout = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
+        /**
+         * {@link FrameLayout} to inflate the child's view. We could also use a {@link android.view.ViewStub}
+         */
+        FrameLayout activityContainer = (FrameLayout) fullLayout.findViewById(R.id.activity_content);
+        getLayoutInflater().inflate(layoutResID, activityContainer, true);
+
+        /**
+         * Note that we don't pass the child's layoutId to the parent,
+         * instead we pass it our inflated layout.
+         */
+        super.setContentView(fullLayout);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        navigationView = (NavigationView) findViewById(R.id.navigationView);
+
+        if (useToolbar())
+        {
+            setSupportActionBar(toolbar);
+        }
+        else
+        {
+            toolbar.setVisibility(View.GONE);
+        }
+
+        setUpNavView();
+    }
+
+
+    protected void setUpNavView()
+    {
+        navigationView.setNavigationItemSelectedListener(this);
+
+        if( useDrawerToggle()) { // use the hamburger menu
+            mDrawerToggle = new ActionBarDrawerToggle(this, fullLayout, toolbar,
+                    R.string.nav_drawer_opened,
+                    R.string.nav_drawer_closed);
+
+            fullLayout.setDrawerListener(mDrawerToggle);
+            mDrawerToggle.syncState();
+        } else if(useToolbar() && getSupportActionBar() != null) {
+            // Use home/back button instead
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(getResources()
+                    .getDrawable(R.drawable.abc_ic_ab_back_material));
+        }
+    }
+
+
+    /**
+     * Helper method to allow child classes to opt-out of having the
+     * hamburger menu.
+     * @return
+     */
+    protected boolean useDrawerToggle()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+        fullLayout.closeDrawer(GravityCompat.START);
+        selectedNavItemId = menuItem.getItemId();
+
+        return onOptionsItemSelected(menuItem);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        Log.d(TAG, id + "");
+        switch (id) {
                 case 0: {
-                    Intent intent = new Intent(getApplicationContext(), AboutCampActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), AboutCampActivity.class );
                     startActivity(intent);
                     break;
                 }
@@ -100,90 +191,6 @@ public class BaseActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
             }
-            mDrawerLayout.closeDrawer(mDrawerList);
-        }
-
-        @Override
-        public void onClick(View view) {
-
-//            if (view == signInButton){
-//                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
-//                startActivity(intent);
-//            }
-//            if (view == signUpButton){
-//                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
-//                startActivity(intent);
-//            }
-
-        }
-
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
-        mDrawerList = (ListView)findViewById(R.id.navList);
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-
-        ButterKnife.bind(this);
-
-        addDrawerItems();
-        setupDrawer();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-    }
-
-    //nav drawer start.
-    private void addDrawerItems(){
-        String[] osArray = { "About Camp", "Camp Map", "See Next Event", "See All Events", "Contact Us", "Add Event", "Upload Photo", "See All Photos", "Sign In", "Sign Up","Admin Panel" };//// TODO: 11/15/16 find a way to make this more dynamic and/or retrieve prgrammatically
-        navDrawAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, osArray);
-        mDrawerList.setAdapter(navDrawAdapter);
-        mDrawerList.setOnItemClickListener(new BaseActivity.DrawerItemClickListener());
-    }
-
-    private void setupDrawer() {
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle("Navigation!");
-                invalidateOptionsMenu();
-            }
-
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                getSupportActionBar().setTitle("Back");
-                invalidateOptionsMenu();
-            }
-        };
-
-        mDrawerToggle.setDrawerIndicatorEnabled(true);
-        mDrawerLayout.addDrawerListener(mDrawerToggle);
-        mDrawerLayout.setScrimColor(Color.argb(140, 194, 194, 194));
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.string.action_setting) {
-            return true;
-        }
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
         return super.onOptionsItemSelected(item);
-    }
-
+        }
 }
