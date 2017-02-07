@@ -135,52 +135,52 @@ public class BaseActivity extends AppCompatActivity implements
         int id = item.getItemId();
         Log.d(TAG, id + "");
         switch (id) {
-                case 0: {
+                case R.id.action_about: {
                     Intent intent = new Intent(getApplicationContext(), AboutCampActivity.class );
                     startActivity(intent);
                     break;
                 }
-                case 1: {
+                case R.id.action_map: {
                     Intent intent = new Intent(getApplicationContext(), IllageMapActivity.class);
                     startActivity(intent);
                     break;
                 }
-                case 2: {
+                case R.id.action_next: {
                     Intent intent = new Intent(getApplicationContext(), NextEventActivity.class);
                     startActivity(intent);
                     break;
                 }
-                case 3: {
+                case R.id.action_all_events: {
                     Intent intent = new Intent(getApplicationContext(), AllEventsActivity.class);
                     startActivity(intent);
                     break;
                 }
-                case 4: {
+                case R.id.action_contact: {
                     Intent intent = new Intent(getApplicationContext(), ContactActivity.class);
                     startActivity(intent);
                     break;
                 }
-                case 5: {
+                case R.id.action_add_event: {
                     Intent intent = new Intent(getApplicationContext(), AddEventActivity.class);
                     startActivity(intent);
                     break;
                 }
-                case 6: {
+                case R.id.action_add_photo: {
                     Intent intent = new Intent(getApplicationContext(), AddPhotoActivity.class);
                     startActivity(intent);
                     break;
                 }
-                case 7: {
+                case R.id.action_photo_gallery: {
                     Intent intent = new Intent(getApplicationContext(), PhotoGalleryActivity.class);
                     startActivity(intent);
                     break;
                 }
-                case 8:{
+                case R.id.action_sign_in:{
                     Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
                     startActivity(intent);
                     break;
                 }
-                case 9: {
+                case R.id.action_sign_up: {
                     Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
                     startActivity(intent);
                     break;

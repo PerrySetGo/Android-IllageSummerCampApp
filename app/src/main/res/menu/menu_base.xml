@@ -6,4 +6,31 @@
     <item
         android:id="@+id/action_about"
         android:title="About Camp"/>
+    <item
+        android:id="@+id/action_map"
+        android:title="Camp Map"/>
+    <item
+        android:id="@+id/action_contact"
+        android:title="Contact Us"/>
+    <item
+        android:id="@+id/action_next"
+        android:title="Which Event is Next?"/>
+    <item
+    android:id="@+id/action_add_event"
+    android:title="Add Event"/>
+    <item
+        android:id="@+id/action_all_events"
+        android:title="See All Events"/>
+    <item
+        android:id="@+id/action_sign_up"
+        android:title="Sign Up"/>
+    <item
+        android:id="@+id/action_sign_in"
+        android:title="Sign In"/>
+    <item
+        android:id="@+id/action_photo_gallery"
+        android:title="Photo Gallery"/>
+    <item
+        android:id="@+id/action_add_photo"
+        android:title="Add Photo"/>
 </menu>
