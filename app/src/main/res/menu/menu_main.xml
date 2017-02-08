@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group>
         <item
-            android:title="ADMIN"
+            android:title="@string/admin"
             android:enabled="false"
-            app:showAsAction="always" >
+            app:showAsAction="ifRoom" >
         </item>
     </group>
     <group>
         <item
             android:id="@+id/action_logout"
-            android:title="Log Out"
+            android:title="@string/log_out"
             android:visible="true"
             app:showAsAction="never" />
         <item
             android:id="@+id/action_create_event"
-            android:title="Create Event"
+            android:title="@string/create_event"
             android:visible="true"
             app:showAsAction="never" />
     </group>

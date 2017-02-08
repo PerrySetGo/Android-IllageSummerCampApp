@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -59,7 +58,6 @@ public class AddEventActivity extends BaseActivity implements TimePickerDialog.O
     //time vars
     TimePickerFragment startTimePickerFragment;
     TimePickerFragment endTimePickerFragment;
-    int startPickerHour, startPickerMin, endPickerHour, endPickerMin, pickerHour, pickerMin;
     long startDateTimeLong;
     long endDateTimeLong;
     boolean isSettingStartTime = true;
@@ -77,7 +75,6 @@ public class AddEventActivity extends BaseActivity implements TimePickerDialog.O
     ArrayList<String> mLocationNames; //this is the names of the locations so we can use them for the spinner
     ArrayList<String> mDates;
 
-    //other
     private DatabaseReference mSavedEventReference;
 
     @Override
@@ -95,7 +92,7 @@ public class AddEventActivity extends BaseActivity implements TimePickerDialog.O
 
         mAdapter = new EventAdapter(this, mEvents, getFragmentManager());
 
-//get list of dates for date spinner
+        //get list of dates for date spinner - find a diff way to do this.
         mDates = new ArrayList<>();
         mDates.add("Thu, 08/25/2016");
         mDates.add("Fri, 08/26/2016");
@@ -103,8 +100,8 @@ public class AddEventActivity extends BaseActivity implements TimePickerDialog.O
         mDates.add("Sun, 08/28/2016");
 
 
-//start location
-//get the list of locations for the spinner
+        //start location
+        //get the list of locations for the spinner
         mLocationNames = new ArrayList<>();
         mLocationLib = new LocationLib();
         for (int i = 0; i < mLocationLib.getLocations().size(); i++) {
@@ -202,7 +199,7 @@ public class AddEventActivity extends BaseActivity implements TimePickerDialog.O
     }
 
     public void saveEvent(Event newEvent) {
-        String networkMessage="";
+        String networkMessage;
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
         String key = mSavedEventReference.push().getKey();
@@ -222,11 +219,6 @@ public class AddEventActivity extends BaseActivity implements TimePickerDialog.O
             networkMessage = "It looks like you are currently offline. Your event \"" + newEvent.getEventDescription() + "\" will be saved automatically when you are back online.";
         }
         Toast.makeText(getApplicationContext(), networkMessage, Toast.LENGTH_LONG).show();
-    }
-
-    public void showTimePickerDialog(View v) {
-        TimePickerFragment newFragment = new TimePickerFragment();
-        newFragment.show(getFragmentManager(), "timePicker");
     }
 
     //time translator code
@@ -261,7 +253,7 @@ public class AddEventActivity extends BaseActivity implements TimePickerDialog.O
 
     public void setTimeInLong ( int pickerMin, int pickerHour, String trimmedDateChoice){
         DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.US);
-        Date dateAsDate = null;
+        Date dateAsDate = new Date(); //init to avoid npe lint warning
         try {
             dateAsDate = format.parse(trimmedDateChoice + " " + pickerHour + ":" + pickerMin); //match above
         } catch (ParseException e) {

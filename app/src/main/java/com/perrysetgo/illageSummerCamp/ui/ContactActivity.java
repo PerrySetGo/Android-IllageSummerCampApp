@@ -4,41 +4,37 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.perrysetgo.illageSummerCamp.BaseActivity;
-import com.perrysetgo.illageSummerCamp.R;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+import com.perrysetgo.illageSummerCamp.BaseActivity;
+import com.perrysetgo.illageSummerCamp.R;
 
 public class ContactActivity extends BaseActivity {
     public static final String TAG = ContactActivity.class.getSimpleName();
 
     @Bind(R.id.viewWebsiteButton) Button mViewWebSiteButton;
     @Bind(R.id.sendNoteForm) Button mSendNoteForm;
-    @Bind(R.id.emailContact)EditText mEmailContact;
+    @Bind(R.id.emailContact) EditText mEmailContact;
     @Bind(R.id.nameContact) EditText mNameContact;
-    @Bind(R.id.messageContact)EditText mMessageContact;
-    @Bind(R.id.contactFormIntro)TextView mContactFormIntro;
+    @Bind(R.id.messageContact) EditText mMessageContact;
+    @Bind(R.id.contactFormIntro) TextView mContactFormIntro;
     @Bind(R.id.formSubmitButton) Button mFormSubmitButton;
 
     String recipientEmail = "lectique@gmail.com";
-    String messageSubject ="Illage Summer Camp 2016";
+    String messageSubject = "Illage Summer Camp 2016";
 
 
     @Override
@@ -73,11 +69,10 @@ public class ContactActivity extends BaseActivity {
         mFormSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String formattedMessage = "";
                 String name = mNameContact.getText().toString();
                 String email = mEmailContact.getText().toString();
                 String message = mMessageContact.getText().toString();
-                formattedMessage = buildMessage(name, email, message);
+                String formattedMessage = buildMessage(name, email, message);
                 Intent emailIntent = new Intent(Intent.ACTION_SEND);
 
                 emailIntent.setType("message/rfc822");
@@ -91,23 +86,21 @@ public class ContactActivity extends BaseActivity {
 
                 if (isIntentSafe) {
                     startActivity(emailIntent);
-                }
-                else{
-                    Toast.makeText(getApplicationContext(),"Your email is not configured. Please configure it first, then try again.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Your email is not configured. Please configure it first, then try again.", Toast.LENGTH_LONG).show();
                 }
             }
         });
-   }
+    }
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id)
-        {
-            case R.id.action_contact: return true;
+        switch (id) {
+            case R.id.action_contact:
+                return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -116,11 +109,10 @@ public class ContactActivity extends BaseActivity {
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.US);
         Calendar cal = Calendar.getInstance();
         String currentDateTime = dateFormat.format(cal.getTime());
-        String formattedMessage = "Message from: " + name + "\n\n"
-                                    + "At: " + currentDateTime + "\n\n"
-                                    + "From: " + email + "\n\n"
-                                    + message;
-        return formattedMessage;
+        return "Message from: " + name + "\n\n"
+                + "At: " + currentDateTime + "\n\n"
+                + "From: " + email + "\n\n"
+                + message;
     }
 
 

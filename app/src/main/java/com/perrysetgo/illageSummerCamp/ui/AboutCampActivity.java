@@ -1,8 +1,6 @@
 package com.perrysetgo.illageSummerCamp.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.perrysetgo.illageSummerCamp.BaseActivity;
@@ -24,7 +22,6 @@ public class AboutCampActivity extends BaseActivity {
         {
             case R.id.action_about: return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

@@ -2,7 +2,6 @@ package com.perrysetgo.illageSummerCamp.ui;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -11,10 +10,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.perrysetgo.illageSummerCamp.BaseActivity;
-import com.perrysetgo.illageSummerCamp.R;
-import com.perrysetgo.illageSummerCamp.models.Location;
-import com.perrysetgo.illageSummerCamp.models.LocationLib;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,14 +19,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.util.ArrayList;
+import com.perrysetgo.illageSummerCamp.BaseActivity;
+import com.perrysetgo.illageSummerCamp.R;
+import com.perrysetgo.illageSummerCamp.models.Location;
+import com.perrysetgo.illageSummerCamp.models.LocationLib;
 
 public class IllageMapActivity extends BaseActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
-    private ArrayList<Location> mLocations;
-    private LocationLib mLocationLib;
+    GoogleMap mMap;
+    LocationLib mLocationLib;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +57,7 @@ public class IllageMapActivity extends BaseActivity implements OnMapReadyCallbac
 
         LatLngBounds bounds = builder.build();
 
-        int padding = 50; // offset from edges of the map in pixels
+        int padding = 50; // offset from edges of the map in px
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
         googleMap.moveCamera(cu);
 
@@ -110,8 +106,6 @@ public class IllageMapActivity extends BaseActivity implements OnMapReadyCallbac
         {
             case R.id.action_main: return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
 }

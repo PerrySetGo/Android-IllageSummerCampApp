@@ -12,7 +12,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -184,22 +183,22 @@ public class AddPhotoActivity extends BaseActivity implements View.OnClickListen
         dbo.inJustDecodeBounds = true;
         BitmapFactory.decodeStream(is, null, dbo);
 
-        int rotatedWidth, rotatedHeight;
+        int rotatedW, rotatedH;
         int orientation = getOrientation(context, photoUri);
 
         if (orientation == 90 || orientation == 270) {
-            rotatedWidth = dbo.outHeight;
-            rotatedHeight = dbo.outWidth;
+            rotatedW = dbo.outHeight; //ignore warning
+            rotatedH = dbo.outWidth;
         } else {
-            rotatedWidth = dbo.outWidth;
-            rotatedHeight = dbo.outHeight;
+            rotatedW = dbo.outWidth;
+            rotatedH = dbo.outHeight;
         }
 
         Bitmap bitmap;
         is = context.getContentResolver().openInputStream(photoUri);
-        if (rotatedWidth > maxWidth || rotatedHeight > maxWidth) {
-            float widthRatio = ((float) rotatedWidth) / ((float) maxWidth);
-            float heightRatio = ((float) rotatedHeight) / ((float) maxWidth);
+        if (rotatedW > maxWidth || rotatedH > maxWidth) {
+            float widthRatio = ((float) rotatedW) / ((float) maxWidth);
+            float heightRatio = ((float) rotatedH) / ((float) maxWidth);
             float maxRatio = Math.max(widthRatio, heightRatio);
             Log.d("ImageUtil", String.format("Shrinking. maxRatio=%s",
                     maxRatio));

@@ -2,7 +2,6 @@ package com.perrysetgo.illageSummerCamp.ui;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -72,56 +71,57 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
     }
 
     @Override
-    public void onClick(View view){
+    public void onClick(View view) {
         Log.i(TAG, view.toString());
 
-        if (view == loginTextView){
-            Intent intent = new Intent (SignUpActivity.this, SignInActivity.class); //manage activity stack
-                                                                                    //custom control back button
+        if (view == loginTextView) {
+            Intent intent = new Intent(SignUpActivity.this, SignInActivity.class); //manage activity stack
+            //custom control back button
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         }
-        if (view == createUserButton){
+        if (view == createUserButton) {
             createNewUser();
-        }
-        else {
+        } else {
             Log.i(TAG, "broke");
         }
 
     }
 
-    private void createNewUser(){
+    private void createNewUser() {
         final String name = nameEditText.getText().toString().trim();
         final String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.toString().trim();
         String confirmPassword = confirmPasswordEditText.getText().toString().trim();
+        if (password.equals(confirmPassword)) {
+            auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                String key = newUserReference.push().getKey();
+                                //add the user to a users table too so we can use it to connect it to events.
+                                User newUser = new User(name, email, key);
+                                DatabaseReference newRef = FirebaseDatabase
+                                        .getInstance()
+                                        .getReference(Constants.FIREBASE_CHILD_USERS)
+                                        .child(key);
 
-        auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>(){
-                    @Override
-                    public void onComplete (@NonNull Task<AuthResult> task){
-                        if (task.isSuccessful()){
-                            String key = newUserReference.push().getKey();
-                            //add the user to a users table too so we can use it to connect it to events.
-                            User newUser = new User(name, email, key );
-                            DatabaseReference newRef = FirebaseDatabase
-                                    .getInstance()
-                                    .getReference(Constants.FIREBASE_CHILD_USERS)
-                                    .child(key);
-
-                            newRef.setValue(newUser);
-                            Log.i(TAG, "success");
+                                newRef.setValue(newUser);
+                                Log.i(TAG, "success");
+                            } else {
+                                Toast.makeText(SignUpActivity.this, "Failed", Toast.LENGTH_LONG).show();
+                            }
                         }
-                        else {
-                            Toast.makeText(SignUpActivity.this, "Failed", Toast.LENGTH_LONG).show();
-                        }
-                    }
 
-                });
+                    });
+        } else {
+            Toast.makeText(SignUpActivity.this, R.string.pw_no_match, Toast.LENGTH_LONG).show();
+        }
     }
 
-    private void createAuthStateListener(){
+    private void createAuthStateListener() {
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -135,6 +135,4 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
             }
         };
     }
-
-
 }

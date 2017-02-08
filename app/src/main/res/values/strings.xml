@@ -74,4 +74,17 @@
     <string name="incorrect_password">incorrect password, try again.</string>
     <string name="incorrect_username">incorrect username, try again.</string>
     <string name="user_pw_mismatch">incorrect credentials, try again.</string>
+    <string name="main_activity">Main Activity</string>
+    <string name="about_camp">About Camp</string>
+    <string name="camp_map">Camp Map</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="which_event_is_next">Which Event is Next?</string>
+    <string name="add_event">Add Event</string>
+    <string name="see_all_events">See All Events</string>
+    <string name="photo_gallery">Photo Gallery</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="admin">ADMIN</string>
+    <string name="log_out">Log Out</string>
+    <string name="create_event">Create Event</string>
+    <string name="pw_no_match">Passwords don\'t match</string>
 </resources>

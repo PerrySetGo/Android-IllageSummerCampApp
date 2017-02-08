@@ -1,11 +1,9 @@
 package com.perrysetgo.illageSummerCamp.ui;
 
 import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -34,7 +32,7 @@ public class PhotoGalleryActivity extends BaseActivity {
 
     ValueEventListener mPhotosListener;
     DatabaseReference mPhotosReference;
-    ArrayList<Photo> photos = new ArrayList<Photo>();
+    ArrayList<Photo> photos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

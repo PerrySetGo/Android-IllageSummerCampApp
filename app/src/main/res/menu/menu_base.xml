@@ -2,34 +2,34 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_main"
-        android:title="Main Activity"/>
+        android:title="@string/main_activity"/>
     <item
         android:id="@+id/action_about"
-        android:title="About Camp"/>
+        android:title="@string/about_camp"/>
     <item
         android:id="@+id/action_map"
-        android:title="Camp Map"/>
+        android:title="@string/camp_map"/>
     <item
         android:id="@+id/action_contact"
-        android:title="Contact Us"/>
+        android:title="@string/contact_us"/>
     <item
         android:id="@+id/action_next"
-        android:title="Which Event is Next?"/>
+        android:title="@string/which_event_is_next"/>
     <item android:id="@+id/action_add_event"
-        android:title="Add Event"/>
+        android:title="@string/add_event"/>
     <item
         android:id="@+id/action_all_events"
-        android:title="See All Events"/>
+        android:title="@string/see_all_events"/>
     <item
         android:id="@+id/action_sign_up"
-        android:title="Sign Up"/>
+        android:title="@string/sign_up"/>
     <item
         android:id="@+id/action_sign_in"
-        android:title="Sign In"/>
+        android:title="@string/sign_in"/>
     <item
         android:id="@+id/action_photo_gallery"
-        android:title="Photo Gallery"/>
+        android:title="@string/photo_gallery"/>
     <item
         android:id="@+id/action_add_photo"
-        android:title="Add Photo"/>
+        android:title="@string/add_photo"/>
 </menu>

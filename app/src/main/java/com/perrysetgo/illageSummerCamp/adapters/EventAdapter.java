@@ -29,12 +29,8 @@ public class EventAdapter extends BaseAdapter {
     private Context context;
     private ArrayList <Event> mEvents;
     private FragmentManager fm;
-    private boolean isAuthed;
-    private FirebaseAuth auth;
-    private FirebaseAuth.AuthStateListener authListener;
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    Event event;
-    private DatabaseReference makeUserReference;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private Event event;
 
     public EventAdapter(Context context, ArrayList<Event> events, FragmentManager fm) {
         this.context = context;
@@ -100,7 +96,7 @@ public class EventAdapter extends BaseAdapter {
                 if (user != null ) {
                     Log.i(TAG, "u ok");
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); //get the currently logged in user.
-                    String uid = user.getUid();
+                    String uid = user.getUid(); //check warning
 
                     DatabaseReference faveEventRef = FirebaseDatabase
                             .getInstance()
@@ -118,9 +114,7 @@ public class EventAdapter extends BaseAdapter {
 
             }
         });
-
         return convertView;
-
     }
 
     private static class ViewHolder{

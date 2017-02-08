@@ -1,9 +1,7 @@
 package com.perrysetgo.illageSummerCamp.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -21,7 +19,6 @@ import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.models.Event;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -29,41 +26,21 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class NextEventActivity extends BaseActivity {
-    private ArrayList<Event> mEvents;
     private static final long WINDOW_END = 10800000; //3hrs in ms
-    private Event nextEvent;
     long rightNowInMillis = Calendar.getInstance().getTimeInMillis();
     long eventWindowEnd = rightNowInMillis + WINDOW_END; //3hrs from now.
 
     //todo fix "no event coming up" screen
-    @Bind(R.id.nextEventTitleBox)
-    TextView nextEventTitleBox;
-    @Bind(R.id.nextEventTitleLabel)
-    TextView nextEventTitleLabel;
-
+    @Bind(R.id.nextEventTitleBox) TextView nextEventTitleBox;
+    @Bind(R.id.nextEventTitleLabel) TextView nextEventTitleLabel;
     @Bind(R.id.currentTimeLabel) TextView currentTimeLabel;
-
-
-    @Bind(R.id.nextEventLocationBox)
-    TextView nextEventLocationBox;
-    @Bind(R.id.nextEventLocationLabel)
-    TextView nextEventLocationLabel;
-
-    @Bind(R.id.nextEventDateTimeBox)
-    TextView nextEventDateTimeBox;
-    @Bind(R.id.nextDateTimeLabel)
-    TextView nextEventDateTimeLabel;
-
-    @Bind(R.id.nextEventDescriptionLabel)
-    TextView nextEventDescriptionLabel;
-    @Bind(R.id.nextEventDescriptionBox)
-    TextView nextEventDescriptionBox;
-
-    @Bind(R.id.eventsStatusBox)
-    TextView eventsStatusBox;
-
-
-
+    @Bind(R.id.nextEventLocationBox) TextView nextEventLocationBox;
+    @Bind(R.id.nextEventLocationLabel) TextView nextEventLocationLabel;
+    @Bind(R.id.nextEventDateTimeBox) TextView nextEventDateTimeBox;
+    @Bind(R.id.nextDateTimeLabel) TextView nextEventDateTimeLabel;
+    @Bind(R.id.nextEventDescriptionLabel) TextView nextEventDescriptionLabel;
+    @Bind(R.id.nextEventDescriptionBox) TextView nextEventDescriptionBox;
+    @Bind(R.id.eventsStatusBox) TextView eventsStatusBox;
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
