@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.perrysetgo.illageSummerCamp.BaseActivity;
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.models.User;
@@ -25,7 +26,7 @@ import com.perrysetgo.illageSummerCamp.models.User;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
+public class SignUpActivity extends BaseActivity implements View.OnClickListener {
     public static final String TAG = SignUpActivity.class.getSimpleName();
 
     private FirebaseAuth auth;

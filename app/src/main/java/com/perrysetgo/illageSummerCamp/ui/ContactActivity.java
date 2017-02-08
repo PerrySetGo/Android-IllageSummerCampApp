@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.perrysetgo.illageSummerCamp.BaseActivity;
 import com.perrysetgo.illageSummerCamp.R;
 
 import java.text.DateFormat;
@@ -25,7 +26,7 @@ import java.util.Locale;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ContactActivity extends AppCompatActivity {
+public class ContactActivity extends BaseActivity {
     public static final String TAG = ContactActivity.class.getSimpleName();
 
     @Bind(R.id.viewWebsiteButton) Button mViewWebSiteButton;

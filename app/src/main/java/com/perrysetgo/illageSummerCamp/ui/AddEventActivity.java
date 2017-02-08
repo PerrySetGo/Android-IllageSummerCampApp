@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import com.perrysetgo.illageSummerCamp.BaseActivity;
 import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.adapters.EventAdapter;
 import com.perrysetgo.illageSummerCamp.fragments.TimePickerFragment;
@@ -39,7 +40,7 @@ import java.util.Locale;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class AddEventActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
+public class AddEventActivity extends BaseActivity implements TimePickerDialog.OnTimeSetListener{
 
     public static final String TAG = AddEventActivity.class.getSimpleName();
 

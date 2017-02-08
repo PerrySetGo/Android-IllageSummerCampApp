@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.perrysetgo.illageSummerCamp.BaseActivity;
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.models.Event;
@@ -27,7 +28,7 @@ import java.util.Locale;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class NextEventActivity extends AppCompatActivity {
+public class NextEventActivity extends BaseActivity {
     private ArrayList<Event> mEvents;
     private static final long WINDOW_END = 10800000; //3hrs in ms
     private Event nextEvent;

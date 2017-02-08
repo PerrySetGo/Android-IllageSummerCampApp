@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.perrysetgo.illageSummerCamp.BaseActivity;
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.adapters.PhotoGalleryAdapter;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PhotoGalleryActivity extends AppCompatActivity {
+public class PhotoGalleryActivity extends BaseActivity {
 
     public static final String TAG = PhotoGalleryActivity.class.getSimpleName();
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;

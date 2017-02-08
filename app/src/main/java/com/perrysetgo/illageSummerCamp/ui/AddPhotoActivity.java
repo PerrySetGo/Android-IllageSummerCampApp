@@ -25,6 +25,7 @@ import android.widget.ImageView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.perrysetgo.illageSummerCamp.BaseActivity;
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.models.Photo;
@@ -36,7 +37,7 @@ import java.io.InputStream;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class AddPhotoActivity extends AppCompatActivity implements View.OnClickListener{
+public class AddPhotoActivity extends BaseActivity implements View.OnClickListener{
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_FROM_GALLERY = 2;
