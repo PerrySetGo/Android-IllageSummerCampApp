@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.perrysetgo.illageSummerCamp.BaseActivity;
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.adapters.EventAdapter;
 import com.perrysetgo.illageSummerCamp.models.Event;
@@ -29,30 +31,32 @@ import java.util.Collections;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class AllEventsActivity extends ListActivity {
+public class AllEventsActivity extends BaseActivity {
 
     private ArrayList<Event> mEvents;
     public static final String TAG = AllEventsActivity.class.getSimpleName();
     private ProgressDialog progress;
     private EventAdapter mAdapter;
     private ValueEventListener queryRefListener;
+    ListView list;
+
     @Bind (R.id.noEventsBox) TextView noEventsBox;
-    DatabaseReference ref = FirebaseDatabase
-            .getInstance()
-            .getReference(Constants.FIREBASE_CHILD_EVENTS);
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EVENTS);
     Query queryRef = ref.orderByValue();
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_events);
-        ButterKnife.bind(this);
-        mEvents = new ArrayList<Event>();
         FragmentManager fm = getFragmentManager();
-        mAdapter = new EventAdapter(this, mEvents, fm);
-        setListAdapter(mAdapter);
+        mEvents = new ArrayList<Event>();
+        list = (ListView) findViewById(R.id.list);
+        mAdapter = new EventAdapter(this, mEvents, fm); //check fragment
+        list.setAdapter(mAdapter);
+        ButterKnife.bind(this);
 
 //        showLoadingDialog();
 

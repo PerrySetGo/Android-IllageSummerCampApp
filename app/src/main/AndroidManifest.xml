@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.IllageMapActivity" />
-        <activity android:name=".ui.AllEventsActivity" />
+        <activity android:name=".ui.AllEventsActivity" android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity android:name=".ui.AddEventActivity" />
         <activity android:name=".ui.NextEventActivity" />
         <activity android:name=".ui.AboutCampActivity" />
