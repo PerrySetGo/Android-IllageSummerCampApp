@@ -20,68 +20,34 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".BaseActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".BaseActivity">
         </activity>
         <activity
-            android:name=".ui.MainActivity"
-            android:label="@string/title_activity_home">
+            android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.IllageMapActivity"
-            android:label="@string/title_activity_illage_map">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.MainActivity" />
-        </activity>
+        <activity android:name=".ui.IllageMapActivity" />
+        <activity android:name=".ui.AllEventsActivity" />
+        <activity android:name=".ui.AddEventActivity" />
+        <activity android:name=".ui.NextEventActivity" />
+        <activity android:name=".ui.AboutCampActivity" />
+        <activity android:name=".ui.ContactActivity" />
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.SignUpActivity" />
+        <activity android:name=".ui.SignInActivity" />
+        <activity android:name=".ui.AddPhotoActivity" />
+        <activity android:name=".ui.PhotoGalleryActivity" />
+
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD5qGMJl2ZSQyrWQQHMITtquXzXiCINx0Q" />
 
-        <activity
-            android:name=".ui.AllEventsActivity"
-            android:label="@string/title_activity_all_events"
-            android:parentActivityName=".ui.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.perrysetgo.illageSummerCamp.ui.MainActivity" />
-        </activity>
-        <activity
-            android:name=".ui.AddEventActivity"
-            android:label="@string/title_activity_add_event"
-            android:parentActivityName=".ui.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.perrysetgo.illageSummerCamp.ui.MainActivity" />
-        </activity>
-        <activity android:name=".ui.NextEventActivity" />
-        <activity android:name=".ui.AboutCampActivity" />
-        <activity
-            android:name=".ui.ContactActivity"
-            android:label="@string/title_activity_contact"
-            android:parentActivityName=".ui.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.perrysetgo.illageSummerCamp.ui.MainActivity" />
-        </activity>
-        <activity
-            android:name=".ui.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:parentActivityName=".ui.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.perrysetgo.illageSummerCamp.ui.MainActivity" />
-        </activity>
-        <activity android:name=".ui.SignUpActivity" />
-        <activity android:name=".ui.SignInActivity" />
-        <activity android:name=".ui.AddPhotoActivity" />
-        <activity android:name=".ui.PhotoGalleryActivity" />
     </application>
 
 </manifest>

@@ -15,9 +15,8 @@
     <item
         android:id="@+id/action_next"
         android:title="Which Event is Next?"/>
-    <item
-    android:id="@+id/action_add_event"
-    android:title="Add Event"/>
+    <item android:id="@+id/action_add_event"
+        android:title="Add Event"/>
     <item
         android:id="@+id/action_all_events"
         android:title="See All Events"/>
