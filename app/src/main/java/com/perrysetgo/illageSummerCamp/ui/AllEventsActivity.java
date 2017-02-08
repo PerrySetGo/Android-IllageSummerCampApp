@@ -1,7 +1,6 @@
 package com.perrysetgo.illageSummerCamp.ui;
 
 import android.app.FragmentManager;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,26 +43,23 @@ public class AllEventsActivity extends BaseActivity {
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EVENTS);
     Query queryRef = ref.orderByValue();
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_events);
         FragmentManager fm = getFragmentManager();
-        mEvents = new ArrayList<Event>();
+        mEvents = new ArrayList<>();
         list = (ListView) findViewById(R.id.list);
-        mAdapter = new EventAdapter(this, mEvents, fm); //check fragment
+        mAdapter = new EventAdapter(this, mEvents, fm);
         list.setAdapter(mAdapter);
         ButterKnife.bind(this);
 
-//        showLoadingDialog();
+        showLoadingDialog();
 
         queryRefListener = queryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //dismissLoadingDialog();
+                dismissLoadingDialog();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     mEvents.add(snapshot.getValue(Event.class));
                 }
@@ -71,19 +67,15 @@ public class AllEventsActivity extends BaseActivity {
                 mAdapter.notifyDataSetChanged();
             }
             public void onCancelled(DatabaseError error){
-                //dismissLoadingDialog();
+                dismissLoadingDialog();
                 Toast.makeText(getApplicationContext(),"There was an issue connecting to the database. Please try again later.", Toast.LENGTH_LONG).show();
                 Log.d(TAG, error.toString());
             }
         });
 
         if (mEvents.size() == 0){
-            Log.i("TEST", "length is 0");
-            Toast.makeText(getApplicationContext(),"there are no events", Toast.LENGTH_LONG).show();
-        }
-        else {
-
-            Log.i("TEST", "length is >0");
+            dismissLoadingDialog();
+            noEventsBox.setVisibility(View.VISIBLE);
         }
     }
 
@@ -99,7 +91,6 @@ public class AllEventsActivity extends BaseActivity {
     }
 
     public void showLoadingDialog() {
-
         if (progress == null) {
             progress = new ProgressDialog(this);
             progress.setMessage("Getting Events");
@@ -108,7 +99,6 @@ public class AllEventsActivity extends BaseActivity {
     }
 
     public void dismissLoadingDialog() {
-
         if (progress != null && progress.isShowing()) {
             progress.dismiss();
         }
@@ -116,25 +106,17 @@ public class AllEventsActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         switch (id)
         {
             case R.id.action_main: return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
 }
