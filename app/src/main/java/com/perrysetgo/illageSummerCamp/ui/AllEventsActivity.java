@@ -78,17 +78,13 @@ public class AllEventsActivity extends BaseActivity {
         });
 
         if (mEvents.size() == 0){
-            
-            //// TODO: 11/14/16 show no events message here.
             Log.i("TEST", "length is 0");
-            noEventsBox.setVisibility(View.VISIBLE);
+            Toast.makeText(getApplicationContext(),"there are no events", Toast.LENGTH_LONG).show();
         }
         else {
 
             Log.i("TEST", "length is >0");
         }
-
-
     }
 
     @Override
