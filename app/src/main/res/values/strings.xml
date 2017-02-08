@@ -59,6 +59,8 @@
     <string name="login">Login</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="sign_up">Sign Up</string>
+    <string name="nav_drawer_opened">Nav Open</string>
+    <string name="nav_drawer_closed">Nav Closed</string>
     <string name="already_have_an_account_log_in_here">Already have an account? Log in here!</string>
     <string name="create_account">Create Account</string>
     <string name="empty_placeholder">--</string>

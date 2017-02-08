@@ -16,12 +16,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.perrysetgo.illageSummerCamp.BaseActivity;
 import com.perrysetgo.illageSummerCamp.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class SignInActivity extends AppCompatActivity  implements View.OnClickListener{
+public class SignInActivity extends BaseActivity implements View.OnClickListener{
     @Bind(R.id.passwordLoginButton)
     Button passwordLoginButton;
     @Bind(R.id.emailEditText)

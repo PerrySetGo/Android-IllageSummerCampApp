@@ -3,6 +3,8 @@ package com.perrysetgo.illageSummerCamp.ui;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.perrysetgo.illageSummerCamp.BaseActivity;
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.models.Event;
@@ -25,7 +28,7 @@ import java.util.Locale;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class NextEventActivity extends AppCompatActivity {
+public class NextEventActivity extends BaseActivity {
     private ArrayList<Event> mEvents;
     private static final long WINDOW_END = 10800000; //3hrs in ms
     private Event nextEvent;
@@ -133,4 +136,20 @@ public class NextEventActivity extends AppCompatActivity {
         });
 
    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        switch (id)
+        {
+            case R.id.action_next: return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }

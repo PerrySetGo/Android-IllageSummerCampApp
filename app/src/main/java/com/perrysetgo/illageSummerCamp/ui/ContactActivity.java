@@ -6,12 +6,15 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.perrysetgo.illageSummerCamp.BaseActivity;
 import com.perrysetgo.illageSummerCamp.R;
 
 import java.text.DateFormat;
@@ -23,7 +26,7 @@ import java.util.Locale;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ContactActivity extends AppCompatActivity {
+public class ContactActivity extends BaseActivity {
     public static final String TAG = ContactActivity.class.getSimpleName();
 
     @Bind(R.id.viewWebsiteButton) Button mViewWebSiteButton;
@@ -96,6 +99,19 @@ public class ContactActivity extends AppCompatActivity {
         });
    }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id)
+        {
+            case R.id.action_contact: return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    //static
     private String buildMessage(String name, String email, String message) {
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.US);
         Calendar cal = Calendar.getInstance();
@@ -106,4 +122,6 @@ public class ContactActivity extends AppCompatActivity {
                                     + message;
         return formattedMessage;
     }
+
+
 }
