@@ -1,6 +1,8 @@
 package com.perrysetgo.illageSummerCamp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,9 +13,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.perrysetgo.illageSummerCamp.ui.AboutCampActivity;
 import com.perrysetgo.illageSummerCamp.ui.AddEventActivity;
@@ -35,7 +40,9 @@ public class BaseActivity extends AppCompatActivity implements
     private Toolbar toolbar;
     ActionBarDrawerToggle mDrawerToggle;
     int selectedNavItemId;
+    SharedPreferences mSharedPreferences;
     String TAG = BaseActivity.class.getSimpleName();
+    public boolean loggedInAsAdmin;
 
     protected boolean useToolbar() {
         return true;
@@ -43,7 +50,11 @@ public class BaseActivity extends AppCompatActivity implements
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
+
         fullLayout = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        loggedInAsAdmin = mSharedPreferences.getBoolean(Constants.PREFERENCES_USER_LOGIN_STATUS, true); //logged in as admin?
+
 
         /**
          * {@link FrameLayout} to inflate the child's view. We could also use a {@link android.view.ViewStub}
@@ -51,6 +62,7 @@ public class BaseActivity extends AppCompatActivity implements
         FrameLayout activityContainer = (FrameLayout) fullLayout.findViewById(R.id.activity_content);
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
         super.setContentView(fullLayout);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         navigationView = (NavigationView) findViewById(R.id.navigationView);
         if (useToolbar()) {
@@ -58,10 +70,8 @@ public class BaseActivity extends AppCompatActivity implements
         } else {
             toolbar.setVisibility(View.GONE);
         }
-
         setUpNavView();
     }
-
 
     protected void setUpNavView() {
         navigationView.setNavigationItemSelectedListener(this);
@@ -88,8 +98,17 @@ public class BaseActivity extends AppCompatActivity implements
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         fullLayout.closeDrawer(GravityCompat.START);
         selectedNavItemId = menuItem.getItemId();
-
         return onOptionsItemSelected(menuItem);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(loggedInAsAdmin) {
+            Log.d(TAG, "LOGGED IN - SHOW MENU");
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_main, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
     }
 
 
@@ -153,6 +172,18 @@ public class BaseActivity extends AppCompatActivity implements
                 startActivity(intent);
                 break;
             }
+            case R.id.action_logout: {
+                logAdminOut();
+                finish();
+                startActivity(getIntent());
+                break;
+            }
+
+            case R.id.action_create_event: {
+                Intent intent = new Intent(getApplicationContext(), AddEventActivity.class);
+                startActivity(intent);
+                break;
+            }
 
             default:
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -161,4 +192,10 @@ public class BaseActivity extends AppCompatActivity implements
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void logAdminOut(){
+        mSharedPreferences.edit().putBoolean(Constants.PREFERENCES_USER_LOGIN_STATUS, false).apply();
+        Toast.makeText(getApplicationContext(), "Admin Logged Out", Toast.LENGTH_LONG).show();
+    }
+
 }
