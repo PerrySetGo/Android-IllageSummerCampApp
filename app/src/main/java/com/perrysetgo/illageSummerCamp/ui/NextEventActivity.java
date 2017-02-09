@@ -30,7 +30,6 @@ public class NextEventActivity extends BaseActivity {
     long rightNowInMillis = Calendar.getInstance().getTimeInMillis();
     long eventWindowEnd = rightNowInMillis + WINDOW_END; //3hrs from now.
 
-    //todo fix "no event coming up" screen
     @Bind(R.id.nextEventTitleBox) TextView nextEventTitleBox;
     @Bind(R.id.nextEventTitleLabel) TextView nextEventTitleLabel;
     @Bind(R.id.currentTimeLabel) TextView currentTimeLabel;
@@ -116,12 +115,8 @@ public class NextEventActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         switch (id)
         {
             case R.id.action_next: return true;

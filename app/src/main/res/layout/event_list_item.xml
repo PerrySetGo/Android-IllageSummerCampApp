@@ -17,13 +17,12 @@
         android:layout_below="@+id/eventDescriptionLabel"
         android:layout_marginEnd="4dp"
         android:textSize="12sp" />
-<!--TODO fix the layout of this page. Make the date formatting smaller.-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/this_is_a_140_character_tweet_used_to_test_the_dimensions_of_my_text_view_box_here_are_50_extra_characters_used_as_a_placeholder_for_tests"
         android:id="@+id/eventDescriptionLabel"
-        android:textSize="17sp"
+        android:textSize="12sp"
         android:textColor="@android:color/black"
         android:padding="8dp"
         android:layout_below="@+id/eventTitleLabel"

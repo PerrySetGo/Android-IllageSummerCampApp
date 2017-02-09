@@ -154,6 +154,7 @@ public class BaseActivity extends AppCompatActivity implements
                 break;
             }
 
+
             default:
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
