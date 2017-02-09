@@ -15,7 +15,6 @@ import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -46,13 +45,9 @@ public class AddPhotoActivity extends BaseActivity implements View.OnClickListen
     @Bind(R.id.addPhotoButton) Button addPhotoButton;
     @Bind(R.id.galleryUploadButton) Button galleryUploadButton;
     @Bind(R.id.savePhotoButton) Button savePhotoButton;
-
     @Bind(R.id.addImageLabel) ImageView addImageLabel;
-
     @Bind(R.id.photoAuthorEditText) EditText photoAuthorEditText;
     @Bind(R.id.photoCaptionEditText) EditText photoCaptionEditText;
-
-//    String TAG = AddPhotoActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,25 +61,12 @@ public class AddPhotoActivity extends BaseActivity implements View.OnClickListen
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         switch (id)
         {
-            case R.id.action_main: return true;
+            case R.id.action_add_photo: return true;
         }
 
         return super.onOptionsItemSelected(item);
