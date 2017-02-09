@@ -1,6 +1,8 @@
 package com.perrysetgo.illageSummerCamp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -14,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.perrysetgo.illageSummerCamp.ui.AboutCampActivity;
 import com.perrysetgo.illageSummerCamp.ui.AddEventActivity;
@@ -35,6 +38,7 @@ public class BaseActivity extends AppCompatActivity implements
     private Toolbar toolbar;
     ActionBarDrawerToggle mDrawerToggle;
     int selectedNavItemId;
+    SharedPreferences mSharedPreferences;
     String TAG = BaseActivity.class.getSimpleName();
 
     protected boolean useToolbar() {
@@ -44,6 +48,7 @@ public class BaseActivity extends AppCompatActivity implements
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         fullLayout = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         /**
          * {@link FrameLayout} to inflate the child's view. We could also use a {@link android.view.ViewStub}
@@ -153,7 +158,18 @@ public class BaseActivity extends AppCompatActivity implements
                 startActivity(intent);
                 break;
             }
+            case R.id.action_logout: {
+                logAdminOut();
+                finish();
+                startActivity(getIntent());
+                break;
+            }
 
+            case R.id.action_create_event: {
+                Intent intent = new Intent(getApplicationContext(), AddEventActivity.class);
+                startActivity(intent);
+                break;
+            }
 
             default:
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -161,5 +177,10 @@ public class BaseActivity extends AppCompatActivity implements
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void logAdminOut(){
+        mSharedPreferences.edit().putBoolean(Constants.PREFERENCES_USER_LOGIN_STATUS, false).apply();
+        Toast.makeText(getApplicationContext(), "Admin Logged Out", Toast.LENGTH_LONG).show();
     }
 }
