@@ -7,46 +7,18 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context=".ui.MainActivity">
-
+<!--basic labels-->
 
     <TextView
+        android:id="@+id/newEventLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/new_event"
-        android:id="@+id/newEventLabel"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:visibility="visible"/>
+        android:text="@string/new_event"
+        android:visibility="visible" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/yes"
-        android:id="@+id/newEventButton"
-        android:visibility="invisible"
-        android:layout_above="@+id/startTimeView"
-        android:layout_centerHorizontal="true"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/no_thanks"
-        android:id="@+id/noNewButton"
-        android:visibility="invisible"
-        android:layout_alignBaseline="@+id/endTimeView"
-        android:layout_alignBottom="@+id/endTimeView"
-        android:layout_centerHorizontal="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/would_you_like_to_add_another_event"
-        android:id="@+id/addNewEventLabel"
-        android:layout_below="@+id/editTitle"
-        android:layout_centerHorizontal="true"
-        android:textSize="18sp"
-        android:visibility="invisible"/>
-
+    <!-- title -->
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,59 +31,34 @@
         android:layout_alignEnd="@+id/eventSubmitButton"
         android:visibility="visible"/>
 
+
+    <!--location-->
+    <TextView
+        android:id="@+id/eventLocationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/locationSpinner"
+        android:layout_alignStart="@+id/newEventLabel"
+        android:layout_marginBottom="8dp"
+        android:text="@string/please_choose_a_location_below"
+        android:visibility="visible" />
+
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/locationSpinner"
         android:hint="@string/location"
-        android:layout_above="@+id/showStartTimeButton"
+        android:layout_above="@+id/startTimeButton"
         android:layout_toStartOf="@+id/dateView"
         android:visibility="visible"/>
 
+    <!--date-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/dateView"
         android:layout_alignBottom="@+id/addNewEventLabel"
         android:layout_alignEnd="@+id/editTitle"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/set_start_time"
-        android:id="@+id/showStartTimeButton"
-        android:layout_above="@+id/endTimeButton"
-        android:layout_alignParentStart="true"
-        android:visibility="visible"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/set_end_time"
-        android:id="@+id/endTimeButton"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/showStartTimeButton"
-        android:visibility="visible"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/startTimeView"
-        android:background="#76ff62"
-        android:layout_above="@+id/endTimeButton"
-        android:visibility="visible"
-        android:layout_alignEnd="@+id/addNewEventLabel"/>
-<!--todo improve this page's layout, especially the timepicker highlighting. Also make the description form multiline-->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/endTimeView"
-        android:background="#40bcff"
-        android:layout_alignBottom="@+id/endTimeButton"
-        android:layout_alignEnd="@+id/locationSpinner"
-        android:visibility="visible"/>
-
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,16 +67,71 @@
         android:layout_alignParentStart="true"
         android:visibility="visible"/>
 
+    <!--start time-->
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/set_start_time"
+        android:id="@+id/startTimeButton"
+        android:visibility="visible"
+        android:layout_alignBaseline="@+id/endTimeButton"
+        android:layout_alignBottom="@+id/endTimeButton"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/startTimeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/startTimeButton"
+        android:layout_alignStart="@id/startTimeButton"
+        android:layout_below="@+id/startTimeButton"
+        android:background="@android:color/holo_blue_light"
+        android:gravity="center_vertical|center_horizontal"
+        android:typeface="monospace"
+        android:visibility="visible" />
+
+    <!-- end time-->
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/set_end_time"
+        android:id="@+id/endTimeButton"
+        android:visibility="visible"
+        android:layout_marginTop="78dp"
+        android:layout_below="@+id/dateSpinner"
+        android:layout_alignEnd="@+id/dateView" />
+
+    <TextView
+        android:id="@+id/endTimeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/endTimeButton"
+        android:layout_alignStart="@id/endTimeButton"
+        android:layout_below="@+id/endTimeButton"
+        android:background="@android:color/holo_orange_light"
+        android:gravity="center_vertical|center_horizontal"
+        android:typeface="monospace"
+        android:visibility="visible" />
+
+    <!--description-->
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/editDescription"
-        android:layout_below="@+id/endTimeButton"
-        android:layout_alignParentStart="true"
         android:visibility="visible"
-        android:hint="@string/please_enter_a_description"/>
+        android:hint="@string/please_enter_a_description"
+        android:layout_below="@+id/noNewButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="58dp" />
+
+
+
+    <!--submit-->
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -140,5 +142,38 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:visibility="visible"/>
+
+    <!--add a new event stuff-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/would_you_like_to_add_another_event"
+        android:id="@+id/addNewEventLabel"
+        android:layout_below="@+id/editTitle"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:visibility="invisible"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_thanks"
+        android:id="@+id/noNewButton"
+        android:visibility="invisible"
+        android:layout_alignBaseline="@+id/endTimeView"
+        android:layout_alignBottom="@+id/endTimeView"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/yes"
+        android:id="@+id/newEventButton"
+        android:visibility="invisible"
+        android:layout_centerHorizontal="true"/>
+
+
+
 
 </RelativeLayout>

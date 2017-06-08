@@ -25,7 +25,7 @@
     <string name="one_cuisine_type">One Cuisine Type</string>
     <string name="event_photo">Event Photo</string>
     <string name="illagesummercamp_logo">IllageSummerCamp Logo</string>
-    <string name="new_event">New Event</string>
+    <string name="new_event">Please give add in a new event.</string>
     <string name="yes">Yes</string>
     <string name="no_thanks">No Thanks</string>
     <string name="would_you_like_to_add_another_event">Would You Like To Add Another Event?</string>
@@ -88,4 +88,5 @@
     <string name="create_event">Create Event</string>
     <string name="pw_no_match">Passwords don\'t match</string>
     <string name="admin_login">Admin Login</string>
+    <string name="please_choose_a_location_below">Please choose a location below</string>
 </resources>

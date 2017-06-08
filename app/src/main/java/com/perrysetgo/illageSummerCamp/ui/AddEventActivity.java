@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.vision.text.Text;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -45,15 +46,21 @@ public class AddEventActivity extends BaseActivity implements TimePickerDialog.O
 
     @Bind(R.id.editTitle) EditText mEventTitle;
     @Bind(R.id.editDescription) EditText mEventDescription;
+
+    @Bind(R.id.dateSpinner) Spinner mDateSpinner;
+    @Bind(R.id.eventLocationLabel) TextView mLocationLabel;
+    @Bind(R.id.locationSpinner) Spinner mLocationSpinner;
+
+    @Bind(R.id.startTimeButton) Button startTimeButton;
+    @Bind(R.id.startTimeView) TextView startTimeView;
+    @Bind(R.id.endTimeButton) Button endTimeButton;
+    @Bind(R.id.endTimeView) TextView endTimeView;
+
+    @Bind(R.id.eventSubmitButton)  Button mSubmitButton;
+
     @Bind(R.id.newEventButton) Button mNewEventButton;
     @Bind(R.id.noNewButton) Button mNoNewEventButton;
-    @Bind (R.id.endTimeButton) Button endTimeButton;
-    @Bind(R.id.showStartTimeButton) Button startTimeButton;
-    @Bind(R.id.eventSubmitButton)  Button mSubmitButton;
-    @Bind(R.id.locationSpinner) Spinner mLocationSpinner;
-    @Bind(R.id.dateSpinner) Spinner mDateSpinner;
-    @Bind(R.id.startTimeView) TextView startTimeView;
-    @Bind(R.id.endTimeView) TextView endTimeView;
+
 
     //time vars
     TimePickerFragment startTimePickerFragment;
@@ -144,15 +151,17 @@ public class AddEventActivity extends BaseActivity implements TimePickerDialog.O
                     mAdapter.notifyDataSetChanged();
 
                     mEventTitle.setVisibility(View.INVISIBLE);
-                    mLocationSpinner.setVisibility(View.INVISIBLE);
-                    mSubmitButton.setVisibility(View.INVISIBLE);
+                    mDateSpinner.setVisibility(View.INVISIBLE);
                     newEventLabel.setVisibility(View.INVISIBLE);
+                    mLocationLabel.setVisibility(View.INVISIBLE);
+                    mLocationSpinner.setVisibility(View.INVISIBLE);
                     startTimeButton.setVisibility(View.INVISIBLE);
                     endTimeButton.setVisibility(View.INVISIBLE);
                     startTimeView.setVisibility(View.INVISIBLE);
                     endTimeView.setVisibility(View.INVISIBLE);
                     mEventDescription.setVisibility(View.INVISIBLE);
-                    mDateSpinner.setVisibility(View.INVISIBLE);
+
+                    mSubmitButton.setVisibility(View.INVISIBLE);
 
                     addNewEventLabel.setVisibility(View.VISIBLE);
                     mNewEventButton.setVisibility(View.VISIBLE);
