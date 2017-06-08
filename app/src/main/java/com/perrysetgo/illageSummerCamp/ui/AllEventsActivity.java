@@ -46,12 +46,13 @@ public class AllEventsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_events);
+        ButterKnife.bind(this);
+        noEventsBox.setVisibility(View.INVISIBLE);
         FragmentManager fm = getFragmentManager();
         mEvents = new ArrayList<>();
         list = (ListView) findViewById(R.id.list);
         mAdapter = new EventAdapter(this, mEvents, fm);
         list.setAdapter(mAdapter);
-        ButterKnife.bind(this);
 
         showLoadingDialog();
 
@@ -63,6 +64,11 @@ public class AllEventsActivity extends BaseActivity {
                     mEvents.add(snapshot.getValue(Event.class));
                 }
                 sortEventsList(mEvents);
+                if (mEvents.size() == 0){
+
+                    noEventsBox.setVisibility(View.VISIBLE);
+                }
+                dismissLoadingDialog();
                 mAdapter.notifyDataSetChanged();
             }
             public void onCancelled(DatabaseError error){
@@ -72,10 +78,7 @@ public class AllEventsActivity extends BaseActivity {
             }
         });
 
-        if (mEvents.size() == 0){
-            dismissLoadingDialog();
-            noEventsBox.setVisibility(View.VISIBLE);
-        }
+
     }
 
     @Override
