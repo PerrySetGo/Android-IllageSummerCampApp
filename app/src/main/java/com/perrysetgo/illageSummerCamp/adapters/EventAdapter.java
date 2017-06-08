@@ -42,6 +42,11 @@ public class EventAdapter extends BaseAdapter {
         mEvents = events;
     }
 
+
+    public EventAdapter(){
+
+    }
+
     @Override
     public int getCount() {
         return mEvents.size();
@@ -114,8 +119,9 @@ public class EventAdapter extends BaseAdapter {
                 else {
                     Bundle eventBundle = new Bundle();
                     eventBundle.putParcelable("eventToSave", Parcels.wrap(event));
-                    SignUpFragment signupFragment = new SignUpFragment();
 
+                    SignUpFragment signupFragment = new SignUpFragment();
+                    signupFragment.setArguments(eventBundle);
                     signupFragment.show(fm, "Sample Fragment");
                 }
 

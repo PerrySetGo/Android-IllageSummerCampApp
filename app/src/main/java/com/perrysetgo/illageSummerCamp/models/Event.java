@@ -13,21 +13,24 @@ import com.google.firebase.database.ValueEventListener;
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.adapters.EventAdapter;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 
+@Parcel
 public class Event {
 
     public static final String TAG = Event.class.getSimpleName();
-    private ArrayList<Event> mEvents;
-    private EventAdapter mAdapter;
     public String eventTitle;
     public String eventLocation;
     public long eventStartDateTime;
     public long eventEndDateTime;
     public String eventDescription;
     private String pushId;
+
+    public Event(){} //req
 
     public Event(String eventTitle, String eventLocation, long eventStartDateTime, String eventDescription, long eventEndDateTime) {
         this.eventTitle = eventTitle;
@@ -47,7 +50,7 @@ public class Event {
     };
 
 
-    public Event(){} //req
+
 
     public String getEventDescription() {
         return eventDescription;

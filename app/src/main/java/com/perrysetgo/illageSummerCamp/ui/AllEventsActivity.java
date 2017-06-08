@@ -65,7 +65,6 @@ public class AllEventsActivity extends BaseActivity {
                 }
                 sortEventsList(mEvents);
                 if (mEvents.size() == 0){
-
                     noEventsBox.setVisibility(View.VISIBLE);
                 }
                 dismissLoadingDialog();

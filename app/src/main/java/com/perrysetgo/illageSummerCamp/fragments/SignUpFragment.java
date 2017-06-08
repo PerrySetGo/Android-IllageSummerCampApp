@@ -29,10 +29,16 @@ public class SignUpFragment extends DialogFragment {
 //        super.setArguments(args);
 //    }
 
+    public SignUpFragment(){
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_sample_dialog, container, false);
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        Bundle eventBundle = getArguments().getBundle("eventBundle"); //retrieve the bundle that was put in the argument
+        final Event eventToSave = eventBundle.getParcelable("eventToSave");
 
 
         Button signupButton = (Button) rootView.findViewById(R.id.signupButton);
@@ -45,6 +51,7 @@ public class SignUpFragment extends DialogFragment {
             public void onClick(View v) {
                 Log.d(TAG, v.toString());
                 //// TODO: 7/11/16 carry selected event with you and then add to list.
+                Log.d(TAG, eventToSave.getEventDescription());
                 Intent intent = new Intent(getActivity(), SignUpActivity.class);
                 startActivity(intent);
             }
