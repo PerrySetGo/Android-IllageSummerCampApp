@@ -56,8 +56,6 @@ public class NextEventActivity extends BaseActivity {
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EVENTS);
         Query queryRef = ref.orderByChild("eventStartDateTime");
-        
-        //// TODO: 11/15/16 verify that correct fields whow when event is added.
 
         queryRef.addValueEventListener(new ValueEventListener() {
             @Override

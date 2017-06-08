@@ -13,7 +13,7 @@ public class TimePickerFragment extends DialogFragment {
     private TimePickerDialog.OnTimeSetListener mListener;
 
     @Override
-    public void onAttach(Context context) { //// TODO: 2/8/17 double check this,.
+    public void onAttach(Context context) {
         super.onAttach(context);
         mListener = (TimePickerDialog.OnTimeSetListener) context;
 

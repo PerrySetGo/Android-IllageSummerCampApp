@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
+import com.perrysetgo.illageSummerCamp.models.Event;
 import com.perrysetgo.illageSummerCamp.ui.SignInActivity;
 import com.perrysetgo.illageSummerCamp.ui.SignUpActivity;
 
@@ -21,6 +22,12 @@ public class SignUpFragment extends DialogFragment {
 
     public static final String TAG = SignUpFragment.class.getSimpleName();
     SharedPreferences mSharedPreferences;
+    Event eventToSave;
+
+//    @Override
+//    public void setArguments(Bundle args) {
+//        super.setArguments(args);
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

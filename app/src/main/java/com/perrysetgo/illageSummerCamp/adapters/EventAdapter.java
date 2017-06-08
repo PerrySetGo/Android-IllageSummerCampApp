@@ -2,6 +2,7 @@ package com.perrysetgo.illageSummerCamp.adapters;
 
 import android.app.FragmentManager;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,9 @@ import com.perrysetgo.illageSummerCamp.Constants;
 import com.perrysetgo.illageSummerCamp.R;
 import com.perrysetgo.illageSummerCamp.fragments.SignUpFragment;
 import com.perrysetgo.illageSummerCamp.models.Event;
+
+import org.parceler.Parcel;
+import org.parceler.Parcels;
 
 public class EventAdapter extends BaseAdapter {
     public static final String TAG = EventAdapter.class.getSimpleName();
@@ -108,7 +112,10 @@ public class EventAdapter extends BaseAdapter {
                     Toast.makeText(context, "Event was saved", Toast.LENGTH_LONG).show();
                 }
                 else {
+                    Bundle eventBundle = new Bundle();
+                    eventBundle.putParcelable("eventToSave", Parcels.wrap(event));
                     SignUpFragment signupFragment = new SignUpFragment();
+
                     signupFragment.show(fm, "Sample Fragment");
                 }
 
