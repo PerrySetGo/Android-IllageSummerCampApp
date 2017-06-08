@@ -89,7 +89,6 @@ public class EventAdapter extends BaseAdapter {
         holder.descriptionLabel.setText(event.getEventDescription());
 
 
-
         holder.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,12 +97,13 @@ public class EventAdapter extends BaseAdapter {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); //get the currently logged in user.
                     String uid = user.getUid(); //check warning
 
-                    DatabaseReference faveEventRef = FirebaseDatabase
-                            .getInstance()
-                            .getReference(Constants.FIREBASE_CHILD_EVENTS)
-                            .child(event.getPushId());
+//                    DatabaseReference faveEventRef = FirebaseDatabase
+//                            .getInstance()
+//                            .getReference(Constants.FIREBASE_CHILD_EVENTS)
+//                            .child(event.getPushId());
+//
+//                    faveEventRef.child("attendees").setValue(uid);
 
-                    faveEventRef.child("attendees").setValue(uid);
 
                     Toast.makeText(context, "Event was saved", Toast.LENGTH_LONG).show();
                 }

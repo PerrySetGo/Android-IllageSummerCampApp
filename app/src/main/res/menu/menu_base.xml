@@ -24,8 +24,11 @@
         android:id="@+id/action_sign_up"
         android:title="@string/sign_up"/>
     <item
-        android:id="@+id/action_sign_in"
-        android:title="@string/sign_in"/>
+    android:id="@+id/action_sign_in"
+    android:title="@string/sign_in"/>
+    <item
+        android:id="@+id/action_sign_out"
+        android:title="Sign out"/>
     <item
         android:id="@+id/action_photo_gallery"
         android:title="@string/photo_gallery"/>

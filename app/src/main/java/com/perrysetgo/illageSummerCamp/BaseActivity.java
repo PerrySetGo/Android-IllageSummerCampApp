@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.perrysetgo.illageSummerCamp.ui.AboutCampActivity;
 import com.perrysetgo.illageSummerCamp.ui.AddEventActivity;
 import com.perrysetgo.illageSummerCamp.ui.AddPhotoActivity;
@@ -172,6 +173,11 @@ public class BaseActivity extends AppCompatActivity implements
                 startActivity(intent);
                 break;
             }
+            case R.id.action_sign_out: {
+                logout();
+                startActivity(getIntent());
+                break;
+            }
             case R.id.action_logout: {
                 logAdminOut();
                 finish();
@@ -191,6 +197,11 @@ public class BaseActivity extends AppCompatActivity implements
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
     }
 
     private void logAdminOut(){
